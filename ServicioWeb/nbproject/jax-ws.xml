@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="ServicioWebSalon">
+      <implementation-class>org.salon.ServicioWebSalon</implementation-class>
+    </service>
+    <service name="ServicioWebMenu">
+      <implementation-class>org.menu.ServicioWebMenu</implementation-class>
+    </service>
+    <service name="ServicioWebEntretenimiento">
+      <implementation-class>org.entretenimiento.ServicioWebEntretenimiento</implementation-class>
+    </service>
+  </services>
+  <clients/>
+</jax-ws>
