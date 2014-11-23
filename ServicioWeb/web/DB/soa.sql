@@ -1,7 +1,16 @@
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';;
 
+-- -----------------------------------------------------
+-- Schema ServicioWeb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema ServicioWeb
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `ServicioWeb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `ServicioWeb` ;
 
@@ -11,24 +20,24 @@ USE `ServicioWeb` ;
 CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Salon` (
   `idSalon` INT NOT NULL AUTO_INCREMENT,
   `nombreSalon` VARCHAR(45) NOT NULL,
-  `precio` FLOAT NOT NULL,
-  `direccion` VARCHAR(50) NOT NULL,
+  `precioSalon` FLOAT NOT NULL,
+  `direccionSalon` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`idSalon`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServicioWeb`.`StatusReservacionSalon`
+-- Table `ServicioWeb`.`SRSalon`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`StatusReservacionSalon` (
-  `idStatusReservacion` INT NOT NULL AUTO_INCREMENT,
-  `fechaReservacion` DATE NOT NULL,
-  `status` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `Salon_idSalon` INT NOT NULL,
-  PRIMARY KEY (`idStatusReservacion`),
-  INDEX `fk_StatusReservacion_Salon_idx` (`Salon_idSalon` ASC),
-  CONSTRAINT `fk_StatusReservacion_Salon`
-    FOREIGN KEY (`Salon_idSalon`)
+CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SRSalon` (
+  `idSRSalon` INT NOT NULL AUTO_INCREMENT,
+  `statusSalon` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
+  `fechaSalon` DATE NOT NULL,
+  `salonIdSalon` INT NOT NULL,
+  PRIMARY KEY (`idSRSalon`),
+  INDEX `fk_SRSalon_Salon_idx` (`salonIdSalon` ASC),
+  CONSTRAINT `fk_SRSalon_Salon`
+    FOREIGN KEY (`salonIdSalon`)
     REFERENCES `ServicioWeb`.`Salon` (`idSalon`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -36,30 +45,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServicioWeb`.`PaqueteComida`
+-- Table `ServicioWeb`.`Menu`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`PaqueteComida` (
-  `idPaqueteComida` INT NOT NULL AUTO_INCREMENT,
-  `menu` VARCHAR(500) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Menu` (
+  `idMenu` INT NOT NULL AUTO_INCREMENT,
+  `menuDes` VARCHAR(200) NOT NULL,
   `precio` FLOAT NOT NULL,
-  `cantidadPersonas` INT NULL,
-  PRIMARY KEY (`idPaqueteComida`))
+  `cantidadPersonas` INT NOT NULL,
+  PRIMARY KEY (`idMenu`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServicioWeb`.`StatusReservacionComida`
+-- Table `ServicioWeb`.`SRMenu`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`StatusReservacionComida` (
-  `idStatusReservacion` INT NOT NULL AUTO_INCREMENT,
-  `fechaReservacion` DATE NOT NULL,
-  `status` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `PaqueteComida_idPaqueteComida` INT NOT NULL,
-  PRIMARY KEY (`idStatusReservacion`),
-  INDEX `fk_StatusReservacion_PaqueteComida1_idx` (`PaqueteComida_idPaqueteComida` ASC),
-  CONSTRAINT `fk_StatusReservacion_PaqueteComida1`
-    FOREIGN KEY (`PaqueteComida_idPaqueteComida`)
-    REFERENCES `ServicioWeb`.`PaqueteComida` (`idPaqueteComida`)
+CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SRMenu` (
+  `idSRMenu` INT NOT NULL AUTO_INCREMENT,
+  `stautsMenu` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
+  `fechaMenu` DATE NOT NULL,
+  `menuIdMenu` INT NOT NULL,
+  PRIMARY KEY (`idSRMenu`),
+  INDEX `fk_SRMenu_Menu1_idx` (`menuIdMenu` ASC),
+  CONSTRAINT `fk_SRMenu_Menu1`
+    FOREIGN KEY (`menuIdMenu`)
+    REFERENCES `ServicioWeb`.`Menu` (`idMenu`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -70,25 +79,25 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Entretenimiento` (
   `idEntretenimiento` INT NOT NULL AUTO_INCREMENT,
-  `tipoEntretenimiento` VARCHAR(150) NOT NULL,
-  `horas` VARCHAR(45) NOT NULL,
+  `tipoEntretenimiento` VARCHAR(45) NOT NULL,
+  `horas` INT NOT NULL,
   `precio` FLOAT NOT NULL,
   PRIMARY KEY (`idEntretenimiento`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServicioWeb`.`StatusReservacionEntre`
+-- Table `ServicioWeb`.`SREntrenimiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`StatusReservacionEntre` (
-  `idStatusReservacion` INT NOT NULL AUTO_INCREMENT,
-  `fechaReservacion` DATE NOT NULL,
-  `status` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `Entretenimiento_idEntretenimiento` INT NOT NULL,
-  PRIMARY KEY (`idStatusReservacion`),
-  INDEX `fk_StatusReservacion_Entretenimiento1_idx` (`Entretenimiento_idEntretenimiento` ASC),
-  CONSTRAINT `fk_StatusReservacion_Entretenimiento1`
-    FOREIGN KEY (`Entretenimiento_idEntretenimiento`)
+CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SREntrenimiento` (
+  `idSREntrenimiento` INT NOT NULL AUTO_INCREMENT,
+  `fechaEntretenimiento` DATE NOT NULL,
+  `statusEntretenimiento` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
+  `entretenimientoIdEntretenimiento` INT NOT NULL,
+  PRIMARY KEY (`idSREntrenimiento`),
+  INDEX `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento` ASC),
+  CONSTRAINT `fk_SREntrenimiento_Entretenimiento1`
+    FOREIGN KEY (`entretenimientoIdEntretenimiento`)
     REFERENCES `ServicioWeb`.`Entretenimiento` (`idEntretenimiento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
