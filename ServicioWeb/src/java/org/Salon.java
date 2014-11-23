@@ -1,5 +1,5 @@
 package org;
-// Generated 22/11/2014 11:26:43 AM by Hibernate Tools 4.3.1
+// Generated 22/11/2014 09:15:36 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -10,32 +10,27 @@ import java.util.Set;
  */
 public class Salon  implements java.io.Serializable {
 
+
      private Integer idSalon;
      private String nombreSalon;
-     private float precio;
-     private String direccion;
-     private Set<Statusreservacionsalon> statusreservacionsalons = new HashSet<Statusreservacionsalon>(0);
+     private float precioSalon;
+     private String direccionSalon;
+     private Set<Srsalon> srsalons = new HashSet<Srsalon>(0);
 
     public Salon() {
     }
 
 	
-    public Salon(String nombreSalon, float precio, String direccion) {
+    public Salon(String nombreSalon, float precioSalon, String direccionSalon) {
         this.nombreSalon = nombreSalon;
-        this.precio = precio;
-        this.direccion = direccion;
+        this.precioSalon = precioSalon;
+        this.direccionSalon = direccionSalon;
     }
-    public Salon(Integer idSalon, String nombreSalon, float precio, String direccion) {
-        this.idSalon=idSalon;
-        this.nombreSalon = nombreSalon;
-        this.precio = precio;
-        this.direccion = direccion;
-    }
-    public Salon(String nombreSalon, float precio, String direccion, Set<Statusreservacionsalon> statusreservacionsalons) {
+    public Salon(String nombreSalon, float precioSalon, String direccionSalon, Set<Srsalon> srsalons) {
        this.nombreSalon = nombreSalon;
-       this.precio = precio;
-       this.direccion = direccion;
-       this.statusreservacionsalons = statusreservacionsalons;
+       this.precioSalon = precioSalon;
+       this.direccionSalon = direccionSalon;
+       this.srsalons = srsalons;
     }
    
     public Integer getIdSalon() {
@@ -52,26 +47,26 @@ public class Salon  implements java.io.Serializable {
     public void setNombreSalon(String nombreSalon) {
         this.nombreSalon = nombreSalon;
     }
-    public float getPrecio() {
-        return this.precio;
+    public float getPrecioSalon() {
+        return this.precioSalon;
     }
     
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setPrecioSalon(float precioSalon) {
+        this.precioSalon = precioSalon;
     }
-    public String getDireccion() {
-        return this.direccion;
-    }
-    
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-    public Set<Statusreservacionsalon> getStatusreservacionsalons() {
-        return this.statusreservacionsalons;
+    public String getDireccionSalon() {
+        return this.direccionSalon;
     }
     
-    public void setStatusreservacionsalons(Set<Statusreservacionsalon> statusreservacionsalons) {
-        this.statusreservacionsalons = statusreservacionsalons;
+    public void setDireccionSalon(String direccionSalon) {
+        this.direccionSalon = direccionSalon;
+    }
+    public Set<Srsalon> getSrsalons() {
+        return this.srsalons;
+    }
+    
+    public void setSrsalons(Set<Srsalon> srsalons) {
+        this.srsalons = srsalons;
     }
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.Menu" table="menu" catalog="servicioweb" optimistic-lock="version">
+        <id name="idMenu" type="java.lang.Integer">
+            <column name="idMenu" />
+            <generator class="identity" />
+        </id>
+        <property name="menuDes" type="string">
+            <column name="menuDes" length="200" not-null="true" />
+        </property>
+        <property name="precio" type="float">
+            <column name="precio" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="cantidadPersonas" type="int">
+            <column name="cantidadPersonas" not-null="true" />
+        </property>
+        <set name="srmenus" table="srmenu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="menuIdMenu" not-null="true" />
+            </key>
+            <one-to-many class="org.Srmenu" />
+        </set>
+    </class>
+</hibernate-mapping>

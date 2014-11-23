@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.Srentrenimiento" table="srentrenimiento" catalog="servicioweb" optimistic-lock="version">
+        <id name="idSrentrenimiento" type="java.lang.Integer">
+            <column name="idSREntrenimiento" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="entretenimiento" class="org.Entretenimiento" fetch="select">
+            <column name="entretenimientoIdEntretenimiento" not-null="true" />
+        </many-to-one>
+        <property name="fechaEntretenimiento" type="date">
+            <column name="fechaEntretenimiento" length="10" not-null="true" />
+        </property>
+        <property name="statusEntretenimiento" type="string">
+            <column name="statusEntretenimiento" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

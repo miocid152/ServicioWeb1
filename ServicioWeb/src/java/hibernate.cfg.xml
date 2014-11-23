@@ -7,15 +7,11 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/servicioweb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
-    
-    <mapping resource="org/Statusreservacioncomida.hbm.xml"/>
-    <mapping resource="org/Paquetecomida.hbm.xml"/>
-    <mapping resource="org/Statusreservacionsalon.hbm.xml"/>
-    <mapping resource="org/Statusreservacionentre.hbm.xml"/>
+    <mapping resource="org/Menu.hbm.xml"/>
+    <mapping resource="org/Srmenu.hbm.xml"/>
     <mapping resource="org/Entretenimiento.hbm.xml"/>
+    <mapping resource="org/Srentrenimiento.hbm.xml"/>
+    <mapping resource="org/Srsalon.hbm.xml"/>
     <mapping resource="org/Salon.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

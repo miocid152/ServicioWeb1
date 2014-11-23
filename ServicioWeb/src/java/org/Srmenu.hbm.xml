@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.Srmenu" table="srmenu" catalog="servicioweb" optimistic-lock="version">
+        <id name="idSrmenu" type="java.lang.Integer">
+            <column name="idSRMenu" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="menu" class="org.Menu" fetch="select">
+            <column name="menuIdMenu" not-null="true" />
+        </many-to-one>
+        <property name="stautsMenu" type="string">
+            <column name="stautsMenu" length="45" not-null="true" />
+        </property>
+        <property name="fechaMenu" type="date">
+            <column name="fechaMenu" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

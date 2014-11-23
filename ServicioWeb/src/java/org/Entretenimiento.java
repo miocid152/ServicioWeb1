@@ -1,5 +1,5 @@
 package org;
-// Generated 22/11/2014 11:26:43 AM by Hibernate Tools 4.3.1
+// Generated 22/11/2014 09:15:36 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,24 +13,24 @@ public class Entretenimiento  implements java.io.Serializable {
 
      private Integer idEntretenimiento;
      private String tipoEntretenimiento;
-     private String horas;
+     private int horas;
      private float precio;
-     private Set<Statusreservacionentre> statusreservacionentres = new HashSet<Statusreservacionentre>(0);
+     private Set<Srentrenimiento> srentrenimientos = new HashSet<Srentrenimiento>(0);
 
     public Entretenimiento() {
     }
 
 	
-    public Entretenimiento(String tipoEntretenimiento, String horas, float precio) {
+    public Entretenimiento(String tipoEntretenimiento, int horas, float precio) {
         this.tipoEntretenimiento = tipoEntretenimiento;
         this.horas = horas;
         this.precio = precio;
     }
-    public Entretenimiento(String tipoEntretenimiento, String horas, float precio, Set<Statusreservacionentre> statusreservacionentres) {
+    public Entretenimiento(String tipoEntretenimiento, int horas, float precio, Set<Srentrenimiento> srentrenimientos) {
        this.tipoEntretenimiento = tipoEntretenimiento;
        this.horas = horas;
        this.precio = precio;
-       this.statusreservacionentres = statusreservacionentres;
+       this.srentrenimientos = srentrenimientos;
     }
    
     public Integer getIdEntretenimiento() {
@@ -47,11 +47,11 @@ public class Entretenimiento  implements java.io.Serializable {
     public void setTipoEntretenimiento(String tipoEntretenimiento) {
         this.tipoEntretenimiento = tipoEntretenimiento;
     }
-    public String getHoras() {
+    public int getHoras() {
         return this.horas;
     }
     
-    public void setHoras(String horas) {
+    public void setHoras(int horas) {
         this.horas = horas;
     }
     public float getPrecio() {
@@ -61,12 +61,12 @@ public class Entretenimiento  implements java.io.Serializable {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-    public Set<Statusreservacionentre> getStatusreservacionentres() {
-        return this.statusreservacionentres;
+    public Set<Srentrenimiento> getSrentrenimientos() {
+        return this.srentrenimientos;
     }
     
-    public void setStatusreservacionentres(Set<Statusreservacionentre> statusreservacionentres) {
-        this.statusreservacionentres = statusreservacionentres;
+    public void setSrentrenimientos(Set<Srentrenimiento> srentrenimientos) {
+        this.srentrenimientos = srentrenimientos;
     }
 
 

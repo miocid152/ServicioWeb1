@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22/11/2014 11:26:43 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="org.Salon" table="salon" catalog="servicioweb" optimistic-lock="version">
         <id name="idSalon" type="java.lang.Integer">
@@ -11,17 +11,17 @@
         <property name="nombreSalon" type="string">
             <column name="nombreSalon" length="45" not-null="true" />
         </property>
-        <property name="precio" type="float">
-            <column name="precio" precision="12" scale="0" not-null="true" />
+        <property name="precioSalon" type="float">
+            <column name="precioSalon" precision="12" scale="0" not-null="true" />
         </property>
-        <property name="direccion" type="string">
-            <column name="direccion" length="50" not-null="true" />
+        <property name="direccionSalon" type="string">
+            <column name="direccionSalon" length="60" not-null="true" />
         </property>
-        <set name="statusreservacionsalons" table="statusreservacionsalon" inverse="true" lazy="true" fetch="select">
+        <set name="srsalons" table="srsalon" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Salon_idSalon" not-null="true" />
+                <column name="salonIdSalon" not-null="true" />
             </key>
-            <one-to-many class="org.Statusreservacionsalon" />
+            <one-to-many class="org.Srsalon" />
         </set>
     </class>
 </hibernate-mapping>
