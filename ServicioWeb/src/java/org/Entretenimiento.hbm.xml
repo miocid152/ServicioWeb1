@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2014 11:26:43 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.Entretenimiento" table="entretenimiento" catalog="servicioweb" optimistic-lock="version">
+        <id name="idEntretenimiento" type="java.lang.Integer">
+            <column name="idEntretenimiento" />
+            <generator class="identity" />
+        </id>
+        <property name="tipoEntretenimiento" type="string">
+            <column name="tipoEntretenimiento" length="150" not-null="true" />
+        </property>
+        <property name="horas" type="string">
+            <column name="horas" length="45" not-null="true" />
+        </property>
+        <property name="precio" type="float">
+            <column name="precio" precision="12" scale="0" not-null="true" />
+        </property>
+        <set name="statusreservacionentres" table="statusreservacionentre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Entretenimiento_idEntretenimiento" not-null="true" />
+            </key>
+            <one-to-many class="org.Statusreservacionentre" />
+        </set>
+    </class>
+</hibernate-mapping>

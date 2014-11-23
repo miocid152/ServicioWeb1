@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2014 11:26:43 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.Statusreservacioncomida" table="statusreservacioncomida" catalog="servicioweb" optimistic-lock="version">
+        <id name="idStatusReservacion" type="java.lang.Integer">
+            <column name="idStatusReservacion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="paquetecomida" class="org.Paquetecomida" fetch="select">
+            <column name="PaqueteComida_idPaqueteComida" not-null="true" />
+        </many-to-one>
+        <property name="fechaReservacion" type="date">
+            <column name="fechaReservacion" length="10" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
