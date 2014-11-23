@@ -77,26 +77,44 @@ public class QuerySalon {
         return mensaje;
     }
 
-//    public String cancelarReservacion(int idSalon, Date fechaSalon) {
-//        mensaje="";
-//        Srsalon srs = new Srsalon();
-//        Transaction tx = null;
-//        Integer id = idSalon;
-//        try {
-//            tx = session.beginTransaction();
-//            srs = (Srsalon) session.get(Srsalon.class, id);
-//            session.update(usuario);
-//            tx.commit();
-//            mensaje = "Cancelacion Exitosa";
-//        } catch (HibernateException e) {
-//            if (tx != null) {
-//                tx.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//        return mensaje;
-//    }
+    public String cancelarReservacion(int idSalon, Date fechaSalon) {
+        mensaje="";
+        Srsalon srs = new Srsalon();
+        Transaction tx = null;
+        
+        Integer IdSrsalon = obtenerIdSalonReservado(idSalon,fechaSalon);
+        try {
+            tx = session.beginTransaction();
+            srs = (Srsalon) session.get(Srsalon.class, IdSrsalon);
+            srs.setStatusSalon("DISPONIBLE");
+
+            session.update(srs);
+            tx.commit();
+            mensaje = "Cancelacion Exitosa";
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return mensaje;
+    }
+
+    private Integer obtenerIdSalonReservado(Integer id, Date fechaSalon) {
+        List<Srsalon> srsalon = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Srsalon where fechaSalon='"+fechaSalon+"' and salonIdSalon="+id);
+            srsalon = (List<Srsalon>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return srsalon.get(0).getIdSrsalon();
+       
+    }
 
 }

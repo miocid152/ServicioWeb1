@@ -58,14 +58,15 @@ public class ServicioWebSalon {
         return retorno;
     }
 
-//    /**
-//     * Web service operation
-//     */
-//    @WebMethod(operationName = "CancelarReservacionSalon")
-//    public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") Date fechaSalon) {
-//        String retorno =qs.cancelarReservacion(idSalon,fechaSalon);
-//        return retorno;
-//    }
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "CancelarReservacionSalon")
+    public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") Date fechaSalon) {
+        System.out.println(""+fechaSalon.toString());
+        String retorno =qs.cancelarReservacion(idSalon,fechaSalon);
+        return retorno;
+    }
 
 //    /**
 //     * Web service operation
