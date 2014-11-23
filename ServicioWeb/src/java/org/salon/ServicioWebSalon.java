@@ -6,6 +6,8 @@
 package org.salon;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -62,9 +64,17 @@ public class ServicioWebSalon {
      * Web service operation
      */
     @WebMethod(operationName = "CancelarReservacionSalon")
-    public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") Date fechaSalon) {
-        System.out.println(""+fechaSalon.toString());
-        String retorno =qs.cancelarReservacion(idSalon,fechaSalon);
+    public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String retorno="";
+        try {
+		Date date = formatter.parse(fechaSalon);
+                retorno=qs.cancelarReservacion(idSalon,formatter.format(date));
+ 
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+        
         return retorno;
     }
 

@@ -77,13 +77,15 @@ public class QuerySalon {
         return mensaje;
     }
 
-    public String cancelarReservacion(int idSalon, Date fechaSalon) {
+    public String cancelarReservacion(int idSalon, String fechaSalon) {
         mensaje="";
         Srsalon srs = new Srsalon();
         Transaction tx = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         
         Integer IdSrsalon = obtenerIdSalonReservado(idSalon,fechaSalon);
         try {
+            
             tx = session.beginTransaction();
             srs = (Srsalon) session.get(Srsalon.class, IdSrsalon);
             srs.setStatusSalon("DISPONIBLE");
@@ -102,7 +104,7 @@ public class QuerySalon {
         return mensaje;
     }
 
-    private Integer obtenerIdSalonReservado(Integer id, Date fechaSalon) {
+    private Integer obtenerIdSalonReservado(Integer id, String fechaSalon) {
         List<Srsalon> srsalon = null;
         try {
             session.beginTransaction();
