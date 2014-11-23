@@ -27,12 +27,9 @@ public class QueryMenu {
     Session session;
     String mensaje = "";
 
-    public QueryMenu() {
-        session = HibernateUtil.getSessionFactory().openSession();
-    }
 
     public List ObtenerMenu() {
-        
+        session = HibernateUtil.getSessionFactory().openSession();
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         
         Calendar calendar = Calendar.getInstance();
@@ -42,7 +39,7 @@ public class QueryMenu {
         List<Salon> salon = null;
         try {
             session.beginTransaction();
-            Query q = session.createQuery("from Menu");
+            Query q = session.createQuery("Select m from Menu m  where m.idMenu  not in(Select m.idMenu from Menu m, Srmenu where menuIdMenu=idMenu and stautsMenu='RESERVADO 'or stautsMenu='CONFIRMADO' and fechaMenu<='"+fecha+"')");
             salon = (List<Salon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -65,6 +62,7 @@ public class QueryMenu {
         Integer id = idMenu;
         Transaction tx = null;
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
             menu = (Menu) session.get(Menu.class, id);
             
@@ -92,11 +90,10 @@ public class QueryMenu {
         mensaje = "";
         Srmenu srm = new Srmenu();
         Transaction tx = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
         Integer IdMenu = obtenerIdMenuReservado(idMenu, fechaMenu);
         try {
-
+        session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
             srm = (Srmenu) session.get(Srmenu.class, IdMenu);
             srm.setStautsMenu("DISPONIBLE");
@@ -119,11 +116,11 @@ public class QueryMenu {
         mensaje = "";
         Srmenu srm = new Srmenu();
         Transaction tx = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        
 
         Integer IdSrmenu = obtenerIdMenuReservado(idMenu, fechaMenu);
         try {
-
+            session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
             srm = (Srmenu) session.get(Srmenu.class, IdSrmenu);
             srm.setStautsMenu("CONFIRMADO");
@@ -145,6 +142,7 @@ public class QueryMenu {
     private Integer obtenerIdMenuReservado(Integer id, String fechaMenu) {
         List<Srmenu> srmenu = null;
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             //Query q = session.createQuery("from Srsalon where fechaSalon='" + fechaSalon + "' and salonIdSalon=" + id);}
             Query q = session.createQuery("from Srmenu where FechaMenu = '"+fechaMenu+"' and menuIdMenu ="+id);

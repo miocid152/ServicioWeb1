@@ -44,7 +44,9 @@ public class ServicioWebMenu {
             Map map = new LinkedHashMap();
             map.put("idMenu", valor.get(i).getIdMenu());
             map.put("menuDes", valor.get(i).getMenuDes());
-            map.put("precio", valor.get(i).getPrecio());
+            map.put("precioMenu", valor.get(i).getPrecioMenu());
+            map.put("nombreCompaniaMenu", valor.get(i).getNombreCompaniaMenu());
+            
             map.put("cantidadPersonas", valor.get(i).getCantidadPersonas());
             l1.add(map);
        
@@ -56,22 +58,22 @@ public class ServicioWebMenu {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "ReservacionSalon")
-    public String ReservacionSalon(@WebParam(name = "idSalon") int idSalon) {
-        String retorno = qm.agregarReservacion(idSalon);
+    @WebMethod(operationName = "ReservacionMenu")
+    public String ReservacionMenu(@WebParam(name = "idMenu") int idMenu) {
+        String retorno = qm.agregarReservacion(idMenu);
         return retorno;
     }
 
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "CancelarReservacionSalon")
-    public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
+    @WebMethod(operationName = "CancelarReservacionMenu")
+    public String CancelarReservacionSalon(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaMenu") String fechaMenu) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String retorno = "";
         try {
-            Date date = formatter.parse(fechaSalon);
-            retorno = qm.cancelarReservacion(idSalon, formatter.format(date));
+            Date date = formatter.parse(fechaMenu);
+            retorno = qm.cancelarReservacion(idMenu, formatter.format(date));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -83,13 +85,13 @@ public class ServicioWebMenu {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "ConfirmarReservacionSalon")
-    public String ConfirmarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
+    @WebMethod(operationName = "ConfirmarReservacionMenu")
+    public String ConfirmarReservacionMenu(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaMenu") String fechaMenu) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String retorno = "";
         try {
-            Date date = formatter.parse(fechaSalon);
-            retorno = qm.confirmarReservacion(idSalon, formatter.format(date));
+            Date date = formatter.parse(fechaMenu);
+            retorno = qm.confirmarReservacion(idMenu, formatter.format(date));
 
         } catch (ParseException e) {
             e.printStackTrace();

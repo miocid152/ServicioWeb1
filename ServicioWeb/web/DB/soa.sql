@@ -3,24 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2014 a las 19:49:59
+-- Tiempo de generación: 23-11-2014 a las 21:55:57
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
--- ----------------------------
--- Table structure for Entretenimiento
--- ----------------------------
-DROP TABLE IF EXISTS `Entretenimiento`;
-CREATE TABLE `Entretenimiento` (
-  `idEntretenimiento` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoEntretenimiento` varchar(45) NOT NULL,
-  `horas` int(11) NOT NULL,
-  `precio` float NOT NULL,
-  PRIMARY KEY (`idEntretenimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,7 +33,18 @@ CREATE TABLE IF NOT EXISTS `entretenimiento` (
   `horasEntretenimiento` int(11) NOT NULL,
   `precioEntretenimiento` float NOT NULL,
   PRIMARY KEY (`idEntretenimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `entretenimiento`
+--
+
+INSERT INTO `entretenimiento` (`idEntretenimiento`, `tipoEntretenimiento`, `nombreCompaniaEntretenimiento`, `horasEntretenimiento`, `precioEntretenimiento`) VALUES
+(1, 'Animadores', 'LuzRoja', 5, 3000),
+(2, 'Musica', 'Style', 8, 2500),
+(3, 'Efectos Especiales', 'Starts', 4, 6000),
+(4, 'Piñatas', 'Piñateria', 1, 500),
+(5, 'Videos', 'VideoMovieDigitalExpress', 6, 3000);
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,18 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `precioMenu` float NOT NULL,
   `cantidadPersonas` int(11) NOT NULL,
   PRIMARY KEY (`idMenu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`idMenu`, `menuDes`, `nombreCompaniaMenu`, `precioMenu`, `cantidadPersonas`) VALUES
+(1, 'Para niños', 'Botanitas', 2500, 100),
+(2, 'Para Adultos', 'El Porton', 2000, 80),
+(3, 'Menu Frances', 'Le France', 3500, 17),
+(4, 'Ejecutivo', 'JavaTimes', 100, 3),
+(5, 'Menu Social', 'HP', 3000, 35);
 
 -- --------------------------------------------------------
 
@@ -99,7 +110,16 @@ CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   `entretenimientoIdEntretenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
   KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `srentrenimiento`
+--
+
+INSERT INTO `srentrenimiento` (`idSREntrenimiento`, `fechaEntretenimiento`, `statusEntretenimiento`, `entretenimientoIdEntretenimiento`) VALUES
+(1, '2014-11-23', 'CONFIRMADO', 1),
+(2, '2014-11-23', 'DISPONIBLE', 2),
+(3, '2014-11-23', 'CONFIRMADO', 3);
 
 -- --------------------------------------------------------
 
@@ -114,7 +134,16 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
   `menuIdMenu` int(11) NOT NULL,
   PRIMARY KEY (`idSRMenu`),
   KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `srmenu`
+--
+
+INSERT INTO `srmenu` (`idSRMenu`, `stautsMenu`, `fechaMenu`, `menuIdMenu`) VALUES
+(1, 'RESERVADO', '2014-11-23', 1),
+(2, 'DISPONIBLE', '2014-11-23', 2),
+(3, 'CONFIRMADO', '2014-11-23', 3);
 
 -- --------------------------------------------------------
 
@@ -129,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
   `salonIdSalon` int(11) NOT NULL,
   PRIMARY KEY (`idSRSalon`),
   KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `srsalon`
@@ -137,7 +166,10 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
 
 INSERT INTO `srsalon` (`idSRSalon`, `statusSalon`, `fechaSalon`, `salonIdSalon`) VALUES
 (1, 'RESERVADO', '2014-11-20', 1),
-(2, 'DISPONIBLE', '2014-11-22', 2);
+(2, 'DISPONIBLE', '2014-11-22', 2),
+(3, 'CONFIRMADO', '2014-11-23', 1),
+(4, 'DISPONIBLE', '2014-11-23', 2),
+(5, 'CONFIRMADO', '2014-11-23', 3);
 
 --
 -- Restricciones para tablas volcadas

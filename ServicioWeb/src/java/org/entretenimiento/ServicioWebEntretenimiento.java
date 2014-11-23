@@ -35,7 +35,7 @@ public class ServicioWebEntretenimiento {
      * @return 
      * @throws java.io.IOException
      */
-    @WebMethod(operationName = "ListaSalones")
+    @WebMethod(operationName = "ListaEntretenimiento")
     public String ListaEntretenimiento() throws IOException {
         List<Entretenimiento> valor = qe.ObtenerEntretenimientos();
         List l1 = new LinkedList();
@@ -57,7 +57,7 @@ public class ServicioWebEntretenimiento {
      * @param idEntretenimiento
      * @return 
      */
-    @WebMethod(operationName = "ReservacionSalon")
+    @WebMethod(operationName = "ReservacionEntretenimiento")
     public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento) {
         String retorno = qe.agregarReservacion(idEntretenimiento);
         return retorno;
@@ -69,7 +69,7 @@ public class ServicioWebEntretenimiento {
      * @param fechaEntretenimiento
      * @return 
      */
-    @WebMethod(operationName = "CancelarReservacionSalon")
+    @WebMethod(operationName = "CancelarReservacionEntretenimiento")
     public String CancelarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaEntretenimiento") String fechaEntretenimiento) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String retorno = "";
@@ -87,7 +87,7 @@ public class ServicioWebEntretenimiento {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "ConfirmarReservacionSalon")
+    @WebMethod(operationName = "ConfirmarReservacionEntretenimiento")
     public String ConfirmarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaEntretenimiento") String fechaEntretenimiento) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String retorno = "";

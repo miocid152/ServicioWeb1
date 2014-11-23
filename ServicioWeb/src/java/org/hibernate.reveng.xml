@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="servicioweb"/>
+  <table-filter match-name="srsalon"/>
+  <table-filter match-name="salon"/>
+  <table-filter match-name="menu"/>
   <table-filter match-name="entretenimiento"/>
   <table-filter match-name="srmenu"/>
-  <table-filter match-name="salon"/>
   <table-filter match-name="srentrenimiento"/>
-  <table-filter match-name="menu"/>
-  <table-filter match-name="srsalon"/>
 </hibernate-reverse-engineering>
