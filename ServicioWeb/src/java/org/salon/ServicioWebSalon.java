@@ -44,8 +44,8 @@ public class ServicioWebSalon {
             Map map = new LinkedHashMap();
             map.put("idSalon", valor.get(i).getIdSalon());
             map.put("nombreSalon", valor.get(i).getNombreSalon());
-            map.put("precio", valor.get(i).getPrecioSalon());
-            map.put("direccion", valor.get(i).getDireccionSalon());
+            map.put("precioSalon", valor.get(i).getPrecioSalon());
+            map.put("direccionSalon", valor.get(i).getDireccionSalon());
             l1.add(map);
         }
         String jsonString = JSONValue.toJSONString(l1);

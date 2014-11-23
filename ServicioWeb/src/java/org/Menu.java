@@ -1,5 +1,5 @@
 package org;
-// Generated 22/11/2014 09:15:36 PM by Hibernate Tools 4.3.1
+// Generated 23/11/2014 01:08:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,8 @@ public class Menu  implements java.io.Serializable {
 
      private Integer idMenu;
      private String menuDes;
-     private float precio;
+     private String nombreCompaniaMenu;
+     private float precioMenu;
      private int cantidadPersonas;
      private Set<Srmenu> srmenus = new HashSet<Srmenu>(0);
 
@@ -21,14 +22,16 @@ public class Menu  implements java.io.Serializable {
     }
 
 	
-    public Menu(String menuDes, float precio, int cantidadPersonas) {
+    public Menu(String menuDes, String nombreCompaniaMenu, float precioMenu, int cantidadPersonas) {
         this.menuDes = menuDes;
-        this.precio = precio;
+        this.nombreCompaniaMenu = nombreCompaniaMenu;
+        this.precioMenu = precioMenu;
         this.cantidadPersonas = cantidadPersonas;
     }
-    public Menu(String menuDes, float precio, int cantidadPersonas, Set<Srmenu> srmenus) {
+    public Menu(String menuDes, String nombreCompaniaMenu, float precioMenu, int cantidadPersonas, Set<Srmenu> srmenus) {
        this.menuDes = menuDes;
-       this.precio = precio;
+       this.nombreCompaniaMenu = nombreCompaniaMenu;
+       this.precioMenu = precioMenu;
        this.cantidadPersonas = cantidadPersonas;
        this.srmenus = srmenus;
     }
@@ -47,12 +50,19 @@ public class Menu  implements java.io.Serializable {
     public void setMenuDes(String menuDes) {
         this.menuDes = menuDes;
     }
-    public float getPrecio() {
-        return this.precio;
+    public String getNombreCompaniaMenu() {
+        return this.nombreCompaniaMenu;
     }
     
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setNombreCompaniaMenu(String nombreCompaniaMenu) {
+        this.nombreCompaniaMenu = nombreCompaniaMenu;
+    }
+    public float getPrecioMenu() {
+        return this.precioMenu;
+    }
+    
+    public void setPrecioMenu(float precioMenu) {
+        this.precioMenu = precioMenu;
     }
     public int getCantidadPersonas() {
         return this.cantidadPersonas;

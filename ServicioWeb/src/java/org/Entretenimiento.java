@@ -1,5 +1,5 @@
 package org;
-// Generated 22/11/2014 09:15:36 PM by Hibernate Tools 4.3.1
+// Generated 23/11/2014 01:08:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,23 +13,26 @@ public class Entretenimiento  implements java.io.Serializable {
 
      private Integer idEntretenimiento;
      private String tipoEntretenimiento;
-     private int horas;
-     private float precio;
+     private String nombreCompaniaEntretenimiento;
+     private int horasEntretenimiento;
+     private float precioEntretenimiento;
      private Set<Srentrenimiento> srentrenimientos = new HashSet<Srentrenimiento>(0);
 
     public Entretenimiento() {
     }
 
 	
-    public Entretenimiento(String tipoEntretenimiento, int horas, float precio) {
+    public Entretenimiento(String tipoEntretenimiento, String nombreCompaniaEntretenimiento, int horasEntretenimiento, float precioEntretenimiento) {
         this.tipoEntretenimiento = tipoEntretenimiento;
-        this.horas = horas;
-        this.precio = precio;
+        this.nombreCompaniaEntretenimiento = nombreCompaniaEntretenimiento;
+        this.horasEntretenimiento = horasEntretenimiento;
+        this.precioEntretenimiento = precioEntretenimiento;
     }
-    public Entretenimiento(String tipoEntretenimiento, int horas, float precio, Set<Srentrenimiento> srentrenimientos) {
+    public Entretenimiento(String tipoEntretenimiento, String nombreCompaniaEntretenimiento, int horasEntretenimiento, float precioEntretenimiento, Set<Srentrenimiento> srentrenimientos) {
        this.tipoEntretenimiento = tipoEntretenimiento;
-       this.horas = horas;
-       this.precio = precio;
+       this.nombreCompaniaEntretenimiento = nombreCompaniaEntretenimiento;
+       this.horasEntretenimiento = horasEntretenimiento;
+       this.precioEntretenimiento = precioEntretenimiento;
        this.srentrenimientos = srentrenimientos;
     }
    
@@ -47,19 +50,26 @@ public class Entretenimiento  implements java.io.Serializable {
     public void setTipoEntretenimiento(String tipoEntretenimiento) {
         this.tipoEntretenimiento = tipoEntretenimiento;
     }
-    public int getHoras() {
-        return this.horas;
+    public String getNombreCompaniaEntretenimiento() {
+        return this.nombreCompaniaEntretenimiento;
     }
     
-    public void setHoras(int horas) {
-        this.horas = horas;
+    public void setNombreCompaniaEntretenimiento(String nombreCompaniaEntretenimiento) {
+        this.nombreCompaniaEntretenimiento = nombreCompaniaEntretenimiento;
     }
-    public float getPrecio() {
-        return this.precio;
+    public int getHorasEntretenimiento() {
+        return this.horasEntretenimiento;
     }
     
-    public void setPrecio(float precio) {
-        this.precio = precio;
+    public void setHorasEntretenimiento(int horasEntretenimiento) {
+        this.horasEntretenimiento = horasEntretenimiento;
+    }
+    public float getPrecioEntretenimiento() {
+        return this.precioEntretenimiento;
+    }
+    
+    public void setPrecioEntretenimiento(float precioEntretenimiento) {
+        this.precioEntretenimiento = precioEntretenimiento;
     }
     public Set<Srentrenimiento> getSrentrenimientos() {
         return this.srentrenimientos;

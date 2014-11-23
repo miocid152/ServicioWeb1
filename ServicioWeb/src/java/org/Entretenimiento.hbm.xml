@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 23/11/2014 01:08:00 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="org.Entretenimiento" table="entretenimiento" catalog="servicioweb" optimistic-lock="version">
         <id name="idEntretenimiento" type="java.lang.Integer">
@@ -11,11 +11,14 @@
         <property name="tipoEntretenimiento" type="string">
             <column name="tipoEntretenimiento" length="45" not-null="true" />
         </property>
-        <property name="horas" type="int">
-            <column name="horas" not-null="true" />
+        <property name="nombreCompaniaEntretenimiento" type="string">
+            <column name="nombreCompaniaEntretenimiento" length="45" not-null="true" />
         </property>
-        <property name="precio" type="float">
-            <column name="precio" precision="12" scale="0" not-null="true" />
+        <property name="horasEntretenimiento" type="int">
+            <column name="horasEntretenimiento" not-null="true" />
+        </property>
+        <property name="precioEntretenimiento" type="float">
+            <column name="precioEntretenimiento" precision="12" scale="0" not-null="true" />
         </property>
         <set name="srentrenimientos" table="srentrenimiento" inverse="true" lazy="true" fetch="select">
             <key>
