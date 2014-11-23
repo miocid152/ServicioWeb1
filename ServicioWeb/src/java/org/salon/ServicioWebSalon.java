@@ -28,6 +28,7 @@ import org.json.simple.JSONValue;
 @WebService(serviceName = "ServicioWebSalon")
 @Stateless()
 public class ServicioWebSalon {
+
     QuerySalon qs = new QuerySalon();
 
     /**
@@ -66,18 +67,35 @@ public class ServicioWebSalon {
     @WebMethod(operationName = "CancelarReservacionSalon")
     public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retorno="";
+        String retorno = "";
         try {
-		Date date = formatter.parse(fechaSalon);
-                retorno=qs.cancelarReservacion(idSalon,formatter.format(date));
- 
-	} catch (ParseException e) {
-		e.printStackTrace();
-	}
-        
+            Date date = formatter.parse(fechaSalon);
+            retorno = qs.cancelarReservacion(idSalon, formatter.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return retorno;
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "ConfirmarReservacionSalon")
+    public String ConfirmarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String retorno = "";
+        try {
+            Date date = formatter.parse(fechaSalon);
+            retorno = qs.confirmarReservacion(idSalon, formatter.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return retorno;
+    }
 //    /**
 //     * Web service operation
 //     *
@@ -99,4 +117,5 @@ public class ServicioWebSalon {
 //        }
 //        return salon;
 //    }
+
 }

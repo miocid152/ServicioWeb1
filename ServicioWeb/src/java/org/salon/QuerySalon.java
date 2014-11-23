@@ -5,6 +5,7 @@
  */
 package org.salon;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,17 +24,24 @@ import org.*;
 public class QuerySalon {
 
     Session session;
-    String mensaje="";
+    String mensaje = "";
 
     public QuerySalon() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public List ObtenerSalones() {
+        
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -7); 
+        Date ahora=calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+        String fecha=formateador.format(ahora);
         List<Salon> salon = null;
         try {
             session.beginTransaction();
-            Query q = session.createQuery("Select s from Salon s where s.idSalon  not in( Select s.idSalon from Salon s, Srsalon where salonIdSalon=IdSalon)");
+            Query q = session.createQuery("Select s from Salon s where s.idSalon  not in( Select s.idSalon from Salon s, Srsalon where salonIdSalon=IdSalon and statusSalon='RESERVADO' or statusSalon='CONFIRMADO' and fechaSalon='"+fecha+"')");
             salon = (List<Salon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -44,7 +52,7 @@ public class QuerySalon {
     }//Nos falta Consulta fecha no esta bien
 
     public String agregarReservacion(int idSalon) {
-        mensaje="";
+        mensaje = "";
         Srsalon srs = new Srsalon();
         Salon salon = new Salon();
         Calendar cal = new GregorianCalendar();
@@ -64,13 +72,13 @@ public class QuerySalon {
             srs.setStatusSalon("RESERVADO");
             session.save(srs);
             tx.commit();
-            mensaje="Reservacion Realizada con Exito";
+            mensaje = "Reservacion Realizada con Exito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
-            mensaje= "Reservacion No Realizada";
+            mensaje = "Reservacion No Realizada";
         } finally {
             session.close();
         }
@@ -78,14 +86,14 @@ public class QuerySalon {
     }
 
     public String cancelarReservacion(int idSalon, String fechaSalon) {
-        mensaje="";
+        mensaje = "";
         Srsalon srs = new Srsalon();
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Integer IdSrsalon = obtenerIdSalonReservado(idSalon,fechaSalon);
+
+        Integer IdSrsalon = obtenerIdSalonReservado(idSalon, fechaSalon);
         try {
-            
+
             tx = session.beginTransaction();
             srs = (Srsalon) session.get(Srsalon.class, IdSrsalon);
             srs.setStatusSalon("DISPONIBLE");
@@ -104,11 +112,38 @@ public class QuerySalon {
         return mensaje;
     }
 
+    public String confirmarReservacion(int idSalon, String fechaSalon) {
+        mensaje = "";
+        Srsalon srs = new Srsalon();
+        Transaction tx = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Integer IdSrsalon = obtenerIdSalonReservado(idSalon, fechaSalon);
+        try {
+
+            tx = session.beginTransaction();
+            srs = (Srsalon) session.get(Srsalon.class, IdSrsalon);
+            srs.setStatusSalon("CONFIRMADO");
+
+            session.update(srs);
+            tx.commit();
+            mensaje = "Confirmacion Exitosa";
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return mensaje;
+    }
+
     private Integer obtenerIdSalonReservado(Integer id, String fechaSalon) {
         List<Srsalon> srsalon = null;
         try {
             session.beginTransaction();
-            Query q = session.createQuery("from Srsalon where fechaSalon='"+fechaSalon+"' and salonIdSalon="+id);
+            Query q = session.createQuery("from Srsalon where fechaSalon='" + fechaSalon + "' and salonIdSalon=" + id);
             srsalon = (List<Srsalon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -116,7 +151,7 @@ public class QuerySalon {
             session.close();
         }
         return srsalon.get(0).getIdSrsalon();
-       
+
     }
 
 }
