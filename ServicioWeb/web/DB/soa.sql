@@ -10,6 +10,17 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+-- ----------------------------
+-- Table structure for Entretenimiento
+-- ----------------------------
+DROP TABLE IF EXISTS `Entretenimiento`;
+CREATE TABLE `Entretenimiento` (
+  `idEntretenimiento` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoEntretenimiento` varchar(45) NOT NULL,
+  `horas` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  PRIMARY KEY (`idEntretenimiento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
