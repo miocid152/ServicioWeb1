@@ -1,109 +1,129 @@
--- MySQL Workbench Forward Engineering
+/*
+Navicat MySQL Data Transfer
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';;
+Source Server         : MySQL Ubuntu VM
+Source Server Version : 50538
+Source Host           : 192.168.56.101:3306
+Source Database       : SOA
 
--- -----------------------------------------------------
--- Schema ServicioWeb
--- -----------------------------------------------------
+Target Server Type    : MYSQL
+Target Server Version : 50538
+File Encoding         : 65001
 
--- -----------------------------------------------------
--- Schema ServicioWeb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ServicioWeb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `ServicioWeb` ;
+Date: 2014-11-23 13:34:32
+*/
 
--- -----------------------------------------------------
--- Table `ServicioWeb`.`Salon`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Salon` (
-  `idSalon` INT NOT NULL AUTO_INCREMENT,
-  `nombreSalon` VARCHAR(45) NOT NULL,
-  `precioSalon` FLOAT NOT NULL,
-  `direccionSalon` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`idSalon`))
-ENGINE = InnoDB;
+SET FOREIGN_KEY_CHECKS=0;
 
+-- ----------------------------
+-- Table structure for Entretenimiento
+-- ----------------------------
+DROP TABLE IF EXISTS `Entretenimiento`;
+CREATE TABLE `Entretenimiento` (
+  `idEntretenimiento` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoEntretenimiento` varchar(45) NOT NULL,
+  `horas` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  PRIMARY KEY (`idEntretenimiento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `ServicioWeb`.`SRSalon`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SRSalon` (
-  `idSRSalon` INT NOT NULL AUTO_INCREMENT,
-  `statusSalon` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `fechaSalon` DATE NOT NULL,
-  `salonIdSalon` INT NOT NULL,
-  PRIMARY KEY (`idSRSalon`),
-  INDEX `fk_SRSalon_Salon_idx` (`salonIdSalon` ASC),
-  CONSTRAINT `fk_SRSalon_Salon`
-    FOREIGN KEY (`salonIdSalon`)
-    REFERENCES `ServicioWeb`.`Salon` (`idSalon`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- ----------------------------
+-- Records of Entretenimiento
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for Menu
+-- ----------------------------
+DROP TABLE IF EXISTS `Menu`;
+CREATE TABLE `Menu` (
+  `idMenu` int(11) NOT NULL AUTO_INCREMENT,
+  `menuDes` varchar(200) NOT NULL,
+  `precio` float NOT NULL,
+  `cantidadPersonas` int(11) NOT NULL,
+  PRIMARY KEY (`idMenu`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `ServicioWeb`.`Menu`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Menu` (
-  `idMenu` INT NOT NULL AUTO_INCREMENT,
-  `menuDes` VARCHAR(200) NOT NULL,
-  `precio` FLOAT NOT NULL,
-  `cantidadPersonas` INT NOT NULL,
-  PRIMARY KEY (`idMenu`))
-ENGINE = InnoDB;
+-- ----------------------------
+-- Records of Menu
+-- ----------------------------
+INSERT INTO `Menu` VALUES ('1', 'Menu ejecutivo para empresarios, este menu de comida cuenta con varidad de sopas de entrada, guisados de plato fuerte y postre. Agua ilimitada', '9000', '80');
+INSERT INTO `Menu` VALUES ('2', 'Menu infantil', '5000', '30');
+INSERT INTO `Menu` VALUES ('3', 'asdasdasdasd', '54', '43');
+INSERT INTO `Menu` VALUES ('4', 'hola k ase', '4000', '3900');
+INSERT INTO `Menu` VALUES ('5', 'el ultimo no funciona', '200000', '3000');
 
+-- ----------------------------
+-- Table structure for Salon
+-- ----------------------------
+DROP TABLE IF EXISTS `Salon`;
+CREATE TABLE `Salon` (
+  `idSalon` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreSalon` varchar(45) NOT NULL,
+  `precioSalon` float NOT NULL,
+  `direccionSalon` varchar(60) NOT NULL,
+  PRIMARY KEY (`idSalon`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `ServicioWeb`.`SRMenu`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SRMenu` (
-  `idSRMenu` INT NOT NULL AUTO_INCREMENT,
-  `stautsMenu` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `fechaMenu` DATE NOT NULL,
-  `menuIdMenu` INT NOT NULL,
-  PRIMARY KEY (`idSRMenu`),
-  INDEX `fk_SRMenu_Menu1_idx` (`menuIdMenu` ASC),
-  CONSTRAINT `fk_SRMenu_Menu1`
-    FOREIGN KEY (`menuIdMenu`)
-    REFERENCES `ServicioWeb`.`Menu` (`idMenu`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- ----------------------------
+-- Records of Salon
+-- ----------------------------
 
-
--- -----------------------------------------------------
--- Table `ServicioWeb`.`Entretenimiento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`Entretenimiento` (
-  `idEntretenimiento` INT NOT NULL AUTO_INCREMENT,
-  `tipoEntretenimiento` VARCHAR(45) NOT NULL,
-  `horas` INT NOT NULL,
-  `precio` FLOAT NOT NULL,
-  PRIMARY KEY (`idEntretenimiento`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ServicioWeb`.`SREntrenimiento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ServicioWeb`.`SREntrenimiento` (
-  `idSREntrenimiento` INT NOT NULL AUTO_INCREMENT,
-  `fechaEntretenimiento` DATE NOT NULL,
-  `statusEntretenimiento` VARCHAR(45) NOT NULL DEFAULT 'RESERVADO',
-  `entretenimientoIdEntretenimiento` INT NOT NULL,
+-- ----------------------------
+-- Table structure for SREntrenimiento
+-- ----------------------------
+DROP TABLE IF EXISTS `SREntrenimiento`;
+CREATE TABLE `SREntrenimiento` (
+  `idSREntrenimiento` int(11) NOT NULL AUTO_INCREMENT,
+  `fechaEntretenimiento` date NOT NULL,
+  `statusEntretenimiento` varchar(45) NOT NULL DEFAULT 'RESERVADO',
+  `entretenimientoIdEntretenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
-  INDEX `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento` ASC),
-  CONSTRAINT `fk_SREntrenimiento_Entretenimiento1`
-    FOREIGN KEY (`entretenimientoIdEntretenimiento`)
-    REFERENCES `ServicioWeb`.`Entretenimiento` (`idEntretenimiento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`),
+  CONSTRAINT `fk_SREntrenimiento_Entretenimiento1` FOREIGN KEY (`entretenimientoIdEntretenimiento`) REFERENCES `Entretenimiento` (`idEntretenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Records of SREntrenimiento
+-- ----------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- ----------------------------
+-- Table structure for SRMenu
+-- ----------------------------
+DROP TABLE IF EXISTS `SRMenu`;
+CREATE TABLE `SRMenu` (
+  `idSRMenu` int(11) NOT NULL AUTO_INCREMENT,
+  `stautsMenu` varchar(45) NOT NULL DEFAULT 'RESERVADO',
+  `fechaMenu` date NOT NULL,
+  `menuIdMenu` int(11) NOT NULL,
+  PRIMARY KEY (`idSRMenu`),
+  KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`),
+  CONSTRAINT `fk_SRMenu_Menu1` FOREIGN KEY (`menuIdMenu`) REFERENCES `Menu` (`idMenu`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of SRMenu
+-- ----------------------------
+INSERT INTO `SRMenu` VALUES ('1', 'RESERVADO', '2014-11-22', '1');
+INSERT INTO `SRMenu` VALUES ('2', 'DISPONIBLE', '2014-11-25', '2');
+INSERT INTO `SRMenu` VALUES ('3', 'RESERVADO', '2014-11-23', '2');
+INSERT INTO `SRMenu` VALUES ('4', 'RESERVADO', '2014-11-23', '1');
+INSERT INTO `SRMenu` VALUES ('5', 'RESERVADO', '2014-11-23', '3');
+INSERT INTO `SRMenu` VALUES ('6', 'RESERVADO', '2014-11-23', '4');
+
+-- ----------------------------
+-- Table structure for SRSalon
+-- ----------------------------
+DROP TABLE IF EXISTS `SRSalon`;
+CREATE TABLE `SRSalon` (
+  `idSRSalon` int(11) NOT NULL AUTO_INCREMENT,
+  `statusSalon` varchar(45) NOT NULL DEFAULT 'RESERVADO',
+  `fechaSalon` date NOT NULL,
+  `salonIdSalon` int(11) NOT NULL,
+  PRIMARY KEY (`idSRSalon`),
+  KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`),
+  CONSTRAINT `fk_SRSalon_Salon` FOREIGN KEY (`salonIdSalon`) REFERENCES `Salon` (`idSalon`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of SRSalon
+-- ----------------------------

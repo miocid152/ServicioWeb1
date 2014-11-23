@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22/11/2014 09:15:37 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 23/11/2014 12:27:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="org.Salon" table="salon" catalog="servicioweb" optimistic-lock="version">
+    <class name="org.Salon" table="Salon" catalog="SOA" optimistic-lock="version">
         <id name="idSalon" type="java.lang.Integer">
             <column name="idSalon" />
             <generator class="identity" />
@@ -17,7 +17,7 @@
         <property name="direccionSalon" type="string">
             <column name="direccionSalon" length="60" not-null="true" />
         </property>
-        <set name="srsalons" table="srsalon" inverse="true" lazy="true" fetch="select">
+        <set name="srsalons" table="SRSalon" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="salonIdSalon" not-null="true" />
             </key>

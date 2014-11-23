@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="servicioweb"/>
-  <table-filter match-name="srmenu"/>
-  <table-filter match-name="srsalon"/>
-  <table-filter match-name="menu"/>
-  <table-filter match-name="entretenimiento"/>
-  <table-filter match-name="srentrenimiento"/>
-  <table-filter match-name="salon"/>
+  <schema-selection match-catalog="SOA"/>
+  <table-filter match-name="Entretenimiento"/>
+  <table-filter match-name="Menu"/>
+  <table-filter match-name="SRSalon"/>
+  <table-filter match-name="Salon"/>
+  <table-filter match-name="SRMenu"/>
+  <table-filter match-name="SREntrenimiento"/>
 </hibernate-reverse-engineering>
