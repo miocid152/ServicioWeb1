@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2014 a las 21:55:57
+-- Tiempo de generación: 25-11-2014 a las 06:31:22
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -19,8 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `servicioweb`
 --
-CREATE SCHEMA IF NOT EXISTS `ServicioWeb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `ServicioWeb` ;
+
 -- --------------------------------------------------------
 
 --
@@ -107,20 +106,17 @@ INSERT INTO `salon` (`idSalon`, `nombreSalon`, `precioSalon`, `direccionSalon`) 
 CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   `idSREntrenimiento` int(11) NOT NULL AUTO_INCREMENT,
   `fechaEntretenimiento` date NOT NULL,
+  `fechaReservacionEntretenimiento` date NOT NULL,
   `statusEntretenimiento` varchar(45) NOT NULL DEFAULT 'RESERVADO',
   `entretenimientoIdEntretenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
   KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `srentrenimiento`
 --
 
-INSERT INTO `srentrenimiento` (`idSREntrenimiento`, `fechaEntretenimiento`, `statusEntretenimiento`, `entretenimientoIdEntretenimiento`) VALUES
-(1, '2014-11-23', 'CONFIRMADO', 1),
-(2, '2014-11-23', 'DISPONIBLE', 2),
-(3, '2014-11-23', 'CONFIRMADO', 3);
 
 -- --------------------------------------------------------
 
@@ -132,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
   `idSRMenu` int(11) NOT NULL AUTO_INCREMENT,
   `stautsMenu` varchar(45) NOT NULL DEFAULT 'RESERVADO',
   `fechaMenu` date NOT NULL,
+  `fechaReservacionMenu` date NOT NULL,
   `menuIdMenu` int(11) NOT NULL,
   PRIMARY KEY (`idSRMenu`),
   KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`)
@@ -140,11 +137,6 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
 --
 -- Volcado de datos para la tabla `srmenu`
 --
-
-INSERT INTO `srmenu` (`idSRMenu`, `stautsMenu`, `fechaMenu`, `menuIdMenu`) VALUES
-(1, 'RESERVADO', '2014-11-23', 1),
-(2, 'DISPONIBLE', '2014-11-23', 2),
-(3, 'CONFIRMADO', '2014-11-23', 3);
 
 -- --------------------------------------------------------
 
@@ -156,21 +148,15 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
   `idSRSalon` int(11) NOT NULL AUTO_INCREMENT,
   `statusSalon` varchar(45) NOT NULL DEFAULT 'RESERVADO',
   `fechaSalon` date NOT NULL,
+  `fechaReservacionSalon` date NOT NULL,
   `salonIdSalon` int(11) NOT NULL,
   PRIMARY KEY (`idSRSalon`),
   KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `srsalon`
 --
-
-INSERT INTO `srsalon` (`idSRSalon`, `statusSalon`, `fechaSalon`, `salonIdSalon`) VALUES
-(1, 'RESERVADO', '2014-11-20', 1),
-(2, 'DISPONIBLE', '2014-11-22', 2),
-(3, 'CONFIRMADO', '2014-11-23', 1),
-(4, 'DISPONIBLE', '2014-11-23', 2),
-(5, 'CONFIRMADO', '2014-11-23', 3);
 
 --
 -- Restricciones para tablas volcadas
