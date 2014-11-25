@@ -1,5 +1,5 @@
 package org;
-// Generated 23/11/2014 02:27:29 PM by Hibernate Tools 4.3.1
+// Generated 24/11/2014 11:37:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,14 +13,16 @@ public class Srentrenimiento  implements java.io.Serializable {
      private Integer idSrentrenimiento;
      private Entretenimiento entretenimiento;
      private Date fechaEntretenimiento;
+     private Date fechaReservacionEntretenimiento;
      private String statusEntretenimiento;
 
     public Srentrenimiento() {
     }
 
-    public Srentrenimiento(Entretenimiento entretenimiento, Date fechaEntretenimiento, String statusEntretenimiento) {
+    public Srentrenimiento(Entretenimiento entretenimiento, Date fechaEntretenimiento, Date fechaReservacionEntretenimiento, String statusEntretenimiento) {
        this.entretenimiento = entretenimiento;
        this.fechaEntretenimiento = fechaEntretenimiento;
+       this.fechaReservacionEntretenimiento = fechaReservacionEntretenimiento;
        this.statusEntretenimiento = statusEntretenimiento;
     }
    
@@ -44,6 +46,13 @@ public class Srentrenimiento  implements java.io.Serializable {
     
     public void setFechaEntretenimiento(Date fechaEntretenimiento) {
         this.fechaEntretenimiento = fechaEntretenimiento;
+    }
+    public Date getFechaReservacionEntretenimiento() {
+        return this.fechaReservacionEntretenimiento;
+    }
+    
+    public void setFechaReservacionEntretenimiento(Date fechaReservacionEntretenimiento) {
+        this.fechaReservacionEntretenimiento = fechaReservacionEntretenimiento;
     }
     public String getStatusEntretenimiento() {
         return this.statusEntretenimiento;

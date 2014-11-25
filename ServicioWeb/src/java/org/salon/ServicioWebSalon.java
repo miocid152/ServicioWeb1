@@ -8,7 +8,6 @@ package org.salon;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -56,9 +55,31 @@ public class ServicioWebSalon {
      * Web service operation
      */
     @WebMethod(operationName = "ReservacionSalon")
-    public String ReservacionSalon(@WebParam(name = "idSalon") int idSalon) {
-        String retorno = qs.agregarReservacion(idSalon);
-        return retorno;
+    public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
+
+        if (qs.verificarStatus(idSalon) == 1) {
+            map.put("mensaje", "ya existe la reservacion");
+            map.put("fecha", qs.obtenerFechaActual());
+        }
+        if (qs.verificarStatus(idSalon) == 3) {
+            map.put("mensaje", "Ya fue confirmado");
+            map.put("fecha", qs.obtenerFechaActual());
+        } 
+        if (qs.verificarStatus(idSalon) == 0) {
+            map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon));
+            map.put("fecha", qs.obtenerFechaActual());
+        }
+        if (qs.verificarStatus(idSalon) == 2) {
+            map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon));
+            map.put("fecha", qs.obtenerFechaActual());
+        }
+  
+        
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
 
     /**
@@ -67,16 +88,33 @@ public class ServicioWebSalon {
     @WebMethod(operationName = "CancelarReservacionSalon")
     public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retorno = "";
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
         try {
             Date date = formatter.parse(fechaSalon);
-            retorno = qs.cancelarReservacion(idSalon, formatter.format(date));
+            if (qs.verificarStatus(idSalon,formatter.format(date)) == 0) {
+                map.put("mensaje", "No existe Reservacion");
+                map.put("fecha", qs.obtenerFechaActual());
+            }
+            if (qs.verificarStatus(idSalon,formatter.format(date)) == 3) {
+                map.put("mensaje", "Ya fue confirmado");
+                map.put("fecha", qs.obtenerFechaActual());
+            } 
+            if (qs.verificarStatus(idSalon,formatter.format(date)) == 2) {
+                map.put("mensaje", "No existe Reservacion");
+                map.put("fecha", qs.obtenerFechaActual());
+            }
+            if (qs.verificarStatus(idSalon,formatter.format(date)) == 1) {
+                map.put("mensaje", qs.cancelarReservacion(idSalon, formatter.format(date)));
+                map.put("fecha", qs.obtenerFechaActual());
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        return retorno;
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
 
     /**
@@ -85,37 +123,33 @@ public class ServicioWebSalon {
     @WebMethod(operationName = "ConfirmarReservacionSalon")
     public String ConfirmarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaSalon") String fechaSalon) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retorno = "";
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
         try {
             Date date = formatter.parse(fechaSalon);
-            retorno = qs.confirmarReservacion(idSalon, formatter.format(date));
+
+            if (qs.verificarStatus(idSalon, formatter.format(date)) == 0) {
+                map.put("mensaje", "No existe Reservacion");
+                map.put("fecha", qs.obtenerFechaActual());
+            }
+            if (qs.verificarStatus(idSalon,formatter.format(date)) == 3) {
+                map.put("mensaje", "Ya fue confirmado");
+                map.put("fecha", qs.obtenerFechaActual());
+            } 
+             if (qs.verificarStatus(idSalon,formatter.format(date)) == 2) {
+                map.put("mensaje", "No existe Reservacion");
+                map.put("fecha", qs.obtenerFechaActual());
+            }
+            if (qs.verificarStatus(idSalon, formatter.format(date)) == 1) {
+                map.put("mensaje", qs.confirmarReservacion(idSalon, formatter.format(date)));
+                map.put("fecha", qs.obtenerFechaActual());
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        return retorno;
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
-//    /**
-//     * Web service operation
-//     *
-//     * @return
-//     */
-//    @WebMethod(operationName = "ListaSalones")
-//    public List<Salon> ListaSalones() {
-//        ObtenerSalon os = new ObtenerSalon();
-//        List<Salon> valor = os.getSalones();
-//        List<Salon> salon = new ArrayList<>();
-//        for (int i = 0; i < valor.size(); i++) {
-//            salon.add(new Salon(
-//                    valor.get(i).getIdSalon(),
-//                    valor.get(i).getNombreSalon(),
-//                    valor.get(i).getPrecio(),
-//                    valor.get(i).getDireccion()
-//                    )
-//            );
-//        }
-//        return salon;
-//    }
-
 }
