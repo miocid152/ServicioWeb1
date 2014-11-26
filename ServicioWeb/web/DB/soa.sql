@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `servicioweb`
 --
+CREATE SCHEMA IF NOT EXISTS `ServicioWeb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `ServicioWeb` ;
 
 -- --------------------------------------------------------
 
@@ -111,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   `entretenimientoIdEntretenimiento` int(11) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
   KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Volcado de datos para la tabla `srentrenimiento`
@@ -132,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
   `menuIdMenu` int(11) NOT NULL,
   PRIMARY KEY (`idSRMenu`),
   KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Volcado de datos para la tabla `srmenu`
@@ -152,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
   `salonIdSalon` int(11) NOT NULL,
   PRIMARY KEY (`idSRSalon`),
   KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Volcado de datos para la tabla `srsalon`

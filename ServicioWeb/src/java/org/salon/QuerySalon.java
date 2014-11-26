@@ -28,17 +28,12 @@ public class QuerySalon {
     Session session;
     String mensaje = "";
 
-    public List ObtenerSalones() {
-        session = HibernateUtil.getSessionFactory().openSession();
-        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -7);
-        Date ahora = calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
-        String fecha = formateador.format(ahora);
+    public List ObtenerSalones(String fecha) {
         List<Salon> salon = null;
         try {
+            session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("Select s from Salon s where  s.idSalon not in(Select s.idSalon from Salon s, Srsalon where salonIdSalon=IdSalon and statusSalon<>'DISPONIBLE')");
+            Query q = session.createQuery("Select s from Salon s where  s.idSalon not in(Select s.idSalon from Salon s, Srsalon where salonIdSalon=IdSalon and (statusSalon='RESERVADO' or statusSalon='CONFIRMADO') and fechaReservacionSalon='"+fecha+"')");
             salon = (List<Salon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -93,7 +88,7 @@ public class QuerySalon {
     public String actualizarReservacion(int idSalon,String fechaReservacionSalon) {
         Date dfrs;
         mensaje = "";
-        List<Srsalon> srsalon = existenciaParaReservar(idSalon, obtenerFechaActual());
+        List<Srsalon> srsalon = existenciaParaReservar(idSalon, fechaReservacionSalon);
         Srsalon srs = null;
         Salon salon = new Salon();
         Calendar cal = new GregorianCalendar();
@@ -131,9 +126,9 @@ public class QuerySalon {
         return mensaje;
     }
 
-    public String cancelarReservacion(int idSalon, String fechaSalon) {
+    public String cancelarReservacion(int idSalon, String fechaReservacionSalon) {
         mensaje = "";
-        List<Srsalon> srsalon = existenciaParaReservar(idSalon, fechaSalon);
+        List<Srsalon> srsalon = existenciaParaReservar(idSalon, fechaReservacionSalon);
         Srsalon srs = null;
         Salon salon = new Salon();
 
@@ -159,12 +154,11 @@ public class QuerySalon {
         return mensaje;
     }
 
-    public String confirmarReservacion(int idSalon, String fechaSalon) {
-
+    public String confirmarReservacion(int idSalon, String fechaReservacionSalon) {
         mensaje = "";
         Srsalon srs = new Srsalon();
         Transaction tx = null;
-        Integer IdSrsalon = obtenerIdSalonReservado(idSalon, fechaSalon);
+        Integer IdSrsalon = obtenerIdSalonReservado(idSalon, fechaReservacionSalon);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
@@ -184,12 +178,12 @@ public class QuerySalon {
         return mensaje;
     }
 
-    private Integer obtenerIdSalonReservado(Integer id, String fechaSalon) {
+    private Integer obtenerIdSalonReservado(Integer id, String fechaReservacionSalon) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Srsalon> srsalon = null;
         try {
             session.beginTransaction();
-            Query q = session.createQuery("from Srsalon where fechaSalon='" + fechaSalon + "' and salonIdSalon=" + id);
+            Query q = session.createQuery("from Srsalon where fechaReservacionSalon='" + fechaReservacionSalon + "' and salonIdSalon=" + id);
             srsalon = (List<Srsalon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -208,7 +202,7 @@ public class QuerySalon {
         List<Srsalon> srsalon = null;
         try {
             session.beginTransaction();
-            Query q = session.createQuery("from Srsalon where fechaSalon='" + fechaSalon + "' and salonIdSalon=" + id);
+            Query q = session.createQuery("from Srsalon where fechaReservacionSalon='" + fechaSalon + "' and salonIdSalon=" + id);
             srsalon = (ArrayList<Srsalon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -218,33 +212,10 @@ public class QuerySalon {
         return srsalon;
     }
 
-    String obtenerFechaActual() {
+    String obtenerFechaReservacion(Integer idSalon, String fecha) {
+        List<Srsalon> srsalon = existenciaParaReservar(idSalon, fecha);
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 0);
-        Date ahora = calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
-        String fecha = formateador.format(ahora);
-        return fecha;
-    }
-
-    int verificarStatus(Integer idSalon) {
-        List<Srsalon> srsalon = existenciaParaReservar(idSalon, obtenerFechaActual());
-        int valor = 0;
-        if (srsalon.size() == 0) {
-            valor = 0;
-        }
-        for (int i = 0; i < srsalon.size(); i++) {
-            if (srsalon.get(i).getStatusSalon().equals("RESERVADO")) {
-                valor = 1;
-            }
-            if (srsalon.get(i).getStatusSalon().equals("DISPONIBLE")) {
-                valor = 2;
-            }
-            if (srsalon.get(i).getStatusSalon().equals("CONFIRMADO")) {
-                valor = 3;
-            }
-        }
-        return valor;
+        return formateador.format(srsalon.get(0).getFechaReservacionSalon());
     }
 
     int verificarStatus(Integer idSalon, String fecha) {
@@ -268,3 +239,9 @@ public class QuerySalon {
     }
 
 }
+//        session = HibernateUtil.getSessionFactory().openSession();
+//        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DAY_OF_YEAR, -7);
+//        Date ahora = calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+//        String fecha = formateador.format(ahora);

@@ -27,17 +27,18 @@ import org.json.simple.JSONValue;
 @WebService(serviceName = "ServicioWebEntretenimiento")
 @Stateless()
 public class ServicioWebEntretenimiento {
+
     QueryEntretenimiento qe = new QueryEntretenimiento();
 
     /**
      * Web service operation
      *
-     * @return 
+     * @return
      * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaEntretenimiento")
-    public String ListaEntretenimiento() throws IOException {
-        List<Entretenimiento> valor = qe.ObtenerEntretenimientos();
+    public String ListaEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) throws IOException {
+        List<Entretenimiento> valor = qe.ObtenerEntretenimientos(fechaReservacionEntretenimiento);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
             Map map = new LinkedHashMap();
@@ -54,52 +55,93 @@ public class ServicioWebEntretenimiento {
 
     /**
      * Web service operation
+     *
      * @param idEntretenimiento
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "ReservacionEntretenimiento")
-    public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento) {
-        String retorno = qe.agregarReservacion(idEntretenimiento);
-        return retorno;
+    public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+            map.put("mensaje", "ya existe la reservacion");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+            map.put("mensaje", "Ya fue confirmado");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+            map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+            map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
 
     /**
      * Web service operation
+     *
      * @param idEntretenimiento
      * @param fechaEntretenimiento
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "CancelarReservacionEntretenimiento")
-    public String CancelarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaEntretenimiento") String fechaEntretenimiento) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retorno = "";
-        try {
-            Date date = formatter.parse(fechaEntretenimiento);
-            retorno = qe.cancelarReservacion(idEntretenimiento, formatter.format(date));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public String CancelarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+            map.put("mensaje", "No existe Reservacion");
+            map.put("fecha", fechaReservacionEntretenimiento);
         }
-
-        return retorno;
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+            map.put("mensaje", "Ya fue confirmado");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+            map.put("mensaje", "No existe Reservacion");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+            map.put("mensaje", qe.cancelarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
 
     /**
      * Web service operation
      */
     @WebMethod(operationName = "ConfirmarReservacionEntretenimiento")
-    public String ConfirmarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaEntretenimiento") String fechaEntretenimiento) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retorno = "";
-        try {
-            Date date = formatter.parse(fechaEntretenimiento);
-            retorno = qe.confirmarReservacion(idEntretenimiento, formatter.format(date));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public String ConfirmarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
+        List l1 = new LinkedList();
+        Map map = new LinkedHashMap();
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+            map.put("mensaje", "No existe Reservacion");
+            map.put("fecha", fechaReservacionEntretenimiento);
         }
-
-        return retorno;
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+            map.put("mensaje", "Ya fue confirmado");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+            map.put("mensaje", "No existe Reservacion");
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+            map.put("mensaje", qe.confirmarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
+            map.put("fecha", fechaReservacionEntretenimiento);
+        }
+        l1.add(map);
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
-    
+
 }
