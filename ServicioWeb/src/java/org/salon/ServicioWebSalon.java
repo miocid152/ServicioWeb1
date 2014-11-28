@@ -6,9 +6,7 @@
 package org.salon;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +31,8 @@ public class ServicioWebSalon {
     /**
      * Web service operation
      *
+     * @param fechaReservacionSalon
+     * @return 
      * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaSalones" )
@@ -53,24 +53,28 @@ public class ServicioWebSalon {
 
     /**
      * Web service operation
+     * @param idSalon
+     * @param fechaReservacionSalon
+     * @return 
      */
     @WebMethod(operationName = "ReservacionSalon")
     public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-        if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 1) {
+        int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
+        if (estado == 1) {
             map.put("mensaje", "ya existe la reservacion");
             map.put("fecha",fechaReservacionSalon);
         }
-        if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 3) {
+        if (estado == 3) {
             map.put("mensaje", "Ya fue confirmado");
             map.put("fecha", fechaReservacionSalon);
         } 
-        if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 0) {
+        if (estado == 0) {
             map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon));
             map.put("fecha", fechaReservacionSalon);
         }
-        if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 2) {
+        if (estado == 2) {
             map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon));
             map.put("fecha",  fechaReservacionSalon);
         }
@@ -81,24 +85,28 @@ public class ServicioWebSalon {
 
     /**
      * Web service operation
+     * @param idSalon
+     * @param fechaReservacionSalon
+     * @return 
      */
     @WebMethod(operationName = "CancelarReservacionSalon")
     public String CancelarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-            if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 0) {
+        int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
+            if (estado== 0) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionSalon);
             }
-            if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 3) {
+            if (estado == 3) {
                 map.put("mensaje", "Ya fue confirmado");
                 map.put("fecha",fechaReservacionSalon);
             } 
-            if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 2) {
+            if (estado == 2) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionSalon);
             }
-            if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 1) {
+            if (estado == 1) {
                 map.put("mensaje", qs.cancelarReservacion(idSalon, fechaReservacionSalon));
                 map.put("fecha",fechaReservacionSalon);
             }
@@ -109,25 +117,29 @@ public class ServicioWebSalon {
 
     /**
      * Web service operation
+     * @param idSalon
+     * @param fechaReservacionSalon
+     * @return 
      */
     @WebMethod(operationName = "ConfirmarReservacionSalon")
     public String ConfirmarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-            if (qs.verificarStatus(idSalon, fechaReservacionSalon) == 0) {
+        int estado =qs.verificarStatus(idSalon, fechaReservacionSalon);
+            if (estado == 0) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionSalon);
             }
-            if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 3) {
+            if (estado == 3) {
                 map.put("mensaje", "Ya fue confirmado");
                 map.put("fecha",fechaReservacionSalon);
             } 
-             if (qs.verificarStatus(idSalon,fechaReservacionSalon) == 2) {
+            if (estado == 2) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionSalon);
             }
-            if (qs.verificarStatus(idSalon, fechaReservacionSalon) == 1) {
+            if (estado == 1) {
                 map.put("mensaje", qs.confirmarReservacion(idSalon, fechaReservacionSalon));
                 map.put("fecha", fechaReservacionSalon);
             }

@@ -31,6 +31,8 @@ public class ServicioWebMenu {
     /**
      * Web service operation
      *
+     * @param fechaReservacionMenu
+     * @return 
      * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaMenu")
@@ -52,24 +54,28 @@ public class ServicioWebMenu {
 
     /**
      * Web service operation
+     * @param idMenu
+     * @param fechaReservacionMenu
+     * @return 
      */
     @WebMethod(operationName = "ReservacionMenu")
     public String ReservacionMenu(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-        if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 1) {
+        int estado = qm.verificarStatus(idMenu,fechaReservacionMenu);
+        if (estado == 1) {
             map.put("mensaje", "ya existe la reservacion");
             map.put("fecha",fechaReservacionMenu);
         }
-        if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 3) {
+        if (estado == 3) {
             map.put("mensaje", "Ya fue confirmado");
             map.put("fecha", fechaReservacionMenu);
         } 
-        if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 0) {
+        if (estado == 0) {
             map.put("mensaje", qm.agregarReservacion(idMenu,fechaReservacionMenu));
             map.put("fecha", fechaReservacionMenu);
         }
-        if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 2) {
+        if (estado == 2) {
             map.put("mensaje", qm.actualizarReservacion(idMenu,fechaReservacionMenu));
             map.put("fecha",  fechaReservacionMenu);
         }
@@ -80,24 +86,28 @@ public class ServicioWebMenu {
 
     /**
      * Web service operation
+     * @param idMenu
+     * @param fechaReservacionMenu
+     * @return 
      */
     @WebMethod(operationName = "CancelarReservacionMenu")
     public String CancelarReservacionSalon(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-            if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 0) {
+        int estado = qm.verificarStatus(idMenu,fechaReservacionMenu);
+            if (estado == 0) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionMenu);
             }
-            if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 3) {
+            if (estado == 3) {
                 map.put("mensaje", "Ya fue confirmado");
                 map.put("fecha",fechaReservacionMenu);
             } 
-            if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 2) {
+            if (estado == 2) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionMenu);
             }
-            if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 1) {
+            if (estado == 1) {
                 map.put("mensaje", qm.cancelarReservacion(idMenu, fechaReservacionMenu));
                 map.put("fecha",fechaReservacionMenu);
             }
@@ -108,25 +118,28 @@ public class ServicioWebMenu {
 
     /**
      * Web service operation
+     * @param idMenu
+     * @param fechaReservacionMenu
+     * @return 
      */
     @WebMethod(operationName = "ConfirmarReservacionMenu")
     public String ConfirmarReservacionMenu(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-            if (qm.verificarStatus(idMenu, fechaReservacionMenu) == 0) {
+        int estado = qm.verificarStatus(idMenu, fechaReservacionMenu);
+            if (estado == 0) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionMenu);
             }
-            if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 3) {
+            if (estado == 3) {
                 map.put("mensaje", "Ya fue confirmado");
                 map.put("fecha",fechaReservacionMenu);
             } 
-             if (qm.verificarStatus(idMenu,fechaReservacionMenu) == 2) {
+             if (estado == 2) {
                 map.put("mensaje", "No existe Reservacion");
                 map.put("fecha", fechaReservacionMenu);
             }
-            if (qm.verificarStatus(idMenu, fechaReservacionMenu) == 1) {
+            if (estado == 1) {
                 map.put("mensaje", qm.confirmarReservacion(idMenu, fechaReservacionMenu));
                 map.put("fecha", fechaReservacionMenu);
             }
@@ -134,6 +147,5 @@ public class ServicioWebMenu {
         String jsonString = JSONValue.toJSONString(l1);
         return jsonString;
     }
-
 
 }

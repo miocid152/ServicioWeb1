@@ -6,9 +6,6 @@
 package org.entretenimiento;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +30,7 @@ public class ServicioWebEntretenimiento {
     /**
      * Web service operation
      *
+     * @param fechaReservacionEntretenimiento
      * @return
      * @throws java.io.IOException
      */
@@ -57,25 +55,27 @@ public class ServicioWebEntretenimiento {
      * Web service operation
      *
      * @param idEntretenimiento
+     * @param fechaReservacionEntretenimiento
      * @return
      */
     @WebMethod(operationName = "ReservacionEntretenimiento")
     public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+        int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
+        if (estado == 1) {
             map.put("mensaje", "ya existe la reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+        if (estado == 3) {
             map.put("mensaje", "Ya fue confirmado");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+        if (estado == 0) {
             map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+        if (estado == 2) {
             map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
@@ -88,26 +88,27 @@ public class ServicioWebEntretenimiento {
      * Web service operation
      *
      * @param idEntretenimiento
-     * @param fechaEntretenimiento
+     * @param fechaReservacionEntretenimiento
      * @return
      */
     @WebMethod(operationName = "CancelarReservacionEntretenimiento")
     public String CancelarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+        int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
+        if (estado == 0) {
             map.put("mensaje", "No existe Reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+        if (estado == 3) {
             map.put("mensaje", "Ya fue confirmado");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+        if (estado == 2) {
             map.put("mensaje", "No existe Reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+        if (estado == 1) {
             map.put("mensaje", qe.cancelarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
@@ -118,24 +119,28 @@ public class ServicioWebEntretenimiento {
 
     /**
      * Web service operation
+     * @param idEntretenimiento
+     * @param fechaReservacionEntretenimiento
+     * @return 
      */
     @WebMethod(operationName = "ConfirmarReservacionEntretenimiento")
     public String ConfirmarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 0) {
+        int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
+        if (estado == 0) {
             map.put("mensaje", "No existe Reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 3) {
+        if (estado == 3) {
             map.put("mensaje", "Ya fue confirmado");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 2) {
+        if (estado == 2) {
             map.put("mensaje", "No existe Reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
-        if (qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento) == 1) {
+        if (estado == 1) {
             map.put("mensaje", qe.confirmarReservacion(idEntretenimiento, fechaReservacionEntretenimiento));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
