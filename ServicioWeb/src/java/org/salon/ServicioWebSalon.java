@@ -33,10 +33,9 @@ public class ServicioWebSalon {
      *
      * @param fechaReservacionSalon
      * @return 
-     * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaSalones" )
-    public String ListaSalones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) throws IOException {
+    public String ListaSalones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
         List<Salon> valor = qs.ObtenerSalones(fechaReservacionSalon);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {

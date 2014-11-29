@@ -32,10 +32,9 @@ public class ServicioWebEntretenimiento {
      *
      * @param fechaReservacionEntretenimiento
      * @return
-     * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaEntretenimiento")
-    public String ListaEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) throws IOException {
+    public String ListaEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento){
         List<Entretenimiento> valor = qe.ObtenerEntretenimientos(fechaReservacionEntretenimiento);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
@@ -95,7 +94,9 @@ public class ServicioWebEntretenimiento {
     public String CancelarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
+        System.out.println(idEntretenimiento+" "+fechaReservacionEntretenimiento);
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
+        System.out.println(""+estado);
         if (estado == 0) {
             map.put("mensaje", "No existe Reservacion");
             map.put("fecha", fechaReservacionEntretenimiento);

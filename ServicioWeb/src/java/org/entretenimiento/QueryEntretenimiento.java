@@ -126,7 +126,7 @@ public class QueryEntretenimiento {
     }
 
     public String cancelarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento) {
-        mensaje = "";
+         mensaje = "";
         List<Srentrenimiento> srentretenimiento = existenciaParaReservar(idEntretenimiento, fechaReservacionEntretenimiento);
         Srentrenimiento sre = null;
         Entretenimiento entretenimiento = new Entretenimiento();
@@ -136,7 +136,8 @@ public class QueryEntretenimiento {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            sre = (Srentrenimiento) session.get(Srentrenimiento.class, id);
+            entretenimiento = (Entretenimiento) session.get(Entretenimiento.class, id);
+            sre = (Srentrenimiento) session.get(Srentrenimiento.class, srentretenimiento.get(0).getIdSrentrenimiento());
             sre.setStatusEntretenimiento("DISPONIBLE");
             session.update(sre);
             tx.commit();
@@ -156,7 +157,6 @@ public class QueryEntretenimiento {
         mensaje = "";
         Srentrenimiento sre = new Srentrenimiento();
         Transaction tx = null;
-
         Integer IdSEntretenimiento = obtenerIdEntretenimientoReservado(idEntretenimiento, fechaReservacionEntretenimiento);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -189,7 +189,12 @@ public class QueryEntretenimiento {
         } finally {
             session.close();
         }
-        return srentretenimiento.get(0).getIdSrentrenimiento();
+        if(srentretenimiento.size()==0){
+            return 0;
+        }
+        else{
+            return srentretenimiento.get(0).getIdSrentrenimiento();
+        }
 
     }
 

@@ -32,10 +32,9 @@ public class ServicioWebMenu {
      *
      * @param fechaReservacionMenu
      * @return 
-     * @throws java.io.IOException
      */
     @WebMethod(operationName = "ListaMenu")
-    public String ListaMenu(@WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) throws IOException {
+    public String ListaMenu(@WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) {
         List<Menu> valor = qm.ObtenerMenu(fechaReservacionMenu);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {

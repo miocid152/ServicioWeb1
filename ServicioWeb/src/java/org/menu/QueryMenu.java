@@ -159,7 +159,6 @@ public class QueryMenu {
         mensaje = "";
         Srmenu srm = new Srmenu();
         Transaction tx = null;
-
         Integer IdSrmenu = obtenerIdMenuReservado(idMenu, fechaReservacionMenu);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
