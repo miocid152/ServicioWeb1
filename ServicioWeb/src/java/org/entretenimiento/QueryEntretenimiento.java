@@ -42,7 +42,7 @@ public class QueryEntretenimiento {
         return entretenimiento;
     }
 
-    public String agregarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento) {
+    public String agregarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento) {
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfre;
@@ -62,6 +62,7 @@ public class QueryEntretenimiento {
             sre.setFechaEntretenimiento(date);
             sre.setEntretenimiento(entretenimiento);
             sre.setStatusEntretenimiento("RESERVADO");
+            sre.setCorreoClienteEntretenimiento(correoClienteEntretenimiento);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfre = formatter.parse(fechaReservacionEntretenimiento);
@@ -84,7 +85,7 @@ public class QueryEntretenimiento {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento) {
+    public String actualizarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento) {
         Date dfre;
         mensaje = "";
         List<Srentrenimiento> srentretenimiento = existenciaParaReservar(idEntretenimiento, fechaReservacionEntretenimiento);
@@ -111,6 +112,7 @@ public class QueryEntretenimiento {
                 e.printStackTrace();
             }
             sre.setStatusEntretenimiento("RESERVADO");
+            sre.setCorreoClienteEntretenimiento(correoClienteEntretenimiento);
             session.update(sre);
             tx.commit();
             mensaje = "Reservacion Realizada con Exito";
@@ -231,5 +233,19 @@ public class QueryEntretenimiento {
             }
         }
         return valor;
+    }
+    float ObtenerPrecio(int idEntretenimiento) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Entretenimiento> entretenimiento = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Entretenimiento where IdEntretenimiento=" + idEntretenimiento);
+            entretenimiento = (ArrayList<Entretenimiento>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return entretenimiento.get(0).getPrecioEntretenimiento();
     }
 }

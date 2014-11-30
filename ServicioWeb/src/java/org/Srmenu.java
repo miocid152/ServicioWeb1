@@ -1,5 +1,5 @@
 package org;
-// Generated 24/11/2014 11:37:20 PM by Hibernate Tools 4.3.1
+// Generated 29/11/2014 08:44:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,15 +15,17 @@ public class Srmenu  implements java.io.Serializable {
      private String stautsMenu;
      private Date fechaMenu;
      private Date fechaReservacionMenu;
+     private String correoClienteMenu;
 
     public Srmenu() {
     }
 
-    public Srmenu(Menu menu, String stautsMenu, Date fechaMenu, Date fechaReservacionMenu) {
+    public Srmenu(Menu menu, String stautsMenu, Date fechaMenu, Date fechaReservacionMenu, String correoClienteMenu) {
        this.menu = menu;
        this.stautsMenu = stautsMenu;
        this.fechaMenu = fechaMenu;
        this.fechaReservacionMenu = fechaReservacionMenu;
+       this.correoClienteMenu = correoClienteMenu;
     }
    
     public Integer getIdSrmenu() {
@@ -60,6 +62,13 @@ public class Srmenu  implements java.io.Serializable {
     
     public void setFechaReservacionMenu(Date fechaReservacionMenu) {
         this.fechaReservacionMenu = fechaReservacionMenu;
+    }
+    public String getCorreoClienteMenu() {
+        return this.correoClienteMenu;
+    }
+    
+    public void setCorreoClienteMenu(String correoClienteMenu) {
+        this.correoClienteMenu = correoClienteMenu;
     }
 
 

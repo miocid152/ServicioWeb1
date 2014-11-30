@@ -5,7 +5,6 @@
  */
 package org.salon;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -54,10 +53,13 @@ public class ServicioWebSalon {
      * Web service operation
      * @param idSalon
      * @param fechaReservacionSalon
+     * @param correoClienteSalon
      * @return 
      */
     @WebMethod(operationName = "ReservacionSalon")
-    public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
+    public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon,
+            @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon,
+            @WebParam(name = "correoClienteSalon") String correoClienteSalon) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
@@ -70,11 +72,11 @@ public class ServicioWebSalon {
             map.put("fecha", fechaReservacionSalon);
         } 
         if (estado == 0) {
-            map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon));
+            map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon));
             map.put("fecha", fechaReservacionSalon);
         }
         if (estado == 2) {
-            map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon));
+            map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon));
             map.put("fecha",  fechaReservacionSalon);
         }
         l1.add(map);
@@ -145,5 +147,16 @@ public class ServicioWebSalon {
         l1.add(map);
         String jsonString = JSONValue.toJSONString(l1);
         return jsonString;
+    }
+
+    /**
+     * Web service operation
+     * @param idSalon
+     * @return 
+     */
+    @WebMethod(operationName = "precioSalon")
+    public Float precioSalon(@WebParam(name = "idSalon") int idSalon) {
+        float precio =  qs.ObtenerPrecio(idSalon);
+        return precio;
     }
 }

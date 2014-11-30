@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   `fechaReservacionEntretenimiento` date NOT NULL,
   `statusEntretenimiento` varchar(45) NOT NULL DEFAULT 'RESERVADO',
   `entretenimientoIdEntretenimiento` int(11) NOT NULL,
+  `correoClienteEntretenimiento` varchar(60) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
   KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -132,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
   `fechaMenu` date NOT NULL,
   `fechaReservacionMenu` date NOT NULL,
   `menuIdMenu` int(11) NOT NULL,
+  `correoClienteMenu` varchar(60) NOT NULL,
   PRIMARY KEY (`idSRMenu`),
   KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -152,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
   `fechaSalon` date NOT NULL,
   `fechaReservacionSalon` date NOT NULL,
   `salonIdSalon` int(11) NOT NULL,
+  `correoClienteSalon` varchar(60) NOT NULL,
   PRIMARY KEY (`idSRSalon`),
   KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

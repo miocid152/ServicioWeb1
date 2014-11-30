@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/11/2014 11:37:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 29/11/2014 08:44:05 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="org.Srmenu" table="srmenu" catalog="servicioweb" optimistic-lock="version">
         <id name="idSrmenu" type="java.lang.Integer">
@@ -19,6 +19,9 @@
         </property>
         <property name="fechaReservacionMenu" type="date">
             <column name="fechaReservacionMenu" length="10" not-null="true" />
+        </property>
+        <property name="correoClienteMenu" type="string">
+            <column name="correoClienteMenu" length="60" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

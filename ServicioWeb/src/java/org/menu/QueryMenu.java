@@ -44,7 +44,7 @@ public class QueryMenu {
         return Menu;
     }
 
-    public String agregarReservacion(int idMenu, String fechaReservacionMenu) {
+    public String agregarReservacion(int idMenu, String fechaReservacionMenu,String correoClienteMenu) {
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfrm;
@@ -64,6 +64,7 @@ public class QueryMenu {
             srm.setFechaMenu(date);
             srm.setMenu(menu);
             srm.setStautsMenu("RESERVADO");
+            srm.setCorreoClienteMenu(correoClienteMenu);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfrm = formatter.parse(fechaReservacionMenu);
@@ -86,7 +87,7 @@ public class QueryMenu {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idMenu, String fechaReservacionMenu) {
+    public String actualizarReservacion(int idMenu, String fechaReservacionMenu,String correoClienteMenu) {
         Date dfrm;
         mensaje = "";
         List<Srmenu> srmenu = existenciaParaReservar(idMenu, fechaReservacionMenu);
@@ -112,6 +113,7 @@ public class QueryMenu {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            srm.setCorreoClienteMenu(correoClienteMenu);
             srm.setStautsMenu("RESERVADO");
             session.update(srm);
             tx.commit();
@@ -231,5 +233,20 @@ public class QueryMenu {
             }
         }
         return valor;
+    }
+    
+    float ObtenerPrecio(int idMenu) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Menu> menu = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Menu where IdMenu=" + idMenu);
+            menu = (ArrayList<Menu>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return menu.get(0).getPrecioMenu();
     }
 }

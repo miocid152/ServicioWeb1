@@ -5,7 +5,6 @@
  */
 package org.menu;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,10 +53,13 @@ public class ServicioWebMenu {
      * Web service operation
      * @param idMenu
      * @param fechaReservacionMenu
+     * @param correoClienteMenu
      * @return 
      */
     @WebMethod(operationName = "ReservacionMenu")
-    public String ReservacionMenu(@WebParam(name = "idMenu") int idMenu, @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu) {
+    public String ReservacionMenu(@WebParam(name = "idMenu") int idMenu,
+            @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu,
+            @WebParam(name = "correoClienteMenu") String correoClienteMenu) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qm.verificarStatus(idMenu,fechaReservacionMenu);
@@ -70,11 +72,11 @@ public class ServicioWebMenu {
             map.put("fecha", fechaReservacionMenu);
         } 
         if (estado == 0) {
-            map.put("mensaje", qm.agregarReservacion(idMenu,fechaReservacionMenu));
+            map.put("mensaje", qm.agregarReservacion(idMenu,fechaReservacionMenu,correoClienteMenu));
             map.put("fecha", fechaReservacionMenu);
         }
         if (estado == 2) {
-            map.put("mensaje", qm.actualizarReservacion(idMenu,fechaReservacionMenu));
+            map.put("mensaje", qm.actualizarReservacion(idMenu,fechaReservacionMenu,correoClienteMenu));
             map.put("fecha",  fechaReservacionMenu);
         }
         l1.add(map);
@@ -146,4 +148,14 @@ public class ServicioWebMenu {
         return jsonString;
     }
 
+    /**
+     * Web service operation
+     * @param idMenu
+     * @return 
+     */
+    @WebMethod(operationName = "precioMenu")
+    public Float precioSalon(@WebParam(name = "idMenu") int idMenu) {
+        float precio =  qm.ObtenerPrecio(idMenu);
+        return precio;
+    }
 }

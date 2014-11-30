@@ -43,7 +43,7 @@ public class QuerySalon {
         return salon;
     }
 
-    public String agregarReservacion(int idSalon, String fechaReservacionSalon) {
+    public String agregarReservacion(int idSalon, String fechaReservacionSalon, String correoClienteSalon) {
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfrs;
@@ -63,6 +63,7 @@ public class QuerySalon {
             srs.setFechaSalon(date);
             srs.setSalon(salon);
             srs.setStatusSalon("RESERVADO");
+            srs.setCorreoClienteSalon(correoClienteSalon);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfrs = formatter.parse(fechaReservacionSalon);
@@ -85,7 +86,7 @@ public class QuerySalon {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idSalon,String fechaReservacionSalon) {
+    public String actualizarReservacion(int idSalon,String fechaReservacionSalon,String correoClienteSalon) {
         Date dfrs;
         mensaje = "";
         List<Srsalon> srsalon = existenciaParaReservar(idSalon, fechaReservacionSalon);
@@ -112,6 +113,7 @@ public class QuerySalon {
                 e.printStackTrace();
             }
             srs.setStatusSalon("RESERVADO");
+            srs.setCorreoClienteSalon(correoClienteSalon);
             session.update(srs);
             tx.commit();
             mensaje = "Reservacion Realizada con Exito";
@@ -236,6 +238,21 @@ public class QuerySalon {
             }
         }
         return valor;
+    }
+
+    float ObtenerPrecio(int idSalon) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Salon> salon = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Salon where IdSalon=" + idSalon);
+            salon = (ArrayList<Salon>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return salon.get(0).getPrecioSalon();
     }
 
 }
