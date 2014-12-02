@@ -8,9 +8,7 @@ package org.salon;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import org.Salon;
 import org.hibernate.HibernateException;
@@ -43,27 +41,24 @@ public class QuerySalon {
         return salon;
     }
 
-    public String agregarReservacion(int idSalon, String fechaReservacionSalon, String correoClienteSalon) {
+    public String agregarReservacion(int idSalon, String fechaReservacionSalon, String correoClienteSalon,
+            String correoElectronico) {
+        Empresacliente empresaCliente =obtenerIdEmpresa(correoElectronico);
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfrs;
         Srsalon srs = new Srsalon();
         Salon salon = new Salon();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
-
+        
         Integer id = idSalon;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             salon = (Salon) session.get(Salon.class, id);
-            srs.setFechaSalon(date);
             srs.setSalon(salon);
             srs.setStatusSalon("RESERVADO");
             srs.setCorreoClienteSalon(correoClienteSalon);
+            srs.setEmpresacliente(empresaCliente);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfrs = formatter.parse(fechaReservacionSalon);
@@ -86,17 +81,14 @@ public class QuerySalon {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idSalon,String fechaReservacionSalon,String correoClienteSalon) {
+    public String actualizarReservacion(int idSalon,String fechaReservacionSalon,String correoClienteSalon,
+            String correoElectronico) {
         Date dfrs;
         mensaje = "";
         List<Srsalon> srsalon = existenciaParaReservar(idSalon, fechaReservacionSalon);
+        Empresacliente empresaCliente =obtenerIdEmpresa(correoElectronico);
         Srsalon srs = null;
         Salon salon = new Salon();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
 
         Integer id = idSalon;
         Transaction tx = null;
@@ -113,6 +105,7 @@ public class QuerySalon {
                 e.printStackTrace();
             }
             srs.setStatusSalon("RESERVADO");
+            srs.setEmpresacliente(empresaCliente);
             srs.setCorreoClienteSalon(correoClienteSalon);
             session.update(srs);
             tx.commit();
@@ -240,7 +233,7 @@ public class QuerySalon {
         return valor;
     }
 
-    float ObtenerPrecio(int idSalon) {
+    Salon obtenerSalon(int idSalon) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Salon> salon = null;
         try {
@@ -252,9 +245,38 @@ public class QuerySalon {
         } finally {
             session.close();
         }
-        return salon.get(0).getPrecioSalon();
+        return salon.get(0);
     }
 
+    Empresacliente obtenerIdEmpresa(String correoElectronico) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Empresacliente> empresa = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Empresacliente where correoElectronico='"+correoElectronico+"'");
+            empresa = (ArrayList<Empresacliente>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return empresa.get(0);
+    }
+
+    List<Srsalon> obtenerSalonesReservados(String fechaReservacionSalon, String correoEmpresa) {
+        List<Srsalon> srsalon = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery("Select s from Srsalon s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionSalon='"+ fechaReservacionSalon+"' and correoElectronico='"+correoEmpresa+"' and statusSalon='RESERVADO')");
+            srsalon = (List<Srsalon>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return srsalon;
+    }
 }
 //        session = HibernateUtil.getSessionFactory().openSession();
 //        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");

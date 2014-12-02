@@ -8,9 +8,7 @@ package org.menu;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,27 +42,24 @@ public class QueryMenu {
         return Menu;
     }
 
-    public String agregarReservacion(int idMenu, String fechaReservacionMenu,String correoClienteMenu) {
+    public String agregarReservacion(int idMenu, String fechaReservacionMenu, String correoClienteMenu,
+            String correoElectronico) {
+        Empresacliente empresaCliente = ObtenerIdEmpresa(correoElectronico);
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfrm;
         Srmenu srm = new Srmenu();
         Menu menu = new Menu();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
 
         Integer id = idMenu;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             menu = (Menu) session.get(Menu.class, id);
-            srm.setFechaMenu(date);
             srm.setMenu(menu);
             srm.setStautsMenu("RESERVADO");
             srm.setCorreoClienteMenu(correoClienteMenu);
+            srm.setEmpresacliente(empresaCliente);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfrm = formatter.parse(fechaReservacionMenu);
@@ -87,17 +82,14 @@ public class QueryMenu {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idMenu, String fechaReservacionMenu,String correoClienteMenu) {
+    public String actualizarReservacion(int idMenu, String fechaReservacionMenu, String correoClienteMenu,
+            String correoElectronico) {
         Date dfrm;
         mensaje = "";
         List<Srmenu> srmenu = existenciaParaReservar(idMenu, fechaReservacionMenu);
+        Empresacliente empresaCliente = ObtenerIdEmpresa(correoElectronico);
         Srmenu srm = null;
         Menu menu = new Menu();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
 
         Integer id = idMenu;
         Transaction tx = null;
@@ -115,6 +107,7 @@ public class QueryMenu {
             }
             srm.setCorreoClienteMenu(correoClienteMenu);
             srm.setStautsMenu("RESERVADO");
+            srm.setEmpresacliente(empresaCliente);
             session.update(srm);
             tx.commit();
             mensaje = "Reservacion Realizada con Exito";
@@ -234,8 +227,8 @@ public class QueryMenu {
         }
         return valor;
     }
-    
-    float ObtenerPrecio(int idMenu) {
+
+    Menu obtenerMenu(int idMenu) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Menu> menu = null;
         try {
@@ -247,6 +240,36 @@ public class QueryMenu {
         } finally {
             session.close();
         }
-        return menu.get(0).getPrecioMenu();
+        return menu.get(0);
+    }
+
+    Empresacliente ObtenerIdEmpresa(String correoElectronico) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Empresacliente> empresa = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Empresacliente where correoElectronico='" + correoElectronico + "'");
+            empresa = (ArrayList<Empresacliente>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return empresa.get(0);
+    }
+
+    List<Srmenu> obtenerMenusReservados(String fechaReservacionMenu, String correoEmpresa) {
+        List<Srmenu> srmenu = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery("Select s from Srmenu s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionMenu='" + fechaReservacionMenu + "' and correoElectronico='" + correoEmpresa + "' and stautsMenu='RESERVADO')");
+            srmenu = (List<Srmenu>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return srmenu;
     }
 }

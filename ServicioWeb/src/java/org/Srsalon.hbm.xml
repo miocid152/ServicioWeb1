@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29/11/2014 08:44:05 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 1/12/2014 10:39:04 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="org.Srsalon" table="srsalon" catalog="servicioweb" optimistic-lock="version">
         <id name="idSrsalon" type="java.lang.Integer">
             <column name="idSRSalon" />
             <generator class="identity" />
         </id>
+        <many-to-one name="empresacliente" class="org.Empresacliente" fetch="select">
+            <column name="empresaClienteIdEmpresaCliente" not-null="true" />
+        </many-to-one>
         <many-to-one name="salon" class="org.Salon" fetch="select">
             <column name="salonIdSalon" not-null="true" />
         </many-to-one>
         <property name="statusSalon" type="string">
             <column name="statusSalon" length="45" not-null="true" />
-        </property>
-        <property name="fechaSalon" type="date">
-            <column name="fechaSalon" length="10" not-null="true" />
         </property>
         <property name="fechaReservacionSalon" type="date">
             <column name="fechaReservacionSalon" length="10" not-null="true" />

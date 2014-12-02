@@ -1,5 +1,5 @@
 package org;
-// Generated 29/11/2014 08:44:03 PM by Hibernate Tools 4.3.1
+// Generated 1/12/2014 10:39:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,8 +11,8 @@ public class Srentrenimiento  implements java.io.Serializable {
 
 
      private Integer idSrentrenimiento;
+     private Empresacliente empresacliente;
      private Entretenimiento entretenimiento;
-     private Date fechaEntretenimiento;
      private Date fechaReservacionEntretenimiento;
      private String statusEntretenimiento;
      private String correoClienteEntretenimiento;
@@ -20,9 +20,9 @@ public class Srentrenimiento  implements java.io.Serializable {
     public Srentrenimiento() {
     }
 
-    public Srentrenimiento(Entretenimiento entretenimiento, Date fechaEntretenimiento, Date fechaReservacionEntretenimiento, String statusEntretenimiento, String correoClienteEntretenimiento) {
+    public Srentrenimiento(Empresacliente empresacliente, Entretenimiento entretenimiento, Date fechaReservacionEntretenimiento, String statusEntretenimiento, String correoClienteEntretenimiento) {
+       this.empresacliente = empresacliente;
        this.entretenimiento = entretenimiento;
-       this.fechaEntretenimiento = fechaEntretenimiento;
        this.fechaReservacionEntretenimiento = fechaReservacionEntretenimiento;
        this.statusEntretenimiento = statusEntretenimiento;
        this.correoClienteEntretenimiento = correoClienteEntretenimiento;
@@ -35,19 +35,19 @@ public class Srentrenimiento  implements java.io.Serializable {
     public void setIdSrentrenimiento(Integer idSrentrenimiento) {
         this.idSrentrenimiento = idSrentrenimiento;
     }
+    public Empresacliente getEmpresacliente() {
+        return this.empresacliente;
+    }
+    
+    public void setEmpresacliente(Empresacliente empresacliente) {
+        this.empresacliente = empresacliente;
+    }
     public Entretenimiento getEntretenimiento() {
         return this.entretenimiento;
     }
     
     public void setEntretenimiento(Entretenimiento entretenimiento) {
         this.entretenimiento = entretenimiento;
-    }
-    public Date getFechaEntretenimiento() {
-        return this.fechaEntretenimiento;
-    }
-    
-    public void setFechaEntretenimiento(Date fechaEntretenimiento) {
-        this.fechaEntretenimiento = fechaEntretenimiento;
     }
     public Date getFechaReservacionEntretenimiento() {
         return this.fechaReservacionEntretenimiento;

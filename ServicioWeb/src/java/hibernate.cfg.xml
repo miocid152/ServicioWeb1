@@ -13,6 +13,7 @@
     <mapping resource="org/Entretenimiento.hbm.xml"/>
     <mapping resource="org/Srentrenimiento.hbm.xml"/>
     <mapping resource="org/Srsalon.hbm.xml"/>
+    <mapping resource="org/Empresacliente.hbm.xml"/>
     <mapping resource="org/Salon.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

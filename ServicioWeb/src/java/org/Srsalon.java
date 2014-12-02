@@ -1,5 +1,5 @@
 package org;
-// Generated 29/11/2014 08:44:03 PM by Hibernate Tools 4.3.1
+// Generated 1/12/2014 10:39:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,19 +11,19 @@ public class Srsalon  implements java.io.Serializable {
 
 
      private Integer idSrsalon;
+     private Empresacliente empresacliente;
      private Salon salon;
      private String statusSalon;
-     private Date fechaSalon;
      private Date fechaReservacionSalon;
      private String correoClienteSalon;
 
     public Srsalon() {
     }
 
-    public Srsalon(Salon salon, String statusSalon, Date fechaSalon, Date fechaReservacionSalon, String correoClienteSalon) {
+    public Srsalon(Empresacliente empresacliente, Salon salon, String statusSalon, Date fechaReservacionSalon, String correoClienteSalon) {
+       this.empresacliente = empresacliente;
        this.salon = salon;
        this.statusSalon = statusSalon;
-       this.fechaSalon = fechaSalon;
        this.fechaReservacionSalon = fechaReservacionSalon;
        this.correoClienteSalon = correoClienteSalon;
     }
@@ -34,6 +34,13 @@ public class Srsalon  implements java.io.Serializable {
     
     public void setIdSrsalon(Integer idSrsalon) {
         this.idSrsalon = idSrsalon;
+    }
+    public Empresacliente getEmpresacliente() {
+        return this.empresacliente;
+    }
+    
+    public void setEmpresacliente(Empresacliente empresacliente) {
+        this.empresacliente = empresacliente;
     }
     public Salon getSalon() {
         return this.salon;
@@ -48,13 +55,6 @@ public class Srsalon  implements java.io.Serializable {
     
     public void setStatusSalon(String statusSalon) {
         this.statusSalon = statusSalon;
-    }
-    public Date getFechaSalon() {
-        return this.fechaSalon;
-    }
-    
-    public void setFechaSalon(Date fechaSalon) {
-        this.fechaSalon = fechaSalon;
     }
     public Date getFechaReservacionSalon() {
         return this.fechaReservacionSalon;

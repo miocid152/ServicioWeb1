@@ -60,7 +60,8 @@ public class ServicioWebEntretenimiento {
     @WebMethod(operationName = "ReservacionEntretenimiento")
     public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento,
             @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento,
-            @WebParam(name = "correoClienteEntretenimiento") String correoClienteEntretenimiento) {
+            @WebParam(name = "correoClienteEntretenimiento") String correoClienteEntretenimiento,
+            @WebParam(name = "correoElectronico") String correoElectronico) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
@@ -73,11 +74,13 @@ public class ServicioWebEntretenimiento {
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 0) {
-            map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento));
+            map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
+                    correoElectronico));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 2) {
-            map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento));
+            map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
+                    correoElectronico));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         l1.add(map);
@@ -157,8 +160,31 @@ public class ServicioWebEntretenimiento {
      */
     @WebMethod(operationName = "precioEntretenimiento")
     public Float precioSalon(@WebParam(name = "idEntretenimiento") int idEntretenimiento) {
-        float precio =  qe.ObtenerPrecio(idEntretenimiento);
+        float precio =  qe.obtenerEntretenimiento(idEntretenimiento).getPrecioEntretenimiento();
         return precio;
     }
 
+     /**
+     * Web service operation
+     * @param fechaReservacionEntretenimiento
+     * @param correoEmpresa
+     * @return 
+     */
+    @WebMethod(operationName = "MostrarReservaciones")
+    public String MostrarReservaciones(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento, @WebParam(name = "correoEmpresa") String correoEmpresa) {
+        List<Srentrenimiento> valor = qe.obtenerEntretenimientosReservados(fechaReservacionEntretenimiento,correoEmpresa);
+        List l1 = new LinkedList();
+        for (int i = 0; i < valor.size(); i++) {
+            Map map = new LinkedHashMap();
+            Entretenimiento entretenimiento = qe.obtenerEntretenimiento(valor.get(i).getEntretenimiento().getIdEntretenimiento());
+            map.put("idEntretenimiento", valor.get(i).getEntretenimiento().getIdEntretenimiento());
+            map.put("nombreCompaniaEntretenimiento",entretenimiento.getNombreCompaniaEntretenimiento());
+            map.put("precioEntretenimiento", entretenimiento.getPrecioEntretenimiento());
+            map.put("correoClienteEntretenimiento", valor.get(i).getCorreoClienteEntretenimiento());
+            map.put("tipoEntretenimiento", entretenimiento.getTipoEntretenimiento());
+            l1.add(map);
+        }
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
+    }
 }

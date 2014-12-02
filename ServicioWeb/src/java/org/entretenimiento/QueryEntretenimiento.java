@@ -8,9 +8,7 @@ package org.entretenimiento;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -42,27 +40,24 @@ public class QueryEntretenimiento {
         return entretenimiento;
     }
 
-    public String agregarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento) {
+    public String agregarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento,
+            String correoElectronico) {
+        Empresacliente empresaCliente =obtenerIdEmpresa(correoElectronico);
         session = HibernateUtil.getSessionFactory().openSession();
         mensaje = "";
         Date dfre;
         Srentrenimiento sre = new Srentrenimiento();
         Entretenimiento entretenimiento = new Entretenimiento();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
-
+        
         Integer id = idEntretenimiento;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             entretenimiento = (Entretenimiento) session.get(Entretenimiento.class, id);
-            sre.setFechaEntretenimiento(date);
             sre.setEntretenimiento(entretenimiento);
             sre.setStatusEntretenimiento("RESERVADO");
             sre.setCorreoClienteEntretenimiento(correoClienteEntretenimiento);
+            sre.setEmpresacliente(empresaCliente);
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 dfre = formatter.parse(fechaReservacionEntretenimiento);
@@ -85,18 +80,15 @@ public class QueryEntretenimiento {
         return mensaje;
     }
 
-    public String actualizarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento) {
+    public String actualizarReservacion(int idEntretenimiento, String fechaReservacionEntretenimiento,String correoClienteEntretenimiento,
+            String correoElectronico) {
         Date dfre;
         mensaje = "";
         List<Srentrenimiento> srentretenimiento = existenciaParaReservar(idEntretenimiento, fechaReservacionEntretenimiento);
+        Empresacliente empresaCliente =obtenerIdEmpresa(correoElectronico);
         Srentrenimiento sre = null;
         Entretenimiento entretenimiento = new Entretenimiento();
-        Calendar cal = new GregorianCalendar();
-        Date date = new Date();
-        date.setDate(cal.get(Calendar.YEAR));
-        date.setMonth(cal.get(Calendar.MONTH));
-        date.setDate(cal.get(Calendar.DAY_OF_MONTH));
-
+        
         Integer id = idEntretenimiento;
         Transaction tx = null;
         try {
@@ -112,6 +104,7 @@ public class QueryEntretenimiento {
                 e.printStackTrace();
             }
             sre.setStatusEntretenimiento("RESERVADO");
+            sre.setEmpresacliente(empresaCliente);
             sre.setCorreoClienteEntretenimiento(correoClienteEntretenimiento);
             session.update(sre);
             tx.commit();
@@ -234,7 +227,7 @@ public class QueryEntretenimiento {
         }
         return valor;
     }
-    float ObtenerPrecio(int idEntretenimiento) {
+    Entretenimiento obtenerEntretenimiento(int idEntretenimiento) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Entretenimiento> entretenimiento = null;
         try {
@@ -246,6 +239,36 @@ public class QueryEntretenimiento {
         } finally {
             session.close();
         }
-        return entretenimiento.get(0).getPrecioEntretenimiento();
+        return entretenimiento.get(0);
+    }
+    
+    Empresacliente obtenerIdEmpresa(String correoElectronico) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Empresacliente> empresa = null;
+        try {
+            session.beginTransaction();
+            Query q = session.createQuery("from Empresacliente where correoElectronico='"+correoElectronico+"'");
+            empresa = (ArrayList<Empresacliente>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return empresa.get(0);
+    }
+
+    List<Srentrenimiento> obtenerEntretenimientosReservados(String fechaReservacionEntretenimiento, String correoEmpresa) {
+        List<Srentrenimiento> srentretenimiento = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query q = session.createQuery("Select s from Srentrenimiento s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionEntretenimiento='"+ fechaReservacionEntretenimiento+"' and correoElectronico='"+correoEmpresa+"' and statusEntretenimiento='RESERVADO')");
+            srentretenimiento = (List<Srentrenimiento>) q.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return srentretenimiento;
     }
 }

@@ -59,7 +59,9 @@ public class ServicioWebSalon {
     @WebMethod(operationName = "ReservacionSalon")
     public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon,
             @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon,
-            @WebParam(name = "correoClienteSalon") String correoClienteSalon) {
+            @WebParam(name = "correoClienteSalon") String correoClienteSalon,
+            @WebParam(name = "correoElectronico") String correoElectronico
+            ) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
@@ -72,11 +74,13 @@ public class ServicioWebSalon {
             map.put("fecha", fechaReservacionSalon);
         } 
         if (estado == 0) {
-            map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon));
+            map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon,
+                    correoElectronico));
             map.put("fecha", fechaReservacionSalon);
         }
         if (estado == 2) {
-            map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon));
+            map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon,
+                    correoElectronico));
             map.put("fecha",  fechaReservacionSalon);
         }
         l1.add(map);
@@ -156,7 +160,31 @@ public class ServicioWebSalon {
      */
     @WebMethod(operationName = "precioSalon")
     public Float precioSalon(@WebParam(name = "idSalon") int idSalon) {
-        float precio =  qs.ObtenerPrecio(idSalon);
+        float precio =  qs.obtenerSalon(idSalon).getPrecioSalon();
         return precio;
+    }
+
+    /**
+     * Web service operation
+     * @param fechaReservacionSalon
+     * @param correoEmpresa
+     * @return 
+     */
+    @WebMethod(operationName = "MostrarReservaciones")
+    public String MostrarReservaciones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon, @WebParam(name = "correoEmpresa") String correoEmpresa) {
+        List<Srsalon> valor = qs.obtenerSalonesReservados(fechaReservacionSalon,correoEmpresa);
+        List l1 = new LinkedList();
+        for (int i = 0; i < valor.size(); i++) {
+            Map map = new LinkedHashMap();
+            Salon salon = qs.obtenerSalon(valor.get(i).getSalon().getIdSalon());
+            map.put("idSalon", valor.get(i).getSalon().getIdSalon());
+            map.put("nombreSalon",salon.getNombreSalon());
+            map.put("precioSalon", salon.getPrecioSalon());
+            map.put("correoClienteSalon", valor.get(i).getCorreoClienteSalon());
+            map.put("direccionSalon", salon.getDireccionSalon());
+            l1.add(map);
+        }
+        String jsonString = JSONValue.toJSONString(l1);
+        return jsonString;
     }
 }

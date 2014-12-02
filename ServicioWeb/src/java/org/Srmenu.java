@@ -1,5 +1,5 @@
 package org;
-// Generated 29/11/2014 08:44:03 PM by Hibernate Tools 4.3.1
+// Generated 1/12/2014 10:39:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,19 +11,19 @@ public class Srmenu  implements java.io.Serializable {
 
 
      private Integer idSrmenu;
+     private Empresacliente empresacliente;
      private Menu menu;
      private String stautsMenu;
-     private Date fechaMenu;
      private Date fechaReservacionMenu;
      private String correoClienteMenu;
 
     public Srmenu() {
     }
 
-    public Srmenu(Menu menu, String stautsMenu, Date fechaMenu, Date fechaReservacionMenu, String correoClienteMenu) {
+    public Srmenu(Empresacliente empresacliente, Menu menu, String stautsMenu, Date fechaReservacionMenu, String correoClienteMenu) {
+       this.empresacliente = empresacliente;
        this.menu = menu;
        this.stautsMenu = stautsMenu;
-       this.fechaMenu = fechaMenu;
        this.fechaReservacionMenu = fechaReservacionMenu;
        this.correoClienteMenu = correoClienteMenu;
     }
@@ -34,6 +34,13 @@ public class Srmenu  implements java.io.Serializable {
     
     public void setIdSrmenu(Integer idSrmenu) {
         this.idSrmenu = idSrmenu;
+    }
+    public Empresacliente getEmpresacliente() {
+        return this.empresacliente;
+    }
+    
+    public void setEmpresacliente(Empresacliente empresacliente) {
+        this.empresacliente = empresacliente;
     }
     public Menu getMenu() {
         return this.menu;
@@ -48,13 +55,6 @@ public class Srmenu  implements java.io.Serializable {
     
     public void setStautsMenu(String stautsMenu) {
         this.stautsMenu = stautsMenu;
-    }
-    public Date getFechaMenu() {
-        return this.fechaMenu;
-    }
-    
-    public void setFechaMenu(Date fechaMenu) {
-        this.fechaMenu = fechaMenu;
     }
     public Date getFechaReservacionMenu() {
         return this.fechaReservacionMenu;

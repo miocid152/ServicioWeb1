@@ -1,5 +1,5 @@
 package org;
-// Generated 29/11/2014 08:44:03 PM by Hibernate Tools 4.3.1
+// Generated 1/12/2014 10:39:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

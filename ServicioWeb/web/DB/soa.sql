@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2014 a las 06:31:22
+-- Tiempo de generación: 02-12-2014 a las 04:59:05
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 CREATE SCHEMA IF NOT EXISTS `ServicioWeb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `ServicioWeb` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresacliente`
+--
+
+CREATE TABLE IF NOT EXISTS `empresacliente` (
+  `idEmpresaCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreEmpresa` varchar(45) NOT NULL,
+  `numeroTel` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
+  `correoElectronico` varchar(80) NOT NULL,
+  PRIMARY KEY (`idEmpresaCliente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `empresacliente`
+--
+
+INSERT INTO `empresacliente` (`idEmpresaCliente`, `nombreEmpresa`, `numeroTel`, `direccion`, `correoElectronico`) VALUES
+(1, 'YE', '2291152722', 'Juan Felipe Cardenas 27', 'ye@prodigy.com'),
+(2, 'Terraza Veracruz', '2291300105', 'Melchor Ocampo', 'tv@tv.com');
 
 -- --------------------------------------------------------
 
@@ -107,19 +130,15 @@ INSERT INTO `salon` (`idSalon`, `nombreSalon`, `precioSalon`, `direccionSalon`) 
 
 CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   `idSREntrenimiento` int(11) NOT NULL AUTO_INCREMENT,
-  `fechaEntretenimiento` date NOT NULL,
   `fechaReservacionEntretenimiento` date NOT NULL,
   `statusEntretenimiento` varchar(45) NOT NULL DEFAULT 'RESERVADO',
   `entretenimientoIdEntretenimiento` int(11) NOT NULL,
   `correoClienteEntretenimiento` varchar(60) NOT NULL,
+  `empresaClienteIdEmpresaCliente` int(11) NOT NULL,
   PRIMARY KEY (`idSREntrenimiento`),
-  KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`)
+  KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`),
+  KEY `fk_srentrenimiento_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Volcado de datos para la tabla `srentrenimiento`
---
-
 
 -- --------------------------------------------------------
 
@@ -130,17 +149,14 @@ CREATE TABLE IF NOT EXISTS `srentrenimiento` (
 CREATE TABLE IF NOT EXISTS `srmenu` (
   `idSRMenu` int(11) NOT NULL AUTO_INCREMENT,
   `stautsMenu` varchar(45) NOT NULL DEFAULT 'RESERVADO',
-  `fechaMenu` date NOT NULL,
   `fechaReservacionMenu` date NOT NULL,
   `menuIdMenu` int(11) NOT NULL,
   `correoClienteMenu` varchar(60) NOT NULL,
+  `empresaClienteIdEmpresaCliente` int(11) NOT NULL,
   PRIMARY KEY (`idSRMenu`),
-  KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`)
+  KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`),
+  KEY `fk_srmenu_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Volcado de datos para la tabla `srmenu`
---
 
 -- --------------------------------------------------------
 
@@ -151,17 +167,14 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
 CREATE TABLE IF NOT EXISTS `srsalon` (
   `idSRSalon` int(11) NOT NULL AUTO_INCREMENT,
   `statusSalon` varchar(45) NOT NULL DEFAULT 'RESERVADO',
-  `fechaSalon` date NOT NULL,
   `fechaReservacionSalon` date NOT NULL,
   `salonIdSalon` int(11) NOT NULL,
   `correoClienteSalon` varchar(60) NOT NULL,
+  `empresaClienteIdEmpresaCliente` int(11) NOT NULL,
   PRIMARY KEY (`idSRSalon`),
-  KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`)
+  KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`),
+  KEY `fk_srsalon_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Volcado de datos para la tabla `srsalon`
---
 
 --
 -- Restricciones para tablas volcadas
@@ -171,19 +184,22 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
 -- Filtros para la tabla `srentrenimiento`
 --
 ALTER TABLE `srentrenimiento`
-  ADD CONSTRAINT `fk_SREntrenimiento_Entretenimiento1` FOREIGN KEY (`entretenimientoIdEntretenimiento`) REFERENCES `entretenimiento` (`idEntretenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_SREntrenimiento_Entretenimiento1` FOREIGN KEY (`entretenimientoIdEntretenimiento`) REFERENCES `entretenimiento` (`idEntretenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_srentrenimiento_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `srmenu`
 --
 ALTER TABLE `srmenu`
-  ADD CONSTRAINT `fk_SRMenu_Menu1` FOREIGN KEY (`menuIdMenu`) REFERENCES `menu` (`idMenu`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_SRMenu_Menu1` FOREIGN KEY (`menuIdMenu`) REFERENCES `menu` (`idMenu`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_srmenu_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `srsalon`
 --
 ALTER TABLE `srsalon`
-  ADD CONSTRAINT `fk_SRSalon_Salon` FOREIGN KEY (`salonIdSalon`) REFERENCES `salon` (`idSalon`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_SRSalon_Salon` FOREIGN KEY (`salonIdSalon`) REFERENCES `salon` (`idSalon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_srsalon_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
