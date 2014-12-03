@@ -54,13 +54,14 @@ public class ServicioWebSalon {
      * @param idSalon
      * @param fechaReservacionSalon
      * @param correoClienteSalon
+     * @param correoEmpresa
      * @return 
      */
     @WebMethod(operationName = "ReservacionSalon")
     public String ReservacionSalon(@WebParam(name = "idSalon" ) int idSalon,
             @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon,
             @WebParam(name = "correoClienteSalon") String correoClienteSalon,
-            @WebParam(name = "correoElectronico") String correoElectronico
+            @WebParam(name = "correoEmpresa") String correoEmpresa
             ) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
@@ -75,12 +76,12 @@ public class ServicioWebSalon {
         } 
         if (estado == 0) {
             map.put("mensaje", qs.agregarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha", fechaReservacionSalon);
         }
         if (estado == 2) {
             map.put("mensaje", qs.actualizarReservacion(idSalon,fechaReservacionSalon,correoClienteSalon,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha",  fechaReservacionSalon);
         }
         l1.add(map);
@@ -170,8 +171,8 @@ public class ServicioWebSalon {
      * @param correoEmpresa
      * @return 
      */
-    @WebMethod(operationName = "MostrarReservaciones")
-    public String MostrarReservaciones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon, @WebParam(name = "correoEmpresa") String correoEmpresa) {
+    @WebMethod(operationName = "MostrarReservacionesSalones")
+    public String MostrarReservacionesSalones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon, @WebParam(name = "correoEmpresa") String correoEmpresa) {
         List<Srsalon> valor = qs.obtenerSalonesReservados(fechaReservacionSalon,correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {

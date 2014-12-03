@@ -55,13 +55,14 @@ public class ServicioWebEntretenimiento {
      * @param idEntretenimiento
      * @param fechaReservacionEntretenimiento
      * @param correoClienteEntretenimiento
+     * @param correoEmpresa
      * @return 
      */
     @WebMethod(operationName = "ReservacionEntretenimiento")
     public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento,
             @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento,
             @WebParam(name = "correoClienteEntretenimiento") String correoClienteEntretenimiento,
-            @WebParam(name = "correoElectronico") String correoElectronico) {
+            @WebParam(name = "correoEmpresa") String correoEmpresa) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
@@ -75,12 +76,12 @@ public class ServicioWebEntretenimiento {
         }
         if (estado == 0) {
             map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 2) {
             map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         l1.add(map);
@@ -170,8 +171,8 @@ public class ServicioWebEntretenimiento {
      * @param correoEmpresa
      * @return 
      */
-    @WebMethod(operationName = "MostrarReservaciones")
-    public String MostrarReservaciones(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento, @WebParam(name = "correoEmpresa") String correoEmpresa) {
+    @WebMethod(operationName = "MostrarReservacionesEntretenimiento")
+    public String MostrarReservacionesEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento, @WebParam(name = "correoEmpresa") String correoEmpresa) {
         List<Srentrenimiento> valor = qe.obtenerEntretenimientosReservados(fechaReservacionEntretenimiento,correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {

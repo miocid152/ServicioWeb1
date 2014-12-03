@@ -55,13 +55,14 @@ public class ServicioWebMenu {
      * @param idMenu
      * @param fechaReservacionMenu
      * @param correoClienteMenu
+     * @param correoEmpresa
      * @return
      */
     @WebMethod(operationName = "ReservacionMenu")
     public String ReservacionMenu(@WebParam(name = "idMenu") int idMenu,
             @WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu,
             @WebParam(name = "correoClienteMenu") String correoClienteMenu,
-            @WebParam(name = "correoElectronico") String correoElectronico) {
+            @WebParam(name = "correoEmpresa") String correoEmpresa) {
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado = qm.verificarStatus(idMenu, fechaReservacionMenu);
@@ -75,12 +76,12 @@ public class ServicioWebMenu {
         }
         if (estado == 0) {
             map.put("mensaje", qm.agregarReservacion(idMenu, fechaReservacionMenu, correoClienteMenu,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha", fechaReservacionMenu);
         }
         if (estado == 2) {
             map.put("mensaje", qm.actualizarReservacion(idMenu, fechaReservacionMenu, correoClienteMenu,
-                    correoElectronico));
+                    correoEmpresa));
             map.put("fecha", fechaReservacionMenu);
         }
         l1.add(map);
@@ -173,8 +174,8 @@ public class ServicioWebMenu {
      * @param correoEmpresa
      * @return
      */
-    @WebMethod(operationName = "MostrarReservaciones")
-    public String MostrarReservaciones(@WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu, @WebParam(name = "correoEmpresa") String correoEmpresa) {
+    @WebMethod(operationName = "MostrarReservacionesMenu")
+    public String MostrarReservacionesMenu(@WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu, @WebParam(name = "correoEmpresa") String correoEmpresa) {
         List<Srmenu> valor = qm.obtenerMenusReservados(fechaReservacionMenu, correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {

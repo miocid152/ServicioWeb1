@@ -3,11 +3,13 @@
 $cadena ="";
 //Lista Salones
 function ReservarSalon($idSalon, $fecha,$correoClienteSalon){
+	$correoEmpresa="tv@tv.com";
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebSalon/ServicioWebSalon?WSDL');
 	 $parametros =array('idSalon'=>$idSalon,
 	 					'fechaReservacionSalon'=>$fecha,
-	 					'correoClienteSalon'=>$correoClienteSalon);
+	 					'correoClienteSalon'=>$correoClienteSalon,
+	 					'correoEmpresa'=>$correoEmpresa);
 	 $operacion = $clienteSOAP->ReservacionSalon($parametros);
 	 $cadena = $operacion->return;
 	 

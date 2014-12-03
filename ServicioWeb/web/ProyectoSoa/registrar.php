@@ -23,7 +23,7 @@
 					</li>
 					<li>
 						<label for="usermail">Email</label>
-						<input type="email" name="usermail" placeholder="yourname@email.com" required>
+						<input type="email" name="usermail" placeholder="tucorreo@email.com" required>
 					</li>
 					<li>
 						<label for="userdireccion">Dirección</label>
@@ -44,7 +44,7 @@
 		</section>
 	</article>
 	<footer>
-		Proyecto Soa by EFIR
+		Proyecto Soa by EFI
 	</footer>
 </body>
 </html>

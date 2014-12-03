@@ -23,7 +23,7 @@
 		</nav>
 	</article>
 	<footer>
-		<p>Proyecto Soa by EFIR</p>
+		Proyecto Soa by EFI
 	</footer>
 </body>
 </html>
