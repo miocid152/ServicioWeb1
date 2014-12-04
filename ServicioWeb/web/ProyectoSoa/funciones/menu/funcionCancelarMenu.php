@@ -1,8 +1,7 @@
 
 <?php
 $cadena ="";
-//Lista Salones
-function CancelarSalon($idMenu, $fecha){
+function CancelarMenu($idMenu, $fecha){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebMenu/ServicioWebMenu?WSDL');
 	 $parametros =array('idMenu'=>$idMenu,

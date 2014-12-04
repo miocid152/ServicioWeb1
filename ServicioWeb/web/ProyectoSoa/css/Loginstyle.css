@@ -151,7 +151,8 @@ a:active {
 
 /*footer*/
 footer {
-	position: relative; margin-top: -50px;  /* altura en px del footer con valor negativo */
+	position: relative;
+  margin-bottom: 0%;  /* altura en px del footer con valor negativo */
 	height: 50px; /* Altura del Footer en px*/
 	clear: both;
 	background: #286af0;
@@ -183,4 +184,77 @@ header #logo{
 
 header #banner{
     width: 85%;
+}
+
+section{
+    width: 88%;
+}
+
+section h1{
+    text-align: center;
+}
+
+section h2{
+    color: crimson;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+section#login form table{
+    background: rgb(252, 242, 132);
+    border: 1px solid darkorange;
+    border-radius: 7px;
+    border-collapse: separate;
+    margin: 8% auto;
+}
+
+section#login form table tr{
+    height: 30px;
+}
+
+section #enlacesSection{
+    margin: 3em 0 9em 0;
+    text-align: center;
+}
+
+section #enlacesSection a{
+    border: 1px solid #285C85;
+    border-radius: 5px;
+    color: #285C85;
+    font-size: 3em;
+    margin: 0 0.3em 2em 0;
+    padding: 0.3em;
+    text-decoration: none;
+}
+
+section #enlacesSection a:hover{
+    border: 1px dashed #FC1910;
+    color: #FC1910;
+    font-size: 3.1em;
+}
+
+section table#listaTabla tr.tablaContenido{
+    background: white;
+}
+
+#s-articulos article{
+  border: 1px dashed #285C85;
+  display: inline-block;
+  margin: 1em;
+  padding: 0.5em;
+  width: 28%;
+}
+
+#s-articulos article h2{
+  margin: 0 0 0.1em 1em;
+}
+
+#s-articulos article p strong{
+  background: #81D2EF;
+}
+
+#s-articulos article p a{
+        color: #F56C29;
+        cursor: pointer;
+  text-decoration: none;
 }

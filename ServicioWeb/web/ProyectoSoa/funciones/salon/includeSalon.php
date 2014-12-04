@@ -4,6 +4,6 @@ include 'funcionReservarSalon.php';
 include 'funcionCancelarSalon.php';
 include 'funcionConfirmarSalon.php';
 include 'funcionMostrarReservacionesSalones.php';
-include 'funcionPrecioSalon.php';
+include 'funcionGetSalon.php';
 
 ?>

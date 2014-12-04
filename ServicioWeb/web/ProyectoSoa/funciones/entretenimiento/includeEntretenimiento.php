@@ -5,6 +5,6 @@ include 'funcionReservarEntretenimiento.php';
 include 'funcionCancelarEntretenimiento.php';
 include 'funcionConfirmarEntretenimiento.php';
 include 'funcionMostrarReservacionesEntretenimientos.php';
-include 'funcionPrecioEntretenimiento.php';
+include 'funcionGetEntretenimiento.php';
 
 ?>

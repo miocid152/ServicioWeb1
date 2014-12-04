@@ -1,7 +1,8 @@
 
 <?php
 $cadena ="";
-function MostrarReservacionesMenu($fecha){
+$$retorno="";
+function MostrarReservacionesMenus($fecha,$opcion){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebMenu/ServicioWebMenu?WSDL');
 	 $correoEmpresa="tv@tv.com";
@@ -15,20 +16,25 @@ function MostrarReservacionesMenu($fecha){
 	}
 
 	$x=json_decode($cadena);
+	if($opcion==1){
+		for($i=0; $i<sizeof($x); $i++){
+			$idMenu = $x[$i]->idMenu;
+			$menuDes = $x[$i]->menuDes;
+			$precioMenu = $x[$i]->precioMenu;
+			$correoClienteMenu = $x[$i]->correoClienteMenu;
+			$cantidadPersonas = $x[$i]->cantidadPersonas;
+			$retorno= "Menu Reservado:  ".$menuDes.
+			"<br/>Precio $".$precioMenu.
+			"<br/>Cantidad Peronas: ".$cantidadPersonas;
 
-	for($i=0; $i<sizeof($x); $i++){
-		$idMenu = $x[$i]->idMenu;
-		$menuDes = $x[$i]->menuDes;
-		$precioMenu = $x[$i]->precioMenu;
-		$correoClienteMenu = $x[$i]->correoClienteMenu;
-		$cantidadPersonas = $x[$i]->cantidadPersonas;
-		echo "ID Menu: ". $idMenu.
-		"<br>Descripcion del menu: ".$menuDes.
-		"<br>Precio ".$precioMenu.
-		"<br>correoClienteMenu ".$correoClienteMenu.
-		"<br>cantidadPersonas".$cantidadPersonas;
-		echo "<br><br><br>";
-
+		}
+		if (empty($x)) $retorno="Fecha no encontrada en Menu";
+		return $retorno;
+	}else{
+		for($i=0; $i<sizeof($x); $i++){
+			$idMenu = $x[$i]->idMenu;
+			return $idMenu;
+		}
 	}
 }
 

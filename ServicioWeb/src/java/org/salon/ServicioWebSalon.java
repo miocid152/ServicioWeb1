@@ -159,10 +159,16 @@ public class ServicioWebSalon {
      * @param idSalon
      * @return 
      */
-    @WebMethod(operationName = "precioSalon")
-    public Float precioSalon(@WebParam(name = "idSalon") int idSalon) {
-        float precio =  qs.obtenerSalon(idSalon).getPrecioSalon();
-        return precio;
+    @WebMethod(operationName = "GetSalon")
+    public String GetSalon(@WebParam(name = "idSalon") int idSalon) {
+        Salon salon =  qs.obtenerSalon(idSalon);
+            Map map = new LinkedHashMap();
+            map.put("idSalon", salon.getIdSalon());
+            map.put("nombreSalon", salon.getNombreSalon());
+            map.put("precioSalon", salon.getPrecioSalon());
+            map.put("direccionSalon", salon.getDireccionSalon());
+            String jsonString = JSONValue.toJSONString(map);
+        return jsonString;
     }
 
     /**

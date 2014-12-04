@@ -161,10 +161,17 @@ public class ServicioWebMenu {
      * @param idMenu
      * @return
      */
-    @WebMethod(operationName = "precioMenu")
-    public Float precioSalon(@WebParam(name = "idMenu") int idMenu) {
-        float precio = qm.obtenerMenu(idMenu).getPrecioMenu();
-        return precio;
+    @WebMethod(operationName = "GetMenu")
+    public String GetMenu(@WebParam(name = "idMenu") int idMenu) {
+        Menu menu = qm.obtenerMenu(idMenu);
+            Map map = new LinkedHashMap();
+            map.put("idMenu", menu.getIdMenu());
+            map.put("menuDes", menu.getMenuDes());
+            map.put("precioMenu", menu.getPrecioMenu());
+            map.put("nombreCompaniaMenu", menu.getNombreCompaniaMenu());
+            map.put("cantidadPersonas", menu.getCantidadPersonas());
+        String jsonString = JSONValue.toJSONString(map);
+        return jsonString;
     }
 
     /**

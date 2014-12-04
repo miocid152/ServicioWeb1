@@ -1,7 +1,8 @@
 
 <?php
 $cadena ="";
-function MostrarReservacionesEntretenimiento($fecha){
+$retorno="";
+function MostrarReservacionesEntretenimientos($fecha,$opcion){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebEntretenimiento/ServicioWebEntretenimiento?WSDL');
 	 $correoEmpresa="tv@tv.com";
@@ -15,20 +16,24 @@ function MostrarReservacionesEntretenimiento($fecha){
 	}
 
 	$x=json_decode($cadena);
-
-	for($i=0; $i<sizeof($x); $i++){
-		$idEntretenimiento = $x[$i]->idEntretenimiento;
-		$nombreCompaniaEntretenimiento = $x[$i]->nombreCompaniaEntretenimiento;
-		$precioEntretenimiento = $x[$i]->precioEntretenimiento;
-		$correoClienteEntretenimiento = $x[$i]->correoClienteEntretenimiento;
-		$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
-		echo "ID Entretenimiento: ". $idEntretenimiento.
-		"<br>Nombre Compañia Entretenimiento: ".$nombreCompaniaEntretenimiento.
-		"<br>Precio ".$precioEntretenimiento.
-		"<br>correoClienteEntretenimiento ".$correoClienteEntretenimiento.
-		"<br>tipoEntretenimiento".$tipoEntretenimiento;
-		echo "<br><br><br>";
-
+	if($opcion==1){
+		for($i=0; $i<sizeof($x); $i++){
+			$idEntretenimiento = $x[$i]->idEntretenimiento;
+			$nombreCompaniaEntretenimiento = $x[$i]->nombreCompaniaEntretenimiento;
+			$precioEntretenimiento = $x[$i]->precioEntretenimiento;
+			$correoClienteEntretenimiento = $x[$i]->correoClienteEntretenimiento;
+			$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
+			$retorno="<br/>Entretenimiento Reservado: ".$nombreCompaniaEntretenimiento.
+			"<br/>Precio $".$precioEntretenimiento.
+			"<br/>Tipo: ".$tipoEntretenimiento;
+		}
+		if (empty($x)) $retorno="Fecha no encontrada en Entretenimiento";
+		return $retorno;
+	}else{
+		for($i=0; $i<sizeof($x); $i++){
+			$idEntretenimiento = $x[$i]->idEntretenimiento;
+			return $idEntretenimiento;
+		}
 	}
 }
 

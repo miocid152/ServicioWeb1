@@ -17,7 +17,7 @@
 			<h1>Bienvenido</h1>
 			<ul>
 				<li><a href="#">Modificar Usuario</a></li>
-				<li><a href="#">Cancelar Reservaciones</a></li>
+				<li><a href="cancelarReservaciones.php">Cancelar Reservaciones</a></li>
 				<li><a href="#">Confirmar Reservaciones</a></li>
 			</ul>
 		</nav>

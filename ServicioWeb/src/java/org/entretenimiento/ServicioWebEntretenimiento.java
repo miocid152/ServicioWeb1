@@ -33,7 +33,7 @@ public class ServicioWebEntretenimiento {
      * @return
      */
     @WebMethod(operationName = "ListaEntretenimiento")
-    public String ListaEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento){
+    public String ListaEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
         List<Entretenimiento> valor = qe.ObtenerEntretenimientos(fechaReservacionEntretenimiento);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
@@ -56,7 +56,7 @@ public class ServicioWebEntretenimiento {
      * @param fechaReservacionEntretenimiento
      * @param correoClienteEntretenimiento
      * @param correoEmpresa
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "ReservacionEntretenimiento")
     public String ReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento,
@@ -75,12 +75,12 @@ public class ServicioWebEntretenimiento {
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 0) {
-            map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
+            map.put("mensaje", qe.agregarReservacion(idEntretenimiento, fechaReservacionEntretenimiento, correoClienteEntretenimiento,
                     correoEmpresa));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 2) {
-            map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento,correoClienteEntretenimiento,
+            map.put("mensaje", qe.actualizarReservacion(idEntretenimiento, fechaReservacionEntretenimiento, correoClienteEntretenimiento,
                     correoEmpresa));
             map.put("fecha", fechaReservacionEntretenimiento);
         }
@@ -124,9 +124,10 @@ public class ServicioWebEntretenimiento {
 
     /**
      * Web service operation
+     *
      * @param idEntretenimiento
      * @param fechaReservacionEntretenimiento
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "ConfirmarReservacionEntretenimiento")
     public String ConfirmarReservacionEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento, @WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento) {
@@ -153,33 +154,42 @@ public class ServicioWebEntretenimiento {
         String jsonString = JSONValue.toJSONString(l1);
         return jsonString;
     }
-    
-        /**
+
+    /**
      * Web service operation
+     *
      * @param idEntretenimiento
-     * @return 
+     * @return
      */
-    @WebMethod(operationName = "precioEntretenimiento")
-    public Float precioSalon(@WebParam(name = "idEntretenimiento") int idEntretenimiento) {
-        float precio =  qe.obtenerEntretenimiento(idEntretenimiento).getPrecioEntretenimiento();
-        return precio;
+    @WebMethod(operationName = "GetEntretenimiento")
+    public String GetEntretenimiento(@WebParam(name = "idEntretenimiento") int idEntretenimiento) {
+        Entretenimiento entretenimiento = qe.obtenerEntretenimiento(idEntretenimiento);
+        Map map = new LinkedHashMap();
+        map.put("idEntretenimiento", entretenimiento.getIdEntretenimiento());
+        map.put("tipoEntretenimiento", entretenimiento.getTipoEntretenimiento());
+        map.put("nombreCompaniaEntretenimiento", entretenimiento.getNombreCompaniaEntretenimiento());
+        map.put("horasEntretenimiento", entretenimiento.getHorasEntretenimiento());
+        map.put("precioEntretenimiento", entretenimiento.getPrecioEntretenimiento());
+        String jsonString = JSONValue.toJSONString(map);
+        return jsonString;
     }
 
-     /**
+    /**
      * Web service operation
+     *
      * @param fechaReservacionEntretenimiento
      * @param correoEmpresa
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "MostrarReservacionesEntretenimiento")
     public String MostrarReservacionesEntretenimiento(@WebParam(name = "fechaReservacionEntretenimiento") String fechaReservacionEntretenimiento, @WebParam(name = "correoEmpresa") String correoEmpresa) {
-        List<Srentrenimiento> valor = qe.obtenerEntretenimientosReservados(fechaReservacionEntretenimiento,correoEmpresa);
+        List<Srentrenimiento> valor = qe.obtenerEntretenimientosReservados(fechaReservacionEntretenimiento, correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
             Map map = new LinkedHashMap();
             Entretenimiento entretenimiento = qe.obtenerEntretenimiento(valor.get(i).getEntretenimiento().getIdEntretenimiento());
             map.put("idEntretenimiento", valor.get(i).getEntretenimiento().getIdEntretenimiento());
-            map.put("nombreCompaniaEntretenimiento",entretenimiento.getNombreCompaniaEntretenimiento());
+            map.put("nombreCompaniaEntretenimiento", entretenimiento.getNombreCompaniaEntretenimiento());
             map.put("precioEntretenimiento", entretenimiento.getPrecioEntretenimiento());
             map.put("correoClienteEntretenimiento", valor.get(i).getCorreoClienteEntretenimiento());
             map.put("tipoEntretenimiento", entretenimiento.getTipoEntretenimiento());
