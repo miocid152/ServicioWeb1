@@ -257,12 +257,12 @@ public class QueryEntretenimiento {
         return empresa.get(0);
     }
 
-    List<Srentrenimiento> obtenerEntretenimientosReservados(String fechaReservacionEntretenimiento, String correoEmpresa) {
+    List<Srentrenimiento> obtenerEntretenimientosReservados(String correoEmpresa) {
         List<Srentrenimiento> srentretenimiento = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("Select s from Srentrenimiento s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionEntretenimiento='"+ fechaReservacionEntretenimiento+"' and correoElectronico='"+correoEmpresa+"' and statusEntretenimiento='RESERVADO')");
+            Query q = session.createQuery("Select s from Srentrenimiento s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (correoElectronico='"+correoEmpresa+"' and statusEntretenimiento='RESERVADO')");
             srentretenimiento = (List<Srentrenimiento>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();

@@ -263,12 +263,12 @@ public class QuerySalon {
         return empresa.get(0);
     }
 
-    List<Srsalon> obtenerSalonesReservados(String fechaReservacionSalon, String correoEmpresa) {
+    List<Srsalon> obtenerSalonesReservados(String correoEmpresa) {
         List<Srsalon> srsalon = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("Select s from Srsalon s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionSalon='"+ fechaReservacionSalon+"' and correoElectronico='"+correoEmpresa+"' and statusSalon='RESERVADO')");
+            Query q = session.createQuery("Select s from Srsalon s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (correoElectronico='"+correoEmpresa+"' and statusSalon='RESERVADO')");
             srsalon = (List<Srsalon>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();

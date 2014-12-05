@@ -258,12 +258,12 @@ public class QueryMenu {
         return empresa.get(0);
     }
 
-    List<Srmenu> obtenerMenusReservados(String fechaReservacionMenu, String correoEmpresa) {
+    List<Srmenu> obtenerMenusReservados(String correoEmpresa) {
         List<Srmenu> srmenu = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("Select s from Srmenu s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (fechaReservacionMenu='" + fechaReservacionMenu + "' and correoElectronico='" + correoEmpresa + "' and stautsMenu='RESERVADO')");
+            Query q = session.createQuery("Select s from Srmenu s, Empresacliente e where IdEmpresacliente= empresaClienteIdEmpresaCliente and (correoElectronico='" + correoEmpresa + "' and stautsMenu='RESERVADO')");
             srmenu = (List<Srmenu>) q.list();
         } catch (HibernateException e) {
             e.printStackTrace();

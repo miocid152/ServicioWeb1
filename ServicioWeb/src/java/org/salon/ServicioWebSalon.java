@@ -173,18 +173,18 @@ public class ServicioWebSalon {
 
     /**
      * Web service operation
-     * @param fechaReservacionSalon
      * @param correoEmpresa
      * @return 
      */
     @WebMethod(operationName = "MostrarReservacionesSalones")
-    public String MostrarReservacionesSalones(@WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon, @WebParam(name = "correoEmpresa") String correoEmpresa) {
-        List<Srsalon> valor = qs.obtenerSalonesReservados(fechaReservacionSalon,correoEmpresa);
+    public String MostrarReservacionesSalones(@WebParam(name = "correoEmpresa") String correoEmpresa) {
+        List<Srsalon> valor = qs.obtenerSalonesReservados(correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
             Map map = new LinkedHashMap();
             Salon salon = qs.obtenerSalon(valor.get(i).getSalon().getIdSalon());
             map.put("idSalon", valor.get(i).getSalon().getIdSalon());
+            map.put("fechaReservacionSalon", valor.get(i).getFechaReservacionSalon());
             map.put("nombreSalon",salon.getNombreSalon());
             map.put("precioSalon", salon.getPrecioSalon());
             map.put("correoClienteSalon", valor.get(i).getCorreoClienteSalon());

@@ -177,18 +177,18 @@ public class ServicioWebMenu {
     /**
      * Web service operation
      *
-     * @param fechaReservacionMenu
      * @param correoEmpresa
      * @return
      */
     @WebMethod(operationName = "MostrarReservacionesMenu")
-    public String MostrarReservacionesMenu(@WebParam(name = "fechaReservacionMenu") String fechaReservacionMenu, @WebParam(name = "correoEmpresa") String correoEmpresa) {
-        List<Srmenu> valor = qm.obtenerMenusReservados(fechaReservacionMenu, correoEmpresa);
+    public String MostrarReservacionesMenu(@WebParam(name = "correoEmpresa") String correoEmpresa) {
+        List<Srmenu> valor = qm.obtenerMenusReservados(correoEmpresa);
         List l1 = new LinkedList();
         for (int i = 0; i < valor.size(); i++) {
             Map map = new LinkedHashMap();
             Menu menu = qm.obtenerMenu(valor.get(i).getMenu().getIdMenu());
             map.put("idMenu", valor.get(i).getMenu().getIdMenu());
+            map.put("fechaReservacionMenu", valor.get(i).getFechaReservacionMenu());
             map.put("menuDes", menu.getMenuDes());
             map.put("precioMenu", menu.getPrecioMenu());
             map.put("correoClienteMenu", valor.get(i).getCorreoClienteMenu());
