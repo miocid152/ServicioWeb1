@@ -5,6 +5,8 @@
  */
 package org.menu;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +25,7 @@ import org.json.simple.JSONValue;
 @WebService(serviceName = "ServicioWebMenu")
 @Stateless()
 public class ServicioWebMenu {
-
+    DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
     QueryMenu qm = new QueryMenu();
 
     /**
@@ -188,7 +190,7 @@ public class ServicioWebMenu {
             Map map = new LinkedHashMap();
             Menu menu = qm.obtenerMenu(valor.get(i).getMenu().getIdMenu());
             map.put("idMenu", valor.get(i).getMenu().getIdMenu());
-            map.put("fechaReservacionMenu", valor.get(i).getFechaReservacionMenu());
+            map.put("fechaReservacionMenu",df.format(valor.get(i).getFechaReservacionMenu()));
             map.put("menuDes", menu.getMenuDes());
             map.put("precioMenu", menu.getPrecioMenu());
             map.put("correoClienteMenu", valor.get(i).getCorreoClienteMenu());

@@ -5,6 +5,7 @@
  */
 package org.salon;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -24,7 +25,7 @@ import org.json.simple.JSONValue;
 @WebService(serviceName = "ServicioWebSalon")
 @Stateless()
 public class ServicioWebSalon {
-
+    DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
     QuerySalon qs = new QuerySalon();
 
     /**
@@ -129,7 +130,6 @@ public class ServicioWebSalon {
      */
     @WebMethod(operationName = "ConfirmarReservacionSalon")
     public String ConfirmarReservacionSalon(@WebParam(name = "idSalon") int idSalon, @WebParam(name = "fechaReservacionSalon") String fechaReservacionSalon) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         List l1 = new LinkedList();
         Map map = new LinkedHashMap();
         int estado =qs.verificarStatus(idSalon, fechaReservacionSalon);
@@ -184,7 +184,7 @@ public class ServicioWebSalon {
             Map map = new LinkedHashMap();
             Salon salon = qs.obtenerSalon(valor.get(i).getSalon().getIdSalon());
             map.put("idSalon", valor.get(i).getSalon().getIdSalon());
-            map.put("fechaReservacionSalon", valor.get(i).getFechaReservacionSalon());
+            map.put("fechaReservacionSalon", df.format(valor.get(i).getFechaReservacionSalon()));
             map.put("nombreSalon",salon.getNombreSalon());
             map.put("precioSalon", salon.getPrecioSalon());
             map.put("correoClienteSalon", valor.get(i).getCorreoClienteSalon());

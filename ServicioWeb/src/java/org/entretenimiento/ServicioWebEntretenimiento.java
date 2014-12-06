@@ -5,6 +5,8 @@
  */
 package org.entretenimiento;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +25,7 @@ import org.json.simple.JSONValue;
 @WebService(serviceName = "ServicioWebEntretenimiento")
 @Stateless()
 public class ServicioWebEntretenimiento {
-
+    DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
     QueryEntretenimiento qe = new QueryEntretenimiento();
 
     /**
@@ -188,7 +190,7 @@ public class ServicioWebEntretenimiento {
             Map map = new LinkedHashMap();
             Entretenimiento entretenimiento = qe.obtenerEntretenimiento(valor.get(i).getEntretenimiento().getIdEntretenimiento());
             map.put("idEntretenimiento", valor.get(i).getEntretenimiento().getIdEntretenimiento());
-            map.put("fechaReservacionEntretenimiento", valor.get(i).getFechaReservacionEntretenimiento());
+            map.put("fechaReservacionEntretenimiento", df.format(valor.get(i).getFechaReservacionEntretenimiento()));
             map.put("nombreCompaniaEntretenimiento", entretenimiento.getNombreCompaniaEntretenimiento());
             map.put("precioEntretenimiento", entretenimiento.getPrecioEntretenimiento());
             map.put("correoClienteEntretenimiento", valor.get(i).getCorreoClienteEntretenimiento());
