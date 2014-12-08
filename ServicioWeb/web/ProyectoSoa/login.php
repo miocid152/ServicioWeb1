@@ -1,3 +1,16 @@
+<?php
+$error="";
+	session_start();
+	if(isset($_SESSION['usermail']) ) {
+		if($_SESSION['tipoUsuario']==0) Header("Location: reservar.php");
+		if($_SESSION['tipoUsuario']==1) Header("Location: admin/index.php");
+		//session_destroy();
+	}
+	if(isset($_SESSION['error']) ) {
+		$error=$_SESSION['error'];
+		session_destroy();
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,6 +28,7 @@
 			<section>
 				<article class="loginform cf">
 					<h1>Bienvenido</h1>
+					<h2><?php echo $error; ?></h2>
 					<form name="login" action="funciones/verificar.php" method="get" accept-charset="utf-8">
 						<ul>
 							<li>

@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+
+ ?>
+ <!DOCTYPE html>
 <html>
 <head>
 	<title>Administrador</title>
@@ -19,7 +22,7 @@
 					<ul>
 						<li><a href="#">Modificar Usuario</a></li>
 						<li><a href="cancelarReservaciones.php">Cancelar Reservaciones</a></li>
-						<li><a href="#">Confirmar Reservaciones</a></li>
+						<li><a href="confirmarReservaciones.php">Confirmar Reservaciones</a></li>
 					</ul>
 				</nav>
 			</article>

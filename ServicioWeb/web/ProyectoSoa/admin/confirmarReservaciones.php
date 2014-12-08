@@ -10,7 +10,7 @@
 			$idSalon=$_REQUEST['idSalon'];
 			$fechaReservacionSalon=$_REQUEST['fechaReservacionSalon'];
 			$x=json_decode(GetSalon($idSalon));
-			$retorno=CancelarSalon($idSalon, $fechaReservacionSalon);
+			$retorno=ConfirmarSalon($idSalon, $fechaReservacionSalon);
 			$formulario="El salon: ".$x->nombreSalon.
 						"<br/>Con Precion: ".$x->precioSalon.
 						"<br/>Direccion: ".$x->direccionSalon.
@@ -19,7 +19,7 @@
 			$idMenu=$_REQUEST['idMenu'];
 			$fechaReservacionMenu=$_REQUEST['fechaReservacionMenu'];
 			$x=json_decode(GetMenu($idMenu));
-			$retorno=CancelarMenu($idMenu, $fechaReservacionMenu);
+			$retorno=ConfirmarMenu($idMenu, $fechaReservacionMenu);
 			$formulario="El menu: ".$x->menuDes.
 						"<br/>Con Precion: ".$x->precioMenu.
 						"<br/>Cantidad de personas: ".$x->cantidadPersonas.
@@ -29,16 +29,16 @@
 			$idEntretenimiento=$_REQUEST['idEntretenimiento'];
 			$fechaReservacionEntretenimiento=$_REQUEST['fechaReservacionEntretenimiento'];
 			$x=json_decode(GetEntretenimiento($idEntretenimiento));
-			$retorno=CancelarEntretenimiento($idEntretenimiento, $fechaReservacionEntretenimiento);
+			$retorno=ConfirmarEntretenimiento($idEntretenimiento, $fechaReservacionEntretenimiento);
 			$formulario="El Entretenimiento de : ".$x->nombreCompaniaEntretenimiento.", de ".$x->tipoEntretenimiento.
 						"<br/>Con Precion: ".$x->precioEntretenimiento.
 						"<br/>Horas de entretenimiento: ".$x->horasEntretenimiento.
 						"<br/>".$retorno;
 
 		} else {
-			if($servicio=="Salon"){$formulario=MostrarReservacionesSalones(1);}
-			if($servicio=="Menu"){$formulario=MostrarReservacionesMenus(1);}
-			if($servicio=="Entretenimiento"){$formulario=MostrarReservacionesEntretenimientos(1);}
+			if($servicio=="Salon"){$formulario=MostrarReservacionesSalones(2);}
+			if($servicio=="Menu"){$formulario=MostrarReservacionesMenus(2);}
+			if($servicio=="Entretenimiento"){$formulario=MostrarReservacionesEntretenimientos(2);}
 		}
 	}
 ?>
@@ -57,7 +57,7 @@
 	    </header>
 	    <section>
 		    <article class="loginform cf">
-			    <form id="" name="fechaReservacion" action="cancelarReservaciones.php" method="get">
+			    <form id="" name="fechaReservacion" action="confirmarReservaciones.php" method="get">
 				    <select required name="servicio">
 				    	<option value="Salon" <?php if($servicio=="Salon") echo "selected";?>> Salon</option>
 				    	<option value="Menu" <?php if($servicio=="Menu") echo "selected";?>> Menu</option>

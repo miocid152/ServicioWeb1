@@ -1,20 +1,27 @@
-<html>
-<head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-</head>
-<body>
-<section class="loginform cf">  
-<form name="login" action="index_submit" method="get" accept-charset="utf-8">  
-    <ul>  
-        <li><label for="usermail">Email</label>  
-        <input type="email" name="usermail" placeholder="yourname@email.com" required></li>  
-        <li><label for="password">Password</label>  
-        <input type="password" name="password" placeholder="password" required></li>  
-        <li>  
-        <input type="submit" value="Login"></li>  
-    </ul>  
-</form>  
-</section>
+<?php
+	session_start();
+	include 'conexion.php';
+	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+	if( isset($_REQUEST['usermail']) && isset($_REQUEST['password'])){
+		$usermail=$_REQUEST['usermail'];
+		$password=$_REQUEST['password'];
+		$consulta ="SELECT * FROM usuario where correoElectronico='".$usermail."' and contrasena='".$password."'";
+		if (null !== ($n = mysqli_fetch_assoc($conexion->query($consulta)))){
+			$verificar = mysqli_query($conexion, $consulta);
+			while ($fila = $verificar->fetch_assoc()) {
+        		$_SESSION['tipoUsuario'] = $fila["tipoUsuario"];
+        		$_SESSION['nombreCompleto'] = $fila["nombreCompleto"];
+				$_SESSION['usermail'] = $usermail;
+				$_SESSION['password'] = $password;
+    		}
 
-</body>
-</html>
+		    $conexion->close();
+			Header("Location: ../index.php");
+		} else{
+			$conexion->close();
+			$_SESSION['error']='Usuario o contraseña incorrectos';
+			Header("Location: ../login.php");
+		}
+	}
+	//session_destroy();
+?>

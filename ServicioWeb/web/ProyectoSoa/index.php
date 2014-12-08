@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(isset($_SESSION['usermail']) ) {
+		if($_SESSION['tipoUsuario']==0) Header("Location: reservar.php");
+		if($_SESSION['tipoUsuario']==1) Header("Location: admin/index.php");
+		//session_destroy();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

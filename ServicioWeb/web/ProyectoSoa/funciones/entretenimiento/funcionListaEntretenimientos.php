@@ -1,8 +1,8 @@
 
 <?php
 $cadena ="";
-//Lista Salones
-function ListaEntretenimientos($fecha){
+if(isset($_GET['fecha'])){
+	$fecha = $_GET['fecha'];
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebEntretenimiento/ServicioWebEntretenimiento?WSDL');
 	 $parametros = array('fechaReservacionEntretenimiento' => $fecha );
@@ -12,7 +12,9 @@ function ListaEntretenimientos($fecha){
 	} catch(SoapFault $e){
 	 var_dump($e);
 	}
-
+	echo '<br/>Entretenimiento: ';
+	echo '<select id="entretenimiento" name="entretenimiento" onchange="showEntretenimiento(this.value)">';
+	echo "<option value='0'>Ninguno</option>";
 	$x=json_decode($cadena);
 
 	for($i=0; $i<sizeof($x); $i++){
@@ -21,14 +23,9 @@ function ListaEntretenimientos($fecha){
 		$nombreCompaniaEntretenimiento = $x[$i]->nombreCompaniaEntretenimiento;
 		$horasEntretenimiento = $x[$i]->horasEntretenimiento;
 		$precioEntretenimiento = $x[$i]->precioEntretenimiento;
-		echo "ID Entretenimiento: ". $idEntretenimiento.
-		"<br>Tipo de Entretenimiento: ".$tipoEntretenimiento.
-		"<br>Nombre de la Compañia: ".$nombreCompaniaEntretenimiento.
-		"<br>Goras de Entretenimiento".$horasEntretenimiento.
-		"<br>Precio: ".$precioEntretenimiento;
-		echo "<br><br><br>";
-
+		echo "<option value='".$idEntretenimiento."'>".$nombreCompaniaEntretenimiento."</option>";
 	}
+	echo '</select>';
 }
 
 

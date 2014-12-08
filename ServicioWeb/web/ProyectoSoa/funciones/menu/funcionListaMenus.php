@@ -1,8 +1,8 @@
 
 <?php
 $cadena ="";
-//Lista Salones
-function ListaMenus($fecha){
+if(isset($_GET['fecha'])){
+	$fecha = $_GET['fecha'];
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebMenu/ServicioWebMenu?WSDL');
 	 $parametros = array('fechaReservacionMenu' => $fecha );
@@ -12,7 +12,9 @@ function ListaMenus($fecha){
 	} catch(SoapFault $e){
 	 var_dump($e);
 	}
-
+	echo '<br/>Menus: ';
+	echo '<select id="menu" name="menu" onchange="showMenu(this.value)">';
+	echo "<option value='0'>Ninguno</option>";
 	$x=json_decode($cadena);
 
 	for($i=0; $i<sizeof($x); $i++){
@@ -21,14 +23,9 @@ function ListaMenus($fecha){
 		$nombreCompaniaMenu = $x[$i]->nombreCompaniaMenu;
 		$precioMenu = $x[$i]->precioMenu;
 		$cantidadPersonas = $x[$i]->cantidadPersonas;
-		echo "ID Menu: ". $idMenu.
-		"<br>Nombre de la compañia: ".$nombreCompaniaMenu.
-		"<br>Precio del Menu ".$precioMenu.
-		"<br>Descripcion".$menuDes.
-		"<br>Cantidad de personas".$cantidadPersonas;
-		echo "<br><br><br>";
-
+		echo "<option value='".$idMenu."'>".$nombreCompaniaMenu."</option>";
 	}
+		echo '</select>';
 }
 
 

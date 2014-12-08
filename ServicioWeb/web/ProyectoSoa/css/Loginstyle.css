@@ -191,6 +191,7 @@ section{
     text-align: center;
     position: relative;
     border-bottom: 0px solid blue;
+    padding-bottom: 10%;
 }
 
 header figure{
@@ -208,3 +209,35 @@ header #banner{
     width: 85%;
 }
 
+
+b.prueba {
+   display: block;
+   color: #666666;
+   border: 1px #286af0 solid;
+   background-color: #EEEEEE;
+   background-image: none;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   width: 324px;
+   height: 26px;
+   line-height: 26px;
+   padding: 0px 5px 0px 5px;
+   vertical-align: middle;
+   text-align: center;
+}
+/* mouse over link */
+b.prueba:hover {
+   color: #ffffff;
+   background-color: #286af0;
+   background-image: none;
+   border: 1px #286af0 solid;
+}
+
+/* selected link */
+b.prueba:active {
+    color: yellow;
+    background: blue;
+} 

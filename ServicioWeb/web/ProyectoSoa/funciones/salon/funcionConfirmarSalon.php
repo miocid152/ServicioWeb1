@@ -17,8 +17,7 @@ function ConfirmarSalon($idSalon, $fecha){
 	$x=json_decode($cadena);
 	echo $cadena;
 
-	echo $x[0]->mensaje;
-	echo $x[0]->fecha;
+	return $x[0]->mensaje;
 }
 
 

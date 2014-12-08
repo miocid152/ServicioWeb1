@@ -1,20 +1,36 @@
-<html>
-<head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-</head>
-<body>
-<section class="loginform cf">  
-<form name="login" action="index_submit" method="get" accept-charset="utf-8">  
-    <ul>  
-        <li><label for="usermail">Email</label>  
-        <input type="email" name="usermail" placeholder="yourname@email.com" required></li>  
-        <li><label for="password">Password</label>  
-        <input type="password" name="password" placeholder="password" required></li>  
-        <li>  
-        <input type="submit" value="Login"></li>  
-    </ul>  
-</form>  
-</section>
+<?php
+	$conexion = new mysqli('localhost','root','root','logueosoa');
+	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
-</body>
-</html>
+	if(isset($_REQUEST['usermail'])){
+		$nombre=$_REQUEST['nombre'];
+		$usermail=$_REQUEST['usermail'];
+		$direccion=$_REQUEST['direccion'];
+		$numeroTelefonico=$_REQUEST['numeroTelefonico'];
+		$password=$_REQUEST['password'];
+
+		$consulta ="select * from usuario where correoElectronico='".$usermail."'";
+		$registro = $conexion->query($consulta)->fetch_assoc();
+		if ($registro['correoElectronico']!=$usermail){
+			$consulta ="INSERT INTO usuario(nombreCompleto,correoElectronico,contrasena,direccion,numeroTelefonico,tipoUsuario) 
+						VALUE ('".$nombre."','".$usermail."','".$password."','".$direccion."','".$numeroTelefonico."',0)";
+			$conexion->query($consulta);
+			mysqli_close($conexion);
+			echo '<br><br><br><br><br><br><br><br><h1><p align="center">Usuario Registrado Exitosamente</p></h1>';
+			echo '<html>
+					<head>
+						<meta http-equiv="REFRESH" content="0;url=../login.php">
+					</head>
+			  </html>'; //
+		}else{
+			mysqli_close($conexion);
+			echo '<html>
+					<head>
+						<meta http-equiv="REFRESH" content="0;url=../registrar.php?existente=1">
+					</head>
+			  </html>'; //
+		}
+	}
+	
+
+?>

@@ -15,6 +15,7 @@
 			<section>
 				<article class="loginform cf">
 				<h1>Registro usuario</h1>
+				<h2> <?php if(isset($_REQUEST['existente'])) {echo "Ya hay un registro con ese correo";} ?></h2>
 					<form name="login" action="funciones/registrar.php" method="get" accept-charset="utf-8">
 						<ul>
 							<li>

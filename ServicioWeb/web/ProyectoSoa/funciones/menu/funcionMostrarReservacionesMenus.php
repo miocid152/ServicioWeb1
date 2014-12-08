@@ -2,12 +2,11 @@
 <?php
 $cadena ="";
 $$retorno="";
-function MostrarReservacionesMenus($fecha,$opcion){
+function MostrarReservacionesMenus($opcion){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebMenu/ServicioWebMenu?WSDL');
 	 $correoEmpresa="tv@tv.com";
-	 $parametros = array('fechaReservacionMenu' => $fecha,
-	  					 'correoEmpresa' => $correoEmpresa);
+	 $parametros = array('correoEmpresa' => $correoEmpresa);
 	 $prueba = $clienteSOAP->MostrarReservacionesMenu($parametros);
 	 $cadena = $prueba->return;
 	 
@@ -16,6 +15,15 @@ function MostrarReservacionesMenus($fecha,$opcion){
 	}
 
 	$x=json_decode($cadena);
+ 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+	$retorno .="<TR align='center'>
+					<td>Menu Descripcion</td>
+					<td>Precio del Menu</td>
+					<td>Cliente</td>
+					<td>Cantidad Personas</td>
+					<td>Fecha Reservacion</td>
+					<td>Funcion</td>
+				</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
 			$idMenu = $x[$i]->idMenu;
@@ -23,19 +31,43 @@ function MostrarReservacionesMenus($fecha,$opcion){
 			$precioMenu = $x[$i]->precioMenu;
 			$correoClienteMenu = $x[$i]->correoClienteMenu;
 			$cantidadPersonas = $x[$i]->cantidadPersonas;
-			$retorno= "Menu Reservado:  ".$menuDes.
-			"<br/>Precio $".$precioMenu.
-			"<br/>Cantidad Peronas: ".$cantidadPersonas;
+			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
 
+			$retorno .="<form method ='GET' action='cancelarReservaciones.php'>
+						<TR>";
+			$retorno.="<TD><input type='hidden' name=idMenu value='".$idMenu."'/>".$menuDes."</TD>";
+			$retorno.="<TD>".$precioMenu."</TD>";
+			$retorno.="<TD>".$correoClienteMenu."</TD>";
+			$retorno.="<TD>".$cantidadPersonas."</TD>";
+			$retorno.="<TD><input type='hidden' name=fechaReservacionMenu value='".$fechaReservacionMenu."'/>".$fechaReservacionMenu."</TD>";
+			$retorno.="<td><input type='hidden' name='servicio' value='Menu'/>
+						   <input type='submit' value='Cancelar Reservacion' id='nada'/></td></TR></FORM>";
 		}
-		if (empty($x)) $retorno="Fecha no encontrada en Menu";
-		return $retorno;
-	}else{
+		$retorno.="</table>";
+	}
+	if($opcion==2){
 		for($i=0; $i<sizeof($x); $i++){
 			$idMenu = $x[$i]->idMenu;
-			return $idMenu;
+			$menuDes = $x[$i]->menuDes;
+			$precioMenu = $x[$i]->precioMenu;
+			$correoClienteMenu = $x[$i]->correoClienteMenu;
+			$cantidadPersonas = $x[$i]->cantidadPersonas;
+			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
+
+			$retorno .="<form method ='GET' action='confirmarReservaciones.php'>
+						<TR>";
+			$retorno.="<TD><input type='hidden' name=idMenu value='".$idMenu."'/>".$menuDes."</TD>";
+			$retorno.="<TD>".$precioMenu."</TD>";
+			$retorno.="<TD>".$correoClienteMenu."</TD>";
+			$retorno.="<TD>".$cantidadPersonas."</TD>";
+			$retorno.="<TD><input type='hidden' name=fechaReservacionMenu value='".$fechaReservacionMenu."'/>".$fechaReservacionMenu."</TD>";
+			$retorno.="<td><input type='hidden' name='servicio' value='Menu'/>
+						   <input type='submit' value='Confirmar Reservacion' id='nada'/></td></TR></FORM>";
 		}
+		$retorno.="</table>";
 	}
+	if (empty($x)) $retorno="No existen Menus Reservados";
+	return $retorno;
 }
 
 

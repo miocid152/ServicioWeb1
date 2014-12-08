@@ -1,6 +1,7 @@
 
 <?php
 $cadena ="";
+$retorno="";
 function CancelarSalon($idSalon, $fecha){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebSalon/ServicioWebSalon?WSDL');
@@ -14,10 +15,8 @@ function CancelarSalon($idSalon, $fecha){
 	}
 
 	$x=json_decode($cadena);
-	echo $cadena;
+	return $x[0]->mensaje;
 
-	echo $x[0]->mensaje;
-	echo $x[0]->fecha;
 }
 
 

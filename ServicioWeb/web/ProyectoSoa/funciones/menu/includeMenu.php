@@ -1,5 +1,4 @@
 <?php
-include 'funcionListaMenus.php';
 include 'funcionReservarMenu.php';
 include 'funcionCancelarMenu.php';
 include 'funcionConfirmarMenu.php';
