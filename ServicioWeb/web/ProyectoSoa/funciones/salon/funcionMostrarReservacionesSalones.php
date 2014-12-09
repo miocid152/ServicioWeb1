@@ -41,11 +41,11 @@ function MostrarReservacionesSalones($opcion){
 			$direccionSalon = $x[$i]->direccionSalon;
 			$retorno .="<form method ='GET' action='cancelarReservaciones.php'>
 						<TR>";
-			$retorno.="<TD><input type='hidden' name=idSalon value='".$idSalon."'/>".$nombreSalon."</TD>";
+			$retorno.="<TD><input type='hidden' name='idSalon' value='".$idSalon."'/>".$nombreSalon."</TD>";
 			$retorno.="<TD>".$precioSalon."</TD>";
 			$retorno.="<TD>".$correoClienteSalon."</TD>";
 			$retorno.="<TD>".$direccionSalon."</TD>";
-			$retorno.="<TD><input type='hidden' name=fechaReservacionSalon value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
+			$retorno.="<TD><input type='hidden' name='fechaReservacionSalon' value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='salon'/>
 						   <input type='submit' value='Cancelar Reservacion' id='nada'/></td></TR></FORM>";
 		}
@@ -61,11 +61,11 @@ function MostrarReservacionesSalones($opcion){
 			$direccionSalon = $x[$i]->direccionSalon;
 			$retorno .="<form method ='GET' action='confirmarReservaciones.php'>
 						<TR>";
-			$retorno.="<TD><input type='hidden' name=idSalon value='".$idSalon."'/>".$nombreSalon."</TD>";
+			$retorno.="<TD><input type='hidden' name='idSalon' value='".$idSalon."'/>".$nombreSalon."</TD>";
 			$retorno.="<TD>".$precioSalon."</TD>";
 			$retorno.="<TD>".$correoClienteSalon."</TD>";
 			$retorno.="<TD>".$direccionSalon."</TD>";
-			$retorno.="<TD><input type='hidden' name=fechaReservacionSalon value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
+			$retorno.="<TD><input type='hidden' name='fechaReservacionSalon' value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='salon'/>
 						   <input type='submit' value='Confirmar Reservacion' id='nada'/></td></TR></FORM>";
 		}

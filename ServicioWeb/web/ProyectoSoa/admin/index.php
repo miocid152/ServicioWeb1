@@ -20,7 +20,7 @@
 				<nav id="wb_CssMenu1" class="loginform cf">
 					<h1>Bienvenido</h1>
 					<ul>
-						<li><a href="#">Modificar Usuario</a></li>
+						<li><a href="modificarUsuarios.php">Modificar Usuario</a></li>
 						<li><a href="cancelarReservaciones.php">Cancelar Reservaciones</a></li>
 						<li><a href="confirmarReservaciones.php">Confirmar Reservaciones</a></li>
 					</ul>
