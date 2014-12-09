@@ -4,6 +4,11 @@ $cadena ="";
 $retorno="";
 //Lista Salones
 function MostrarReservacionesSalones($opcion){
+	/*opciones
+		opcion 1= genera tabla formulario para cancelar reservacion
+		opcion 2= genera tabla formulario para confirmar reservacion
+		opcion 3= genera tabla formulario para mostrar servicios reservados al cliente
+	*/
 	
 	try{
 		 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebSalon/ServicioWebSalon?WSDL');
@@ -67,6 +72,34 @@ function MostrarReservacionesSalones($opcion){
 		$retorno.="</table>";
 	}
 	
+	if($opcion==3){
+		 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+			$retorno .="<TR align=center>
+						<td>Nombre Salon</td>
+						<td>Precio del Salon</td>
+						<td>Cliente</td>
+						<td>Direccion Salon</td>
+						<td>Fecha Reservacion</td>
+					</TR>";
+		for($i=0; $i<sizeof($x); $i++){
+			$idSalon = $x[$i]->idSalon;
+			$fechaReservacionSalon = $x[$i]->fechaReservacionSalon;
+			$nombreSalon = $x[$i]->nombreSalon;
+			$precioSalon = $x[$i]->precioSalon;
+			$correoClienteSalon = $x[$i]->correoClienteSalon;
+			$direccionSalon = $x[$i]->direccionSalon;
+			if($correoClienteSalon=="prueba@prueba.com"){//<---Correo a editar con session
+				$retorno .="<TR>";
+				$retorno.="<TD>".$nombreSalon."</TD>";
+				$retorno.="<TD>".$precioSalon."</TD>";
+				$retorno.="<TD>".$correoClienteSalon."</TD>";
+				$retorno.="<TD>".$direccionSalon."</TD>";
+				$retorno.="<TD>".$fechaReservacionSalon."</TD>";
+				$retorno.="</TR>";
+			}
+		}
+		$retorno.="</table>";
+	}
 	if (empty($x)) $retorno="No existen Salones Reservados";
 	return $retorno;
 }

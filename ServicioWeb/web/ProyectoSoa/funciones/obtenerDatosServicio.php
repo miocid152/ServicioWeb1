@@ -30,7 +30,7 @@ if(isset($_GET['servicio'])){
 	}
 	echo $cadena;
 	echo "<input id='precio".$servicio."' type='hidden' name='precio".$servicio."' value='".$precio."'/>";
-	//echo "<input type='hidden' name='precio".$servicio."' value='".$precio."'/>";
+	echo "<input id='id".$servicio."' type='hidden' name='id".$servicio."' value='".$id."'/>";
 }
 
 ?>

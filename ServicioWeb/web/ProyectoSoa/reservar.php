@@ -1,8 +1,5 @@
 <?php 
-	include 'funciones/includeFunciones.php';
-	$listaSalones="";
-	$listaEntretenimientos="";
-	$listaMenu="";
+
 
 ?>
 <!DOCTYPE html>
@@ -38,7 +35,7 @@
 	        </figure>
 	    </header>
 	    <section>
-	    <form name="calcular" action="funciones/calcular.php" method="get" accept-charset="utf-8">
+	    <form name="calcular" action="reservarServicios.php" method="get" accept-charset="utf-8">
 	    	<article class="loginform cf">
 					Fecha que desee Reservar servicio:<input type="date" id="fecha" name="fecha" placeholder="YYYY-MM-dd" onchange="buscarListas(this.value)">
 					<br/><br/><br/>

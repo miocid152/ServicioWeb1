@@ -17,10 +17,9 @@ function ReservarEntretenimiento($idEntretenimiento, $fecha,$correoClienteEntret
 	}
 
 	$x=json_decode($cadena);
-	echo $cadena;
+	//echo $cadena;
 
-	echo $x[0]->mensaje;
-	echo $x[0]->fecha;
+	return $x[0]->mensaje." con fecha: ".$x[0]->fecha;
 }
 
 
