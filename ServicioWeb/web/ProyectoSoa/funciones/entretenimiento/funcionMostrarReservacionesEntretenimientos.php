@@ -21,14 +21,14 @@ function MostrarReservacionesEntretenimientos($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align='center'>
-					<td>Nombre de la Compañia</td>
-					<td>Precio del Entretenimiento</td>
-					<td>Cliente</td>
-					<td>Tipo de Entretenimiento</td>
-					<td>Fecha Reservacion</td>
-					<td>Funcion</td>
+					<th>Nombre de la Compañia</th>
+					<th>Precio del Entretenimiento</th>
+					<th>Cliente</th>
+					<th>Tipo de Entretenimiento</th>
+					<th>Fecha Reservacion</th>
+					<th>Funcion</th>
 				</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -76,13 +76,13 @@ function MostrarReservacionesEntretenimientos($opcion){
 
 
 	if($opcion==3){
-		$retorno ="<TABLE BORDER='1' width=99% align=center>";
+		$retorno ="<TABLE id='table3' class='mytable' BORDER='1' width=99% align=center>";
 		$retorno .="<TR align='center'>
-					<td>Nombre de la Compañia</td>
-					<td>Precio del Entretenimiento</td>
-					<td>Cliente</td>
-					<td>Tipo de Entretenimiento</td>
-					<td>Fecha Reservacion</td>
+					<th>Nombre de la Compañia</th>
+					<th>Precio del Entretenimiento</th>
+					<th>Cliente</th>
+					<th>Tipo de Entretenimiento</th>
+					<th>Fecha Reservacion</th>
 				</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idEntretenimiento = $x[$i]->idEntretenimiento;

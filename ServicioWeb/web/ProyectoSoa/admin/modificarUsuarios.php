@@ -7,15 +7,15 @@
 
 	$consulta ="SELECT * FROM usuario";
 	if (null !== ($n = mysqli_fetch_assoc($conexion->query($consulta)))){
-	 	$mensaje ="<TABLE BORDER='1' width=99% align=center>";
+	 	$mensaje ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
 		$mensaje .="<TR align=center>
-						<td>Nombre Usuario</td>
-						<td>Correo Electronico</td>
-						<td>Contreseña</td>
-						<td>Direccion</td>
-						<td>Numero Telefonico</td>
-						<td>Tipo de Usuario</td>						
-						<td>Funcion</td>
+						<th>Nombre Usuario</th>
+						<th>Correo Electronico</th>
+						<th>Contreseña</th>
+						<th>Direccion</th>
+						<th>Numero Telefonico</th>
+						<th>Tipo de Usuario</th>						
+						<th>Funcion</th>
 					</TR>";
 		$verificar = mysqli_query($conexion, $consulta);
 		while ($fila = $verificar->fetch_assoc()) {
@@ -30,12 +30,6 @@
 
 			$mensaje.="<td><input type='hidden' name='idUsuario' value='".$fila['idUsuario']."'/>
 						   <input type='submit' value='Modificar' id='nada'/></td></TR></FORM>";
-    		//$fila['idUsuario'];
-    		//$fila['correoElectronico'];
-    		//$fila['contrasena'];
-    		//$fila['direccion'];
-    		//$fila['numeroTelefonico'];
-    		//$fila['tipoUsuario'];
 
 		}
 		$mensaje.="</table>";

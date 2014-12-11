@@ -335,3 +335,22 @@ ul#navigation li a.last {
 ul#navigation li:hover > a {
   background:#fff;
 }
+
+
+.mytable{
+  width:100%; font-size:12px;
+  border:1px solid #ccc;
+}
+.mytable th{
+  background-color:#003366;
+  color:#FFF; padding:2px;
+  border:1px solid #ccc;
+}
+.mytable td{
+ padding:2px;
+ border-bottom:1px solid #ccc;
+ border-right:1px solid #ccc;
+}
+input.flt {
+  width: 8.5em;
+}

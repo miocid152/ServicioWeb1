@@ -25,14 +25,14 @@ function MostrarReservacionesSalones($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align=center>
-						<td>Nombre Salon</td>
-						<td>Precio del Salon</td>
-						<td>Cliente</td>
-						<td>Direccion Salon</td>
-						<td>Fecha Reservacion</td>
-						<td>Funcion</td>
+						<th>Nombre Salon</th>
+						<th>Precio del Salon</th>
+						<th>Cliente</th>
+						<th>Direccion Salon</th>
+						<th>Fecha Reservacion</th>
+						<th>Funcion</th>
 					</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -76,13 +76,13 @@ function MostrarReservacionesSalones($opcion){
 	}
 	
 	if($opcion==3){
-		 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+		 	$retorno ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 			$retorno .="<TR align=center>
-						<td>Nombre Salon</td>
-						<td>Precio del Salon</td>
-						<td>Cliente</td>
-						<td>Direccion Salon</td>
-						<td>Fecha Reservacion</td>
+						<th>Nombre Salon</th>
+						<th>Precio del Salon</th>
+						<th>Cliente</th>
+						<th>Direccion Salon</th>
+						<th>Fecha Reservacion</th>
 					</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idSalon = $x[$i]->idSalon;

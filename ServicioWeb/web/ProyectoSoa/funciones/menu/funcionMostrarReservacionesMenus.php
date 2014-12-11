@@ -1,4 +1,3 @@
-
 <?php
 
 $cadena ="";
@@ -22,14 +21,14 @@ function MostrarReservacionesMenus($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align='center'>
-					<td>Menu Descripcion</td>
-					<td>Precio del Menu</td>
-					<td>Cliente</td>
-					<td>Cantidad Personas</td>
-					<td>Fecha Reservacion</td>
-					<td>Funcion</td>
+					<th>Menu Descripcion</th>
+					<th>Precio del Menu</th>
+					<th>Cliente</th>
+					<th>Cantidad Personas</th>
+					<th>Fecha Reservacion</th>
+					<th>Funcion</th>
 				</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -75,13 +74,13 @@ function MostrarReservacionesMenus($opcion){
 	}
 
 	if($opcion==3){
-	 	$retorno ="<TABLE BORDER='1' width=99% align=center>";
+	 	$retorno ="<TABLE id='table2' class='mytable' BORDER='1' width=99% align=center>";
 		$retorno .="<TR align='center'>
-					<td>Menu Descripcion</td>
-					<td>Precio del Menu</td>
-					<td>Cliente</td>
-					<td>Cantidad Personas</td>
-					<td>Fecha Reservacion</td>
+					<th>Menu Descripcion</th>
+					<th>Precio del Menu</th>
+					<th>Cliente</th>
+					<th>Cantidad Personas</th>
+					<th>Fecha Reservacion</th>
 				</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idMenu = $x[$i]->idMenu;
