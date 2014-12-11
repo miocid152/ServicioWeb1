@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	session_destroy();
+	session_start();
 	include 'conexion.php';
 	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 	if( isset($_REQUEST['usermail']) && isset($_REQUEST['password'])){
@@ -13,6 +15,7 @@
         		$_SESSION['nombreCompleto'] = $fila["nombreCompleto"];
 				$_SESSION['usermail'] = $usermail;
 				$_SESSION['password'] = $password;
+				$_SESSION['error']="";
     		}
 
 		    $conexion->close();

@@ -1,5 +1,5 @@
 <?php
-
+	include '../funciones/sesionAdmin.php'; //Verificamos si eres admin
 	include '../funciones/conexion.php';
 	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 	$mensaje="";
@@ -19,7 +19,7 @@
 					</TR>";
 		$verificar = mysqli_query($conexion, $consulta);
 		while ($fila = $verificar->fetch_assoc()) {
-    		$mensaje .="<form method ='GET' action='modificarUser.php'>
+    		$mensaje .="<form method ='POST' action='modificarUser.php'>
 						<TR>";
 			$mensaje.="<TD><input type='hidden' name='nombreCompleto' value='".$fila['nombreCompleto']."'/>"  .$fila['nombreCompleto'].  "</TD>";
 			$mensaje.="<TD><input type='hidden' name='correoElectronico' value='".$fila['correoElectronico']."'/>"  .$fila['correoElectronico'].  "</TD>";
@@ -49,7 +49,7 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador</title>
+	<title>Administrador - Modificar Usuarios</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -60,13 +60,19 @@
 	                <img src='../img/banner_eventos.jpg' alt="Banner" height="200px">
 	            </figure>
 	    </header>
+	    <nav id="nav">
+				<ul id="navigation">
+					<li><a href="../admin" class="first">Menu Principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+				</ul>
+		</nav>
 	    <section>
-			<article id="wb_CssMenu1" class="loginform cf">
-				<h1>Modificar Usuarios</h1>
-				<hr>
-				<br>
-				<p><?php echo $mensaje; ?></p>
-			</article>
+		<article id="wb_CssMenu1" class="loginform cf">
+			<h1>Modificar Usuarios</h1>
+			<hr>
+			<br>
+			<p><?php echo $mensaje; ?></p>
+		</article>
 		</section>
 		<footer>
 			Proyecto Soa by EFI

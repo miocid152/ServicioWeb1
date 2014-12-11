@@ -117,9 +117,9 @@ function buscarListas(valor) {
 		entretenimientoCon.open("GET","funciones/entretenimiento/funcionListaEntretenimientos.php?fecha="+valor,true);
 		entretenimientoCon.send();
         document.getElementById("myCheck").disabled=false;
-		document.getElementById("salon").disabled=false;
-		document.getElementById("menu").disabled=false;
-		document.getElementById("entretenimiento").disabled=false;
+        if(document.getElementById("salon")){document.getElementById("salon").disabled=false;}
+		if(document.getElementById("menu")){document.getElementById("menu").disabled=false;}
+		if(document.getElementById("entretenimiento")){document.getElementById("entretenimiento").disabled=false;}
     }
 }
 

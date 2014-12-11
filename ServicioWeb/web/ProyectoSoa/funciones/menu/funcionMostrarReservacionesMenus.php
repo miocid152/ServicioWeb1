@@ -1,8 +1,10 @@
 
 <?php
+
 $cadena ="";
 $$retorno="";
 function MostrarReservacionesMenus($opcion){
+	$clienteMail=$_SESSION['usermail'] ;
 	/*opciones
 		opcion 1= genera tabla formulario para cancelar reservacion
 		opcion 2= genera tabla formulario para confirmar reservacion
@@ -38,7 +40,7 @@ function MostrarReservacionesMenus($opcion){
 			$cantidadPersonas = $x[$i]->cantidadPersonas;
 			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
 
-			$retorno .="<form method ='GET' action='cancelarReservaciones.php'>
+			$retorno .="<form method ='POST' action='cancelarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name=idMenu value='".$idMenu."'/>".$menuDes."</TD>";
 			$retorno.="<TD>".$precioMenu."</TD>";
@@ -59,7 +61,7 @@ function MostrarReservacionesMenus($opcion){
 			$cantidadPersonas = $x[$i]->cantidadPersonas;
 			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
 
-			$retorno .="<form method ='GET' action='confirmarReservaciones.php'>
+			$retorno .="<form method ='POST' action='confirmarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name=idMenu value='".$idMenu."'/>".$menuDes."</TD>";
 			$retorno.="<TD>".$precioMenu."</TD>";
@@ -88,7 +90,7 @@ function MostrarReservacionesMenus($opcion){
 			$correoClienteMenu = $x[$i]->correoClienteMenu;
 			$cantidadPersonas = $x[$i]->cantidadPersonas;
 			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
-			if($correoClienteMenu=="prueba@prueba.com"){//<---Correo a editar con session
+			if($correoClienteMenu==$clienteMail){//<---Correo a editar con session
 				$retorno .="<TR>";
 				$retorno.="<TD>".$menuDes."</TD>";
 				$retorno.="<TD>".$precioMenu."</TD>";

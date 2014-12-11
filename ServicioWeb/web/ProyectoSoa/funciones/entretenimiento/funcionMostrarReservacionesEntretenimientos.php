@@ -1,8 +1,9 @@
-
 <?php
+$clienteMail=$_SESSION['usermail'] ;
 $cadena ="";
 $retorno="";
 function MostrarReservacionesEntretenimientos($opcion){
+	$clienteMail=$_SESSION['usermail'] ;
 	/*opciones
 		opcion 1= genera tabla formulario para cancelar reservacion
 		opcion 2= genera tabla formulario para confirmar reservacion
@@ -38,7 +39,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
 			$fechaReservacionEntretenimiento = $x[$i]->fechaReservacionEntretenimiento;
 
-			$retorno .="<form method ='GET' action='cancelarReservaciones.php'>
+			$retorno .="<form method ='POST' action='cancelarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name=idEntretenimiento value='".$idEntretenimiento."'/>".$nombreCompaniaEntretenimiento."</TD>";
 			$retorno.="<TD>".$precioEntretenimiento."</TD>";
@@ -60,7 +61,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
 			$fechaReservacionEntretenimiento = $x[$i]->fechaReservacionEntretenimiento;
 
-			$retorno .="<form method ='GET' action='confirmarReservaciones.php'>
+			$retorno .="<form method ='POST' action='confirmarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name=idEntretenimiento value='".$idEntretenimiento."'/>".$nombreCompaniaEntretenimiento."</TD>";
 			$retorno.="<TD>".$precioEntretenimiento."</TD>";
@@ -90,7 +91,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$correoClienteEntretenimiento = $x[$i]->correoClienteEntretenimiento;
 			$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
 			$fechaReservacionEntretenimiento = $x[$i]->fechaReservacionEntretenimiento;
-			if($correoClienteEntretenimiento=="prueba@prueba.com"){// <--- Correo a editar con session
+			if($correoClienteEntretenimiento==$clienteMail){// <--- Correo a editar con session
 				$retorno .="<TR>";
 				$retorno.="<TD>".$nombreCompaniaEntretenimiento."</TD>";
 				$retorno.="<TD>".$precioEntretenimiento."</TD>";

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+	include '../funciones/sesionAdmin.php'; //Verificamos si eres admin
 	include '../funciones/includeFunciones.php';
 	$servicio="";
 	$formulario="";
@@ -44,7 +45,7 @@
 ?>
 <html>
 	<head>
-		<title>Administrador</title>
+		<title>Administrador - Cancelar Reservaciones</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="../css/normalize.css">
 		<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -55,9 +56,15 @@
 	                <img src='../img/banner_eventos.jpg' alt="Banner" height="200px">
 	            </figure>
 	    </header>
+	    <nav id="nav">
+				<ul id="navigation">
+					<li><a href="../admin" class="first">Menu Principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+				</ul>
+			</nav>
 	    <section>
 		    <article class="loginform cf">
-			    <form id="" name="fechaReservacion" action="cancelarReservaciones.php" method="get">
+			    <form id="" name="fechaReservacion" action="cancelarReservaciones.php" method="POST">
 				    <select required name="servicio">
 				    	<option value="Salon" <?php if($servicio=="Salon") echo "selected";?>> Salon</option>
 				    	<option value="Menu" <?php if($servicio=="Menu") echo "selected";?>> Menu</option>

@@ -1,4 +1,5 @@
 <?php
+	include '../funciones/sesionAdmin.php'; //Verificamos si eres admin
 	$nombreCompleto="";
 	$correoElectronico="";
 	$contrasena="";
@@ -49,7 +50,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registro Usuario</title>
+	<title>Administrador - Modificar Usuario</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -59,12 +60,19 @@
 			<figure id="banner">
 				<img src='../img/banner_eventos.jpg' alt="Banner" height="200px">
 			</figure>
+
 	    </header>
+			<nav id="nav">
+				<ul id="navigation">
+					<li><a href="../admin" class="first">Menu Principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+				</ul>
+			</nav>
 			<section>
 				<article class="loginform cf">
 				<h1>Registro usuario</h1>
 				<h2> <?php echo $mensaje; ?></h2>
-					<form name="login" method="get" accept-charset="utf-8">
+					<form name="login" method="POST" accept-charset="utf-8">
 						<ul>
 							<li>
 								<label for="usernombre">Nombre</label>

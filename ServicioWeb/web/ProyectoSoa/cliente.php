@@ -1,11 +1,12 @@
 <?php
+include 'funciones/sesionCliente.php';//Verificamos si estas logueado
 $resultado="";
 if(isset($_REQUEST['resultado'])){$resultado=$_REQUEST['resultado'];}
  ?>
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador</title>
+	<title>Cliente - Menu</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/LoginStyle.css">
@@ -26,6 +27,7 @@ if(isset($_REQUEST['resultado'])){$resultado=$_REQUEST['resultado'];}
 					<ul>
 						<li><a href="reservar.php">Reservar eventos de servicios</a></li>
 						<li><a href="mostrarServiciosReservados.php">Mostrar Servicios Reservados</a></li>
+						<li><a href="funciones/logout.php">Cerrar Sesion</a></li>
 					</ul>
 				</nav>
 			</article>

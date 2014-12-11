@@ -1,10 +1,10 @@
 <?php
-
+	include '../funciones/sesionAdmin.php'; //Verificamos si eres admin
  ?>
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador</title>
+	<title>Administrador - Menu</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -23,6 +23,7 @@
 						<li><a href="modificarUsuarios.php">Modificar Usuario</a></li>
 						<li><a href="cancelarReservaciones.php">Cancelar Reservaciones</a></li>
 						<li><a href="confirmarReservaciones.php">Confirmar Reservaciones</a></li>
+						<li><a href="../funciones/logout.php">Cerrar Sesion</a></li>
 					</ul>
 				</nav>
 			</article>

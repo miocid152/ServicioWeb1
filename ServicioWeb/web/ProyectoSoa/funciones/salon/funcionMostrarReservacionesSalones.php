@@ -1,9 +1,12 @@
 
 <?php
+
 $cadena ="";
 $retorno="";
+
 //Lista Salones
 function MostrarReservacionesSalones($opcion){
+	$clienteMail=$_SESSION['usermail'] ;
 	/*opciones
 		opcion 1= genera tabla formulario para cancelar reservacion
 		opcion 2= genera tabla formulario para confirmar reservacion
@@ -39,7 +42,7 @@ function MostrarReservacionesSalones($opcion){
 			$precioSalon = $x[$i]->precioSalon;
 			$correoClienteSalon = $x[$i]->correoClienteSalon;
 			$direccionSalon = $x[$i]->direccionSalon;
-			$retorno .="<form method ='GET' action='cancelarReservaciones.php'>
+			$retorno .="<form method ='POST' action='cancelarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name='idSalon' value='".$idSalon."'/>".$nombreSalon."</TD>";
 			$retorno.="<TD>".$precioSalon."</TD>";
@@ -59,7 +62,7 @@ function MostrarReservacionesSalones($opcion){
 			$precioSalon = $x[$i]->precioSalon;
 			$correoClienteSalon = $x[$i]->correoClienteSalon;
 			$direccionSalon = $x[$i]->direccionSalon;
-			$retorno .="<form method ='GET' action='confirmarReservaciones.php'>
+			$retorno .="<form method ='POST' action='confirmarReservaciones.php'>
 						<TR>";
 			$retorno.="<TD><input type='hidden' name='idSalon' value='".$idSalon."'/>".$nombreSalon."</TD>";
 			$retorno.="<TD>".$precioSalon."</TD>";
@@ -88,7 +91,7 @@ function MostrarReservacionesSalones($opcion){
 			$precioSalon = $x[$i]->precioSalon;
 			$correoClienteSalon = $x[$i]->correoClienteSalon;
 			$direccionSalon = $x[$i]->direccionSalon;
-			if($correoClienteSalon=="prueba@prueba.com"){//<---Correo a editar con session
+			if($correoClienteSalon==$clienteMail){//<---Correo a editar con session
 				$retorno .="<TR>";
 				$retorno.="<TD>".$nombreSalon."</TD>";
 				$retorno.="<TD>".$precioSalon."</TD>";

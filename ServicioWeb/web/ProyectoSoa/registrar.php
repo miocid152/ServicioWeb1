@@ -1,7 +1,14 @@
+<?php
+	session_start();
+	if(isset($_SESSION['usermail']) ) {
+		if($_SESSION['tipoUsuario']==0) Header("Location: cliente.php");
+		if($_SESSION['tipoUsuario']==1) Header("Location: admin/index.php");
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registro Usuario</title>
+	<title>Crear Usuario</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/LoginStyle.css">
@@ -12,11 +19,16 @@
 				<img src='img/banner_eventos.jpg' alt="Banner" height="200px">
 			</figure>
 	    </header>
+	    <nav id="nav">
+				<ul id="navigation">
+					<li><a href="index.php" class="first">Inicio</a></li>
+				</ul>
+		</nav>
 			<section>
 				<article class="loginform cf">
-				<h1>Registro usuario</h1>
+				<h1>Crear usuario</h1>
 				<h2> <?php if(isset($_REQUEST['existente'])) {echo "Ya hay un registro con ese correo";} ?></h2>
-					<form name="login" action="funciones/registrar.php" method="get" accept-charset="utf-8">
+					<form name="login" action="funciones/registrar.php" method="POST" accept-charset="utf-8">
 						<ul>
 							<li>
 								<label for="usernombre">Nombre</label>

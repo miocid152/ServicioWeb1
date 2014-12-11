@@ -1,4 +1,5 @@
 <?php
+include 'funciones/sesionCliente.php';//Verificamos si estas logueado
 include 'funciones/includeFunciones.php';
 	$servicio="";
 	$salon="";
@@ -14,7 +15,7 @@ include 'funciones/includeFunciones.php';
 
 <html>
 	<head>
-		<title>Servicios Reservados</title>
+		<title>Cliente - Mostrar Servicios Reservados</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/LoginStyle.css">
@@ -25,6 +26,12 @@ include 'funciones/includeFunciones.php';
 	                <img src='img/banner_eventos.jpg' alt="Banner" height="200px">
 	            </figure>
 	    </header>
+	    <nav id="nav">
+			<ul id="navigation">
+				<li><a href="cliente.php" class="first">Menu Principal</a></li>
+				<li><a href="funciones/logout.php" class="last">Cerrar Sesion</a></li>
+			</ul>
+		</nav>
 	    <section>
 		    <article class="loginform cf">
 		    	<h1>Servicios Salones Reservados</h1>

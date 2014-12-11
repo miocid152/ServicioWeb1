@@ -1,15 +1,14 @@
 <?php
 	session_start();
-	if(isset($_SESSION['usermail']) ) {
-		if($_SESSION['tipoUsuario']==0) Header("Location: reservar.php");
+	if(isset($_SESSION['tipoUsuario']) ) {
+		if($_SESSION['tipoUsuario']==0) Header("Location: cliente.php");
 		if($_SESSION['tipoUsuario']==1) Header("Location: admin/index.php");
-		//session_destroy();
 	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Servicios Web</title>
+		<title>Servicios de Entretenimiento EFI</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">

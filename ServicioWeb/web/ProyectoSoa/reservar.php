@@ -1,11 +1,11 @@
 <?php 
-
+include 'funciones/sesionCliente.php';//Verificamos si estas logueado
 
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Login Eventos</title>
+		<title>Cliente - Reservar Eventos</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/LoginStyle.css">
@@ -34,8 +34,14 @@
 	            <img src='img/banner_eventos.jpg' alt="Banner" height="200px">
 	        </figure>
 	    </header>
+	    <nav id="nav">
+			<ul id="navigation">
+				<li><a href="cliente.php" class="first">Menu Principal</a></li>
+				<li><a href="funciones/logout.php" class="last">Cerrar Sesion</a></li>
+			</ul>
+		</nav>
 	    <section>
-	    <form name="calcular" action="reservarServicios.php" method="get" accept-charset="utf-8">
+	    <form name="calcular" action="reservarServicios.php" method="POST" accept-charset="utf-8">
 	    	<article class="loginform cf">
 					Fecha que desee Reservar servicio:<input type="date" id="fecha" name="fecha" placeholder="YYYY-MM-dd" onchange="buscarListas(this.value)">
 					<br/><br/><br/>
