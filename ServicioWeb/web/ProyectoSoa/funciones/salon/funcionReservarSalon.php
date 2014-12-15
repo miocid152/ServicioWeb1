@@ -1,7 +1,6 @@
 
 <?php
 $cadena ="";
-//Lista Salones
 function ReservarSalon($idSalon, $fecha,$correoClienteSalon){
 	$correoEmpresa="tv@tv.com";
 	try{

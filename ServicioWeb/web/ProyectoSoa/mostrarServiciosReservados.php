@@ -15,7 +15,7 @@ include 'funciones/includeFunciones.php';
 
 <html>
 	<head>
-		<title>Cliente - Mostrar Servicios Reservados</title>
+		<title>Cliente - Mostrar servicios reservados</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/LoginStyle.css">
@@ -30,19 +30,19 @@ include 'funciones/includeFunciones.php';
 	    </header>
 	    <nav id="nav">
 			<ul id="navigation">
-				<li><a href="cliente.php" class="first">Menu Principal</a></li>
-				<li><a href="funciones/logout.php" class="last">Cerrar Sesion</a></li>
+				<li><a href="cliente.php" class="first">Menú principal</a></li>
+				<li><a href="funciones/logout.php" class="last">Cerrar sesión</a></li>
 			</ul>
 		</nav>
 	    <section>
 		    <article class="loginform cf">
-		    	<h1>Servicios Salones Reservados</h1>
+		    	<h1>Servicios salones reservados</h1>
 			 	<?php echo $salon; ?>
 			 	<script language="javascript" type="text/javascript">setFilterGrid( "table1" );</script>
-			 	<h1>Servicios Menus Reservados</h1>
+			 	<h1>Servicios Menús reservados</h1>
 			 	<?php echo $menu; ?>
 			 	<script language="javascript" type="text/javascript">setFilterGrid( "table2" );</script>
-			 	<h1>Servicios Entretenimientos Reservados</h1>
+			 	<h1>Servicios entretenimientos reservados</h1>
 			 	<?php echo $entretenimiento; ?>
 			 	<script language="javascript" type="text/javascript">setFilterGrid( "table3" );</script>
 
@@ -50,7 +50,7 @@ include 'funciones/includeFunciones.php';
 	  	</section>
 	  
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

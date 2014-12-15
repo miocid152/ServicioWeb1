@@ -69,7 +69,7 @@ public class ServicioWebEntretenimiento {
         Map map = new LinkedHashMap();
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
         if (estado == 1) {
-            map.put("mensaje", "ya existe la reservacion");
+            map.put("mensaje", "Ya existe la reservación");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 3) {
@@ -104,7 +104,7 @@ public class ServicioWebEntretenimiento {
         Map map = new LinkedHashMap();
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
         if (estado == 0) {
-            map.put("mensaje", "No existe Reservacion");
+            map.put("mensaje", "No existe reservación");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 3) {
@@ -112,7 +112,7 @@ public class ServicioWebEntretenimiento {
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 2) {
-            map.put("mensaje", "No existe Reservacion");
+            map.put("mensaje", "No existe reservación");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 1) {
@@ -137,7 +137,7 @@ public class ServicioWebEntretenimiento {
         Map map = new LinkedHashMap();
         int estado = qe.verificarStatus(idEntretenimiento, fechaReservacionEntretenimiento);
         if (estado == 0) {
-            map.put("mensaje", "No existe Reservacion");
+            map.put("mensaje", "No existe reservación");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 3) {
@@ -145,7 +145,7 @@ public class ServicioWebEntretenimiento {
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 2) {
-            map.put("mensaje", "No existe Reservacion");
+            map.put("mensaje", "No existe reservación");
             map.put("fecha", fechaReservacionEntretenimiento);
         }
         if (estado == 1) {

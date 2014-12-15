@@ -16,7 +16,7 @@
 						VALUE ('".$nombre."','".$usermail."','".$password."','".$direccion."','".$numeroTelefonico."',0)";
 			$conexion->query($consulta);
 			mysqli_close($conexion);
-			echo '<br><br><br><br><br><br><br><br><h1><p align="center">Usuario Registrado Exitosamente</p></h1>';
+			echo '<br><br><br><br><br><br><br><br><h1><p align="center">Usuario registrado exitosamente</p></h1>';
 			echo '<html>
 					<head>
 						<meta http-equiv="REFRESH" content="0;url=../login.php">

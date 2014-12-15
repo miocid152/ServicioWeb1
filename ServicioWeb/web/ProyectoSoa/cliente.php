@@ -6,7 +6,7 @@ if(isset($_REQUEST['resultado'])){$resultado=$_REQUEST['resultado'];}
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Cliente - Menu</title>
+	<title>Cliente - Menú</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/LoginStyle.css">
@@ -20,20 +20,20 @@ if(isset($_REQUEST['resultado'])){$resultado=$_REQUEST['resultado'];}
 	    <section>
 			<article>
 				<nav id="wb_CssMenu1" class="loginform cf">
-					<h1>Bienvenido</h1>
+					<h1>Bienvenido <?php echo $_SESSION['nombreCompleto']; ?></h1>
 					<hr>
-					<h3>¿Que desea Realizar?</h3>
+					<h3>¿Qué desea realizar?</h3>
 					<h2><?php echo $resultado; ?></h2>
 					<ul>
 						<li><a href="reservar.php">Reservar eventos de servicios</a></li>
-						<li><a href="mostrarServiciosReservados.php">Mostrar Servicios Reservados</a></li>
-						<li><a href="funciones/logout.php">Cerrar Sesion</a></li>
+						<li><a href="mostrarServiciosReservados.php">Mostrar servicios reservados</a></li>
+						<li><a href="funciones/logout.php">Cerrar sesión</a></li>
 					</ul>
 				</nav>
 			</article>
 		</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

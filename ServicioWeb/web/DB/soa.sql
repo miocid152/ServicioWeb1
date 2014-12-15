@@ -58,18 +58,23 @@ CREATE TABLE IF NOT EXISTS `entretenimiento` (
   `horasEntretenimiento` int(11) NOT NULL,
   `precioEntretenimiento` float NOT NULL,
   PRIMARY KEY (`idEntretenimiento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `entretenimiento`
 --
 
 INSERT INTO `entretenimiento` (`idEntretenimiento`, `tipoEntretenimiento`, `nombreCompaniaEntretenimiento`, `horasEntretenimiento`, `precioEntretenimiento`) VALUES
-(1, 'Animadores', 'LuzRoja', 5, 3000),
-(2, 'Musica', 'Style', 8, 2500),
-(3, 'Efectos Especiales', 'Starts', 4, 6000),
-(4, 'Piñatas', 'Piñateria', 1, 500),
-(5, 'Videos', 'VideoMovieDigitalExpress', 6, 3000);
+(1, 'Animadores', 'Luz Roja', 4, 3200),
+(2, 'Música', 'Style', 8, 2500),
+(3, 'Efectos Especiales', 'Stars', 4, 6000),
+(4, 'Piñatas', 'Viva Piñata', 1, 500),
+(5, 'Videos', 'Video Movies of Effects Specials', 6, 3000),
+(6, 'Efectos especiales y sonido', 'CYA', 5, 4500),
+(7, 'Sonido Disco', 'Sonido Factory', 6, 3500),
+(8, 'Música', 'Marimba Jarchos', 3000, 5),
+(9, 'Animadores', 'Animate Frozen', 5, 2300),
+(10, 'Inflables', 'Inflables Los Mario Bross', 4, 2400);
 
 -- --------------------------------------------------------
 
@@ -84,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `precioMenu` float NOT NULL,
   `cantidadPersonas` int(11) NOT NULL,
   PRIMARY KEY (`idMenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `menu`
@@ -95,7 +100,12 @@ INSERT INTO `menu` (`idMenu`, `menuDes`, `nombreCompaniaMenu`, `precioMenu`, `ca
 (2, 'Para Adultos', 'El Porton', 2000, 80),
 (3, 'Menu Frances', 'Le France', 3500, 17),
 (4, 'Ejecutivo', 'JavaTimes', 100, 3),
-(5, 'Menu Social', 'HP', 3000, 35);
+(5, 'Menu Social', 'HP', 3000, 35),
+(6, 'Buffet estilo empresarial', 'Buffet Warren', 8300, 80),
+(7, 'Comida Italiana\r\nPastas, Ensaladas y Pizzas', 'Italiani', 5500.5, 50),
+(8, '1 Trompo de carne al pastor\r\nincluye piña cilantro cebolla salsa y queso', 'Taqueria los pinos', 6000, 200),
+(9, 'Comida China\r\nPastas, Sopas y Arroz', 'Chang-ho', 3500, 100),
+(10, 'Hamburguesas hawaianas incluye\r\npapas, refrescos, ensaladas y aderezo', 'Cacharock', 4999.99, 100);
 
 -- --------------------------------------------------------
 
@@ -109,18 +119,23 @@ CREATE TABLE IF NOT EXISTS `salon` (
   `precioSalon` float NOT NULL,
   `direccionSalon` varchar(60) NOT NULL,
   PRIMARY KEY (`idSalon`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `salon`
 --
 
 INSERT INTO `salon` (`idSalon`, `nombreSalon`, `precioSalon`, `direccionSalon`) VALUES
-(1, 'La casita', 25.5, 'Floresta'),
+(1, 'La Morada', 2500.5, 'Floresta'),
 (2, 'Circus', 2005.5, 'Gracianos Sanchez'),
-(3, 'Castle', 5366, 'No se'),
-(4, 'Casita Verde', 88, 'Flores Magon'),
-(5, 'Casita Morada', 555, 'Uribe');
+(3, 'Castle', 5366, 'Miguel Alemán'),
+(4, 'Casita Verde', 8835.2, 'Flores Magón'),
+(5, 'Cabaña Real', 5589.99, 'Uribe'),
+(6, 'Caribe Cooler', 6500.9, 'Formando Hogar #2600'),
+(7, 'El Perla Negra', 11800.5, 'Boulevar Avila Camacho #3500'),
+(8, 'Madrid', 18001, 'Sugasti #400'),
+(9, 'Club de leones', 14300.5, 'Simon Bolivar #690'),
+(10, 'Beduinos', 28300.5, 'Urano #245 Galaxia');
 
 -- --------------------------------------------------------
 
@@ -138,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `srentrenimiento` (
   PRIMARY KEY (`idSREntrenimiento`),
   KEY `fk_SREntrenimiento_Entretenimiento1_idx` (`entretenimientoIdEntretenimiento`),
   KEY `fk_srentrenimiento_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -156,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `srmenu` (
   PRIMARY KEY (`idSRMenu`),
   KEY `fk_SRMenu_Menu1_idx` (`menuIdMenu`),
   KEY `fk_srmenu_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -174,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
   PRIMARY KEY (`idSRSalon`),
   KEY `fk_SRSalon_Salon_idx` (`salonIdSalon`),
   KEY `fk_srsalon_EmpresaCliente1_idx` (`empresaClienteIdEmpresaCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Restricciones para tablas volcadas
@@ -184,22 +199,22 @@ CREATE TABLE IF NOT EXISTS `srsalon` (
 -- Filtros para la tabla `srentrenimiento`
 --
 ALTER TABLE `srentrenimiento`
-  ADD CONSTRAINT `fk_SREntrenimiento_Entretenimiento1` FOREIGN KEY (`entretenimientoIdEntretenimiento`) REFERENCES `entretenimiento` (`idEntretenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_srentrenimiento_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_srentrenimiento_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_SREntrenimiento_Entretenimiento1` FOREIGN KEY (`entretenimientoIdEntretenimiento`) REFERENCES `entretenimiento` (`idEntretenimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `srmenu`
 --
 ALTER TABLE `srmenu`
-  ADD CONSTRAINT `fk_SRMenu_Menu1` FOREIGN KEY (`menuIdMenu`) REFERENCES `menu` (`idMenu`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_srmenu_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_srmenu_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_SRMenu_Menu1` FOREIGN KEY (`menuIdMenu`) REFERENCES `menu` (`idMenu`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `srsalon`
 --
 ALTER TABLE `srsalon`
-  ADD CONSTRAINT `fk_SRSalon_Salon` FOREIGN KEY (`salonIdSalon`) REFERENCES `salon` (`idSalon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_srsalon_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_srsalon_EmpresaCliente1` FOREIGN KEY (`empresaClienteIdEmpresaCliente`) REFERENCES `empresacliente` (`idEmpresaCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_SRSalon_Salon` FOREIGN KEY (`salonIdSalon`) REFERENCES `salon` (`idSalon`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -338,8 +338,9 @@ ul#navigation li:hover > a {
 
 
 .mytable{
-  width:100%; font-size:12px;
-  border:1px solid #ccc;
+  width:100%; font-size:11px;
+  border:10px solid #ccc;
+
 }
 .mytable th{
   background-color:#003366;
@@ -348,9 +349,16 @@ ul#navigation li:hover > a {
 }
 .mytable td{
  padding:2px;
+ height: auto;
  border-bottom:1px solid #ccc;
  border-right:1px solid #ccc;
 }
-input.flt {
-  width: 8.5em;
+.mytable input.flt {
+  width: 70%;
+  height: auto;
+}
+.loginform .mytable input {
+  /*width: auto;*/
+  clear: both;
+  height: auto;
 }

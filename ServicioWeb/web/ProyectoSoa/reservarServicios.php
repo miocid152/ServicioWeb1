@@ -9,24 +9,24 @@ if(isset($_REQUEST['fecha'])){
 		$idSalon = $_REQUEST['idSalon'];
 		$mensaje .= "<li>";
 		$mensaje .= ReservarSalon($idSalon, $fecha,$clienteMail); //Correo de reserva debido a que no he agregado sesion editar cuando se agreguen sesiones
-		$mensaje .= " del servicio Salón<br/>";
+		$mensaje .= " del servicio salón<br/>";
 		$mensaje .= "</li>";
 	}
 	if(isset($_REQUEST['idMenu'])){
 		$idMenu = $_REQUEST['idMenu'];
 		$mensaje .= "<li>";
 		$mensaje .= ReservarMenu($idMenu, $fecha,$clienteMail); //Correo de reserva debido a que no he agregado sesion editar cuando se agreguen sesiones
-		$mensaje .= " del servicio Menu<br/>";
+		$mensaje .= " del servicio menú<br/>";
 		$mensaje .= "</li>";
 	}
 	if(isset($_REQUEST['idEntretenimiento'])){
 		$idEntretenimiento = $_REQUEST['idEntretenimiento'];
 		$mensaje .= "<li>";
 		$mensaje .= ReservarEntretenimiento($idEntretenimiento, $fecha,$clienteMail); //Correo de reserva debido a que no he agregado sesion editar cuando se agreguen sesiones
-		$mensaje .= " del servicio Entretenimiento<br/>";
+		$mensaje .= " del servicio entretenimiento<br/>";
 		$mensaje .= "</li>";
 	}
-	$mensaje .= "</ul><br/>Pagar al banco y enviar el comprobante por correo electronico a  tv@tv.com";
+	$mensaje .= "</ul><br/>Pagar al banco y enviar el comprobante por correo electrónico a  tv@tv.com";
 }
 
 ?>
@@ -34,7 +34,7 @@ if(isset($_REQUEST['fecha'])){
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Cliente - Servicios de Eventos</title>
+	<title>Cliente - Servicios de eventos</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/LoginStyle.css">
@@ -47,22 +47,22 @@ if(isset($_REQUEST['fecha'])){
 	    </header>
 	    <nav id="nav">
 			<ul id="navigation">
-				<li><a href="cliente.php" class="first">Menu Principal</a></li>
-				<li><a href="funciones/logout.php" class="last">Cerrar Sesion</a></li>
+				<li><a href="cliente.php" class="first">Menú principal</a></li>
+				<li><a href="funciones/logout.php" class="last">Cerrar sesión</a></li>
 			</ul>
 		</nav>
 	    <section>
 			<article id="wb_CssMenu1" class="loginform cf">
-				<h1>Resultado de su Reservacion</h1>
+				<h1>Resultado de su reservación</h1>
 				<h4><?php echo $mensaje; ?></h4>
 				<br/>
 				<center>
-					<a class="prueba" href="cliente.php">Regresar al Menu</a>
+					<a class="prueba" href="cliente.php">Regresar al menú</a>
 				</center>
 			</article>
 		</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

@@ -4,7 +4,7 @@
 	include '../funciones/includeFunciones.php';
 	$servicio="";
 	$formulario="";
-	
+	//Generar formulario dependiendo de servicio al recibir un POST de la misma pagina
 	if(isset($_REQUEST['servicio'])){
 		$servicio=$_REQUEST['servicio'];
 		if(isset($_REQUEST['idSalon'])){
@@ -12,17 +12,17 @@
 			$fechaReservacionSalon=$_REQUEST['fechaReservacionSalon'];
 			$x=json_decode(GetSalon($idSalon));
 			$retorno=ConfirmarSalon($idSalon, $fechaReservacionSalon);
-			$formulario="El salon: ".$x->nombreSalon.
-						"<br/>Con Precion: ".$x->precioSalon.
-						"<br/>Direccion: ".$x->direccionSalon.
+			$formulario="Salón: ".$x->nombreSalon.
+						"<br/>Precio: ".$x->precioSalon.
+						"<br/>Dirección: ".$x->direccionSalon.
 						"<br/>".$retorno;
 		} else if(isset($_REQUEST['idMenu'])){
 			$idMenu=$_REQUEST['idMenu'];
 			$fechaReservacionMenu=$_REQUEST['fechaReservacionMenu'];
 			$x=json_decode(GetMenu($idMenu));
 			$retorno=ConfirmarMenu($idMenu, $fechaReservacionMenu);
-			$formulario="El menu: ".$x->menuDes.
-						"<br/>Con Precion: ".$x->precioMenu.
+			$formulario="Menú: ".$x->menuDes.
+						"<br/>Precio: ".$x->precioMenu.
 						"<br/>Cantidad de personas: ".$x->cantidadPersonas.
 						"<br/>".$retorno;
 
@@ -31,9 +31,9 @@
 			$fechaReservacionEntretenimiento=$_REQUEST['fechaReservacionEntretenimiento'];
 			$x=json_decode(GetEntretenimiento($idEntretenimiento));
 			$retorno=ConfirmarEntretenimiento($idEntretenimiento, $fechaReservacionEntretenimiento);
-			$formulario="El Entretenimiento de : ".$x->nombreCompaniaEntretenimiento.", de ".$x->tipoEntretenimiento.
-						"<br/>Con Precion: ".$x->precioEntretenimiento.
-						"<br/>Horas de entretenimiento: ".$x->horasEntretenimiento.
+			$formulario="Entretenimiento de: ".$x->nombreCompaniaEntretenimiento.", de ".$x->tipoEntretenimiento.
+						"<br/>Precio: ".$x->precioEntretenimiento.
+						"<br/>Horas de servicio: ".$x->horasEntretenimiento.
 						"<br/>".$retorno;
 
 		} else {
@@ -45,10 +45,12 @@
 ?>
 <html>
 	<head>
-		<title>Administrador - Confirmar Reservaciones</title>
+		<title>Administrador - Confirmar reservaciones</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="../css/normalize.css">
 		<link rel="stylesheet" href="../css/LoginStyle.css">
+		<script language="javascript" type="text/javascript" src="../js/actb.js"></script><!-- External script -->
+		<script language="javascript" type="text/javascript" src="../js/tablefilter.js"></script>
 	</head>
 	<body>
 		<header>
@@ -58,16 +60,17 @@
 	    </header>
 	    <nav id="nav">
 				<ul id="navigation">
-					<li><a href="../admin" class="first">Menu Principal</a></li>
-					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+					<li><a href="../admin" class="first">Menú principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar sesión</a></li>
 				</ul>
 			</nav>
 	    <section>
 		    <article class="loginform cf">
+		    	<h1>¿Qué servicio desea confirmar?</h1>
 			    <form id="" name="fechaReservacion" action="confirmarReservaciones.php" method="POST">
 				    <select required name="servicio">
-				    	<option value="Salon" <?php if($servicio=="Salon") echo "selected";?>> Salon</option>
-				    	<option value="Menu" <?php if($servicio=="Menu") echo "selected";?>> Menu</option>
+				    	<option value="Salon" <?php if($servicio=="Salon") echo "selected";?>> Salón</option>
+				    	<option value="Menu" <?php if($servicio=="Menu") echo "selected";?>> Menú</option>
 				    	<option value="Entretenimiento" <?php if($servicio=="Entretenimiento") echo "selected";?>> Entretenimiento</option>
 				    </select>
 				    <input type="submit" value="Buscar"/>
@@ -76,11 +79,12 @@
 		    <article class="loginform cf">
 		    	<h1><?php echo $servicio; ?></h1>
 			 	<?php echo $formulario; ?>
+			 	<script language="javascript" type="text/javascript">setFilterGrid( "table1" );</script>
 			</article>
 	  	</section>
 	  
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

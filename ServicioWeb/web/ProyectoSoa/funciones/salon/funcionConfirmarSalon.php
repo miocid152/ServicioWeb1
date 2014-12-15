@@ -1,7 +1,6 @@
 
 <?php
 $cadena ="";
-//Lista Salones
 function ConfirmarSalon($idSalon, $fecha){
 	try{
 	 $clienteSOAP = new SoapClient('http://localhost:8080/ServicioWebSalon/ServicioWebSalon?WSDL');

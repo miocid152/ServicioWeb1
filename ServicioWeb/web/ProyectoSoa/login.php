@@ -13,7 +13,7 @@ $error="";
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Loguear</title>
+		<title>Login</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/LoginStyle.css">
@@ -48,12 +48,12 @@ $error="";
 						</ul>
 					</form>
 					<br/><br/><br/><br/><br/>
-					<h3><a href="registrar.php">Si no tiene cuenta click aqui</a></h3>
+					<h3><a href="registrar.php">Si usted desea crear una cuenta haga click aquí</a></h3>
 				</article>
 			</section>
 		
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

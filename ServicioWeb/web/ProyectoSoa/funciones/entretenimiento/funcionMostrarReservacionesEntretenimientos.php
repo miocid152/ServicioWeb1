@@ -21,14 +21,14 @@ function MostrarReservacionesEntretenimientos($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align='center'>
-					<th>Nombre de la Compañia</th>
-					<th>Precio del Entretenimiento</th>
+					<th>Nombre de la compañía</th>
+					<th>Precio del entretenimiento</th>
 					<th>Cliente</th>
-					<th>Tipo de Entretenimiento</th>
-					<th>Fecha Reservacion</th>
-					<th>Funcion</th>
+					<th>Tipo de entretenimiento</th>
+					<th>Fecha reservación</th>
+					<th>Función</th>
 				</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -47,7 +47,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$retorno.="<TD>".$tipoEntretenimiento."</TD>";
 			$retorno.="<TD><input type='hidden' name=fechaReservacionEntretenimiento value='".$fechaReservacionEntretenimiento."'/>".$fechaReservacionEntretenimiento."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='Entretenimiento'/>
-						   <input type='submit' value='Cancelar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Cancelar reservación' id='nada'/></td></TR></FORM>";
 
 		}
 		$retorno.="</table>";
@@ -69,7 +69,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$retorno.="<TD>".$tipoEntretenimiento."</TD>";
 			$retorno.="<TD><input type='hidden' name=fechaReservacionEntretenimiento value='".$fechaReservacionEntretenimiento."'/>".$fechaReservacionEntretenimiento."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='Entretenimiento'/>
-						   <input type='submit' value='Confirmar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Confirmar reservación' id='nada'/></td></TR></FORM>";
 		}
 		$retorno.="</table>";
 	}
@@ -78,11 +78,11 @@ function MostrarReservacionesEntretenimientos($opcion){
 	if($opcion==3){
 		$retorno ="<TABLE id='table3' class='mytable' BORDER='1' width=99% align=center>";
 		$retorno .="<TR align='center'>
-					<th>Nombre de la Compañia</th>
-					<th>Precio del Entretenimiento</th>
+					<th>Nombre de la Compañía</th>
+					<th>Precio del entretenimiento</th>
 					<th>Cliente</th>
-					<th>Tipo de Entretenimiento</th>
-					<th>Fecha Reservacion</th>
+					<th>Tipo de entretenimiento</th>
+					<th>Fecha reservación</th>
 				</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idEntretenimiento = $x[$i]->idEntretenimiento;
@@ -91,7 +91,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 			$correoClienteEntretenimiento = $x[$i]->correoClienteEntretenimiento;
 			$tipoEntretenimiento = $x[$i]->tipoEntretenimiento;
 			$fechaReservacionEntretenimiento = $x[$i]->fechaReservacionEntretenimiento;
-			if($correoClienteEntretenimiento==$clienteMail){// <--- Correo a editar con session
+			if($correoClienteEntretenimiento==$clienteMail){
 				$retorno .="<TR>";
 				$retorno.="<TD>".$nombreCompaniaEntretenimiento."</TD>";
 				$retorno.="<TD>".$precioEntretenimiento."</TD>";
@@ -104,7 +104,7 @@ function MostrarReservacionesEntretenimientos($opcion){
 		$retorno.="</table>";
 	}
 
-	if (empty($x)) $retorno="No existen Entretenimientos Reservados";
+	if (empty($x)) $retorno="No existen entretenimientos reservados";
 	return $retorno;
 }
 

@@ -1,10 +1,7 @@
-
 <?php
-
 $cadena ="";
 $retorno="";
 
-//Lista Salones
 function MostrarReservacionesSalones($opcion){
 	$clienteMail=$_SESSION['usermail'] ;
 	/*opciones
@@ -25,14 +22,14 @@ function MostrarReservacionesSalones($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align=center>
-						<th>Nombre Salon</th>
-						<th>Precio del Salon</th>
+						<th>Nombre salón</th>
+						<th>Precio del salón</th>
 						<th>Cliente</th>
-						<th>Direccion Salon</th>
-						<th>Fecha Reservacion</th>
-						<th>Funcion</th>
+						<th>Dirección salón</th>
+						<th>Fecha reservación</th>
+						<th>Función</th>
 					</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -50,7 +47,7 @@ function MostrarReservacionesSalones($opcion){
 			$retorno.="<TD>".$direccionSalon."</TD>";
 			$retorno.="<TD><input type='hidden' name='fechaReservacionSalon' value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='salon'/>
-						   <input type='submit' value='Cancelar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Cancelar reservación' id='nada'/></td></TR></FORM>";
 		}
 		$retorno.="</table>";
 	}
@@ -70,7 +67,7 @@ function MostrarReservacionesSalones($opcion){
 			$retorno.="<TD>".$direccionSalon."</TD>";
 			$retorno.="<TD><input type='hidden' name='fechaReservacionSalon' value='".$fechaReservacionSalon."'/>".$fechaReservacionSalon."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='salon'/>
-						   <input type='submit' value='Confirmar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Confirmar reservación' id='nada'/></td></TR></FORM>";
 		}
 		$retorno.="</table>";
 	}
@@ -78,11 +75,11 @@ function MostrarReservacionesSalones($opcion){
 	if($opcion==3){
 		 	$retorno ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 			$retorno .="<TR align=center>
-						<th>Nombre Salon</th>
-						<th>Precio del Salon</th>
+						<th>Nombre salón</th>
+						<th>Precio del salón</th>
 						<th>Cliente</th>
-						<th>Direccion Salon</th>
-						<th>Fecha Reservacion</th>
+						<th>Dirección salón</th>
+						<th>Fecha reservación</th>
 					</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idSalon = $x[$i]->idSalon;
@@ -91,7 +88,7 @@ function MostrarReservacionesSalones($opcion){
 			$precioSalon = $x[$i]->precioSalon;
 			$correoClienteSalon = $x[$i]->correoClienteSalon;
 			$direccionSalon = $x[$i]->direccionSalon;
-			if($correoClienteSalon==$clienteMail){//<---Correo a editar con session
+			if($correoClienteSalon==$clienteMail){
 				$retorno .="<TR>";
 				$retorno.="<TD>".$nombreSalon."</TD>";
 				$retorno.="<TD>".$precioSalon."</TD>";
@@ -103,7 +100,7 @@ function MostrarReservacionesSalones($opcion){
 		}
 		$retorno.="</table>";
 	}
-	if (empty($x)) $retorno="No existen Salones Reservados";
+	if (empty($x)) $retorno="No existen salones reservados";
 	return $retorno;
 }
 

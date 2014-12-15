@@ -12,7 +12,7 @@ if(isset($_GET['fecha'])){
 	} catch(SoapFault $e){
 	 var_dump($e);
 	}
-	echo '<br/>Menus: ';
+	echo '<br/>Menús: ';
 	echo '<select id="menu" name="menu" onchange="showMenu(this.value)">';
 	echo "<option value='0'>Ninguno</option>";
 	$x=json_decode($cadena);

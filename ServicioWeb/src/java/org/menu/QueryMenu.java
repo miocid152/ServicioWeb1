@@ -69,13 +69,13 @@ public class QueryMenu {
             }
             session.save(srm);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
-            mensaje = "Reservacion No Realizada";
+            mensaje = "Reservación no realizada";
         } finally {
             session.close();
         }
@@ -110,7 +110,7 @@ public class QueryMenu {
             srm.setEmpresacliente(empresaCliente);
             session.update(srm);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -138,7 +138,7 @@ public class QueryMenu {
             srm.setStautsMenu("DISPONIBLE");
             session.update(srm);
             tx.commit();
-            mensaje = "Cancelacion Exitosa";
+            mensaje = "Cancelación exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -162,7 +162,7 @@ public class QueryMenu {
             srm.setStautsMenu("CONFIRMADO");
             session.update(srm);
             tx.commit();
-            mensaje = "Confirmacion Exitosa";
+            mensaje = "Confirmación exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();

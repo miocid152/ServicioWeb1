@@ -68,7 +68,7 @@ public class ServicioWebSalon {
         Map map = new LinkedHashMap();
         int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
         if (estado == 1) {
-            map.put("mensaje", "ya existe la reservacion");
+            map.put("mensaje", "Ya existe la reservación");
             map.put("fecha",fechaReservacionSalon);
         }
         if (estado == 3) {
@@ -102,7 +102,7 @@ public class ServicioWebSalon {
         Map map = new LinkedHashMap();
         int estado = qs.verificarStatus(idSalon,fechaReservacionSalon);
             if (estado== 0) {
-                map.put("mensaje", "No existe Reservacion");
+                map.put("mensaje", "No existe reservación");
                 map.put("fecha", fechaReservacionSalon);
             }
             if (estado == 3) {
@@ -110,7 +110,7 @@ public class ServicioWebSalon {
                 map.put("fecha",fechaReservacionSalon);
             } 
             if (estado == 2) {
-                map.put("mensaje", "No existe Reservacion");
+                map.put("mensaje", "No existe Reservación");
                 map.put("fecha", fechaReservacionSalon);
             }
             if (estado == 1) {
@@ -134,7 +134,7 @@ public class ServicioWebSalon {
         Map map = new LinkedHashMap();
         int estado =qs.verificarStatus(idSalon, fechaReservacionSalon);
             if (estado == 0) {
-                map.put("mensaje", "No existe Reservacion");
+                map.put("mensaje", "No existe reservación");
                 map.put("fecha", fechaReservacionSalon);
             }
             if (estado == 3) {
@@ -142,7 +142,7 @@ public class ServicioWebSalon {
                 map.put("fecha",fechaReservacionSalon);
             } 
             if (estado == 2) {
-                map.put("mensaje", "No existe Reservacion");
+                map.put("mensaje", "No existe reservación");
                 map.put("fecha", fechaReservacionSalon);
             }
             if (estado == 1) {

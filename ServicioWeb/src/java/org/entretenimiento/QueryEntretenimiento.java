@@ -67,13 +67,13 @@ public class QueryEntretenimiento {
             }
             session.save(sre);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
-            mensaje = "Reservacion No Realizada";
+            mensaje = "Reservación no realizada";
         } finally {
             session.close();
         }
@@ -108,7 +108,7 @@ public class QueryEntretenimiento {
             sre.setCorreoClienteEntretenimiento(correoClienteEntretenimiento);
             session.update(sre);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -136,7 +136,7 @@ public class QueryEntretenimiento {
             sre.setStatusEntretenimiento("DISPONIBLE");
             session.update(sre);
             tx.commit();
-            mensaje = "Cancelacion Exitosa";
+            mensaje = "Cancelación exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -160,7 +160,7 @@ public class QueryEntretenimiento {
             sre.setStatusEntretenimiento("CONFIRMADO");
             session.update(sre);
             tx.commit();
-            mensaje = "Confirmacion Exitosa";
+            mensaje = "Confirmación exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();

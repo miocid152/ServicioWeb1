@@ -34,9 +34,9 @@
 					" where idUsuario=".$idUsuario;
 					
 			if (mysqli_query($conexion, $sql)) {
-	    			$mensaje="Modificado con exito";
+	    			$mensaje="Modificado con éxito";
 				} else {
-		    		$mensaje.="Error en la modificacion: " . mysqli_error($conexion);
+		    		$mensaje.="Error en la modificación: " . mysqli_error($conexion);
 				}
 		}else{
 				$mensaje="Ya existe un usuario con el mismo correo";
@@ -50,7 +50,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador - Modificar Usuario</title>
+	<title>Administrador - Modificar usuario</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -64,8 +64,8 @@
 	    </header>
 			<nav id="nav">
 				<ul id="navigation">
-					<li><a href="../admin" class="first">Menu Principal</a></li>
-					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+					<li><a href="../admin" class="first">Menú principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar sesión</a></li>
 				</ul>
 			</nav>
 			<section>
@@ -75,11 +75,11 @@
 					<form name="login" method="POST" accept-charset="utf-8">
 						<ul>
 							<li>
-								<label for="usernombre">Nombre</label>
+								<label for="usernombre">Nombre completo</label>
 								<input type="text" name="nombreCompleto" value="<?php echo $nombreCompleto; ?>" required>
 							</li>
 							<li>
-								<label for="usermail">Email</label>
+								<label for="usermail">E-mail</label>
 								<input type="email" name="correoElectronico" value="<?php echo $correoElectronico; ?>" required>
 							</li>
 							<li>
@@ -95,8 +95,11 @@
 								<input type="text" name="contrasena" value="<?php echo $contrasena; ?>" required></li>
 							<li>
 								<input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>" >
-								<label for="password">Tipo de Usuario 1 = Administrador 0 = Silvestre</label>
-								<input type="number" name="tipoUsuario" value="<?php echo $tipoUsuario; ?>" >
+								<select name="tipoUsuario">
+									<option value='0' <?php if($tipoUsuario==0) echo "selected"; ?> >Usuario silvestre</option>
+									<option value='1' <?php if($tipoUsuario==1) echo "selected"; ?> >Administrador</option>
+								</select>
+
 								<input type="hidden" name="modificar" value="0" required>
 								<input type="submit" value="Modificar">
 							</li>
@@ -105,7 +108,7 @@
 				</article>
 			</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

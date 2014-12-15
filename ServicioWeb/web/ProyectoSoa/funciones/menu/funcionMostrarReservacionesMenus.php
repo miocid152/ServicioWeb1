@@ -21,14 +21,14 @@ function MostrarReservacionesMenus($opcion){
 	}
 
 	$x=json_decode($cadena);
- 	$retorno ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
+ 	$retorno ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 	$retorno .="<TR align='center'>
-					<th>Menu Descripcion</th>
-					<th>Precio del Menu</th>
+					<th>Menú descripción</th>
+					<th>Precio del menú</th>
 					<th>Cliente</th>
-					<th>Cantidad Personas</th>
-					<th>Fecha Reservacion</th>
-					<th>Funcion</th>
+					<th>Cantidad personas</th>
+					<th>Fecha reservación</th>
+					<th>Función</th>
 				</TR>";
 	if($opcion==1){
 		for($i=0; $i<sizeof($x); $i++){
@@ -47,7 +47,7 @@ function MostrarReservacionesMenus($opcion){
 			$retorno.="<TD>".$cantidadPersonas."</TD>";
 			$retorno.="<TD><input type='hidden' name=fechaReservacionMenu value='".$fechaReservacionMenu."'/>".$fechaReservacionMenu."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='Menu'/>
-						   <input type='submit' value='Cancelar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Cancelar reservación' id='nada'/></td></TR></FORM>";
 		}
 		$retorno.="</table>";
 	}
@@ -68,7 +68,7 @@ function MostrarReservacionesMenus($opcion){
 			$retorno.="<TD>".$cantidadPersonas."</TD>";
 			$retorno.="<TD><input type='hidden' name=fechaReservacionMenu value='".$fechaReservacionMenu."'/>".$fechaReservacionMenu."</TD>";
 			$retorno.="<td><input type='hidden' name='servicio' value='Menu'/>
-						   <input type='submit' value='Confirmar Reservacion' id='nada'/></td></TR></FORM>";
+						   <input type='submit' value='Confirmar reservación' id='nada'/></td></TR></FORM>";
 		}
 		$retorno.="</table>";
 	}
@@ -76,11 +76,11 @@ function MostrarReservacionesMenus($opcion){
 	if($opcion==3){
 	 	$retorno ="<TABLE id='table2' class='mytable' BORDER='1' width=99% align=center>";
 		$retorno .="<TR align='center'>
-					<th>Menu Descripcion</th>
-					<th>Precio del Menu</th>
+					<th>Menú descripción</th>
+					<th>Precio del menú</th>
 					<th>Cliente</th>
-					<th>Cantidad Personas</th>
-					<th>Fecha Reservacion</th>
+					<th>Cantidad personas</th>
+					<th>Fecha reservación</th>
 				</TR>";
 		for($i=0; $i<sizeof($x); $i++){
 			$idMenu = $x[$i]->idMenu;
@@ -89,7 +89,7 @@ function MostrarReservacionesMenus($opcion){
 			$correoClienteMenu = $x[$i]->correoClienteMenu;
 			$cantidadPersonas = $x[$i]->cantidadPersonas;
 			$fechaReservacionMenu = $x[$i]->fechaReservacionMenu;
-			if($correoClienteMenu==$clienteMail){//<---Correo a editar con session
+			if($correoClienteMenu==$clienteMail){
 				$retorno .="<TR>";
 				$retorno.="<TD>".$menuDes."</TD>";
 				$retorno.="<TD>".$precioMenu."</TD>";
@@ -101,7 +101,7 @@ function MostrarReservacionesMenus($opcion){
 		}
 		$retorno.="</table>";
 	}
-	if (empty($x)) $retorno="No existen Menus Reservados";
+	if (empty($x)) $retorno="No existen menús reservados";
 	return $retorno;
 }
 

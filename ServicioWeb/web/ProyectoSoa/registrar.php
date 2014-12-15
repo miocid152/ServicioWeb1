@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Crear Usuario</title>
+	<title>Crear usuario</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/LoginStyle.css">
@@ -31,7 +31,7 @@
 					<form name="login" action="funciones/registrar.php" method="POST" accept-charset="utf-8">
 						<ul>
 							<li>
-								<label for="usernombre">Nombre</label>
+								<label for="usernombre">Nombre completo</label>
 								<input type="text" name="nombre" placeholder="Nombre completo" required>
 							</li>
 							<li>
@@ -57,7 +57,7 @@
 				</article>
 			</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

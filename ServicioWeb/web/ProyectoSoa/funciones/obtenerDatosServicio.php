@@ -2,7 +2,7 @@
 include 'salon/funcionGetSalon.php';
 include 'menu/funcionGetMenu.php';
 include 'entretenimiento/funcionGetEntretenimiento.php';
-$x="";
+$x="";//Variable x es el valor de toda la cadena del json
 $cadena="";
 if(isset($_GET['servicio'])){
 	$id = intval($_GET['id']);
@@ -10,29 +10,29 @@ if(isset($_GET['servicio'])){
 	if($servicio=="Salon"){
 		if($id!=0){
 			$x=json_decode(GetSalon($id));
-			$cadena.="Nombre Salon: ".$x->nombreSalon;
+			$cadena.="Nombre salón: ".$x->nombreSalon;
 			$cadena.="<br/>Precio: ".$precio=$x->precioSalon;
-			$cadena.="<br/>Direccion: ".$x->direccionSalon;
+			$cadena.="<br/>Dirección: ".$x->direccionSalon;
 		}
 		else $cadena.="";
 	}
 	if($servicio=="Menu"){
 		if($id!=0){
 			$x=json_decode(GetMenu($id));
-			$cadena.="Descripcion del Menu: ".$x->menuDes;
-			$cadena.="<br/>Nombre de la compañia: ".$x->nombreCompaniaMenu;
+			$cadena.="Descripción del menú: ".$x->menuDes;
+			$cadena.="<br/>Nombre de la compañía: ".$x->nombreCompaniaMenu;
 			$cadena.="<br/>Precio: ".$precio=$x->precioMenu;
-			$cadena.="<br/>Cantidad de Personas: ".$x->cantidadPersonas;
+			$cadena.="<br/>Cantidad de personas: ".$x->cantidadPersonas;
 		}
 		else $cadena.="";
 	}
 	if($servicio=="Entretenimiento"){
 		if($id!=0){
 			$x=json_decode(GetEntretenimiento($id));
-			$cadena.="Tipo de Entretenimiento: ".$x->tipoEntretenimiento;
-			$cadena.="<br/>Nombre de la compañia: ".$x->nombreCompaniaEntretenimiento;
+			$cadena.="Tipo de entretenimiento: ".$x->tipoEntretenimiento;
+			$cadena.="<br/>Nombre de la compañía: ".$x->nombreCompaniaEntretenimiento;
 			$cadena.="<br/>Precio: ".$precio=$x->precioEntretenimiento;
-			$cadena.="<br/>Horas de Entretenimiento: ".$x->horasEntretenimiento;
+			$cadena.="<br/>Horas de servicio: ".$x->horasEntretenimiento;
 		}
 		else $cadena.="";
 	}

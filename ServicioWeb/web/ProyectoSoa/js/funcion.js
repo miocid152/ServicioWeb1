@@ -67,7 +67,7 @@ function showEntretenimiento(str) {
 
 function myFunction() {
     if(document.getElementById("myCheck").checked==true){
-    	document.getElementById("txtSubmit").innerHTML = "<b onclick='pCotizacion()' class='prueba'>Procesar Cotizacion</b>";
+    	document.getElementById("txtSubmit").innerHTML = "<b onclick='pCotizacion()' class='prueba'>Procesar cotización</b>";
     }else{
     	document.getElementById("txtSubmit").innerHTML = "";
     }
@@ -136,20 +136,8 @@ function pCotizacion(){
 	if(document.getElementById("precioEntretenimiento")){var precioEntretenimiento= document.getElementById("precioEntretenimiento").value;  totalCotizacion +=parseFloat(precioEntretenimiento);}
 	if(totalCotizacion==0){var mensaje = "No ha seleccionado nada";}
 	else{
-		var mensaje = "<br/><h2>Precio Total: "+totalCotizacion+"</h2><br/><p>Si esta conforme con el precio de los servicios y desea reservarlos continuar y oprimir  Reservar Servicios</p>	<input type='submit' value='Reservar Servicios'>";
+		var mensaje = "<br/><h2>Precio Total: "+totalCotizacion+"</h2><br/><p>Si está conforme con el precio de los servicios y desea reservarlos presione Reservar servicios para continuar.</p>	<input type='submit' value='Reservar servicios'>";
 	}
 	document.getElementById("cotizacion").innerHTML = mensaje;
 }
 
-/*
-function cargarSelect2(valor) {
-    if(valor==0) {
-        document.getElementById("select2").disabled=true;
-    }else{
-        document.getElementById("select2").options.length=0;									// eliminamos todos los posibles valores que contenga el select2
-        document.getElementById("select2").options[0]=new Option("Seleccionar Salon", "0"); 	// añadimos los nuevos valores al select2
-
-        document.getElementById("select2").disabled=false;
-    }
-}
-*/

@@ -4,7 +4,7 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador - Menu</title>
+	<title>Administrador - Menú</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
@@ -18,18 +18,18 @@
 	    <section>
 			<article>
 				<nav id="wb_CssMenu1" class="loginform cf">
-					<h1>Bienvenido</h1>
+					<h1>Bienvenido <?php echo $_SESSION['nombreCompleto']; ?></h1>
 					<ul>
-						<li><a href="modificarUsuarios.php">Modificar Usuario</a></li>
-						<li><a href="cancelarReservaciones.php">Cancelar Reservaciones</a></li>
-						<li><a href="confirmarReservaciones.php">Confirmar Reservaciones</a></li>
-						<li><a href="../funciones/logout.php">Cerrar Sesion</a></li>
+						<li><a href="modificarUsuarios.php">Modificar usuario</a></li>
+						<li><a href="cancelarReservaciones.php">Cancelar reservaciones</a></li>
+						<li><a href="confirmarReservaciones.php">Confirmar reservaciones</a></li>
+						<li><a href="../funciones/logout.php">Cerrar sesión</a></li>
 					</ul>
 				</nav>
 			</article>
 		</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

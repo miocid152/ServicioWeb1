@@ -26,5 +26,4 @@
 			Header("Location: ../login.php");
 		}
 	}
-	//session_destroy();
 ?>

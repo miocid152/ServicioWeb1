@@ -7,15 +7,15 @@
 
 	$consulta ="SELECT * FROM usuario";
 	if (null !== ($n = mysqli_fetch_assoc($conexion->query($consulta)))){
-	 	$mensaje ="<TABLE class='mytable' BORDER='1' width=99% align=center>";
+	 	$mensaje ="<TABLE id='table1' class='mytable' BORDER='1' width=99% align=center>";
 		$mensaje .="<TR align=center>
-						<th>Nombre Usuario</th>
-						<th>Correo Electronico</th>
+						<th>Nombre usuario</th>
+						<th>Correo electrónico</th>
 						<th>Contreseña</th>
-						<th>Direccion</th>
-						<th>Numero Telefonico</th>
-						<th>Tipo de Usuario</th>						
-						<th>Funcion</th>
+						<th>Dirección</th>
+						<th>Número telefónico</th>
+						<th>Tipo de usuario</th>						
+						<th>Función</th>
 					</TR>";
 		$verificar = mysqli_query($conexion, $consulta);
 		while ($fila = $verificar->fetch_assoc()) {
@@ -32,7 +32,8 @@
 						   <input type='submit' value='Modificar' id='nada'/></td></TR></FORM>";
 
 		}
-		$mensaje.="</table>";
+		$mensaje.='</table>
+		<script language="javascript" type="text/javascript">setFilterGrid( "table1" );</script>';
     	$conexion->close();
 	} else{
 		$conexion->close();
@@ -43,10 +44,12 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador - Modificar Usuarios</title>
+	<title>Administrador - Modificar usuarios</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/LoginStyle.css">
+	<script language="javascript" type="text/javascript" src="../js/actb.js"></script><!-- External script -->
+	<script language="javascript" type="text/javascript" src="../js/tablefilter.js"></script>
 </head>
 	<body>
 		<header>
@@ -56,20 +59,20 @@
 	    </header>
 	    <nav id="nav">
 				<ul id="navigation">
-					<li><a href="../admin" class="first">Menu Principal</a></li>
-					<li><a href="../funciones/logout.php" class="last">Cerrar Sesion</a></li>
+					<li><a href="../admin" class="first">Menú principal</a></li>
+					<li><a href="../funciones/logout.php" class="last">Cerrar sesión</a></li>
 				</ul>
 		</nav>
 	    <section>
 		<article id="wb_CssMenu1" class="loginform cf">
-			<h1>Modificar Usuarios</h1>
+			<h1>Modificar usuarios</h1>
 			<hr>
 			<br>
 			<p><?php echo $mensaje; ?></p>
 		</article>
 		</section>
 		<footer>
-			Proyecto Soa by EFI
+			Proyecto SOA by EFI
 		</footer>
 	</body>
 </html>

@@ -68,13 +68,13 @@ public class QuerySalon {
             }
             session.save(srs);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
-            mensaje = "Reservacion No Realizada";
+            mensaje = "Reservación no realizada";
         } finally {
             session.close();
         }
@@ -109,7 +109,7 @@ public class QuerySalon {
             srs.setCorreoClienteSalon(correoClienteSalon);
             session.update(srs);
             tx.commit();
-            mensaje = "Reservacion Realizada con Exito";
+            mensaje = "Reservación realizada con éxito";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -137,7 +137,7 @@ public class QuerySalon {
             srs.setStatusSalon("DISPONIBLE");
             session.update(srs);
             tx.commit();
-            mensaje = "Cancelacion Exitosa";
+            mensaje = "Cancelación exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -161,7 +161,7 @@ public class QuerySalon {
             srs.setStatusSalon("CONFIRMADO");
             session.update(srs);
             tx.commit();
-            mensaje = "Confirmacion Exitosa";
+            mensaje = "Confirmación Exitosa";
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -278,9 +278,3 @@ public class QuerySalon {
         return srsalon;
     }
 }
-//        session = HibernateUtil.getSessionFactory().openSession();
-//        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.DAY_OF_YEAR, -7);
-//        Date ahora = calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
-//        String fecha = formateador.format(ahora);
